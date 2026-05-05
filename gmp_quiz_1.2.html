@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생산팀을 위한 GMP Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<!-- EmailJS for sending result emails -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- SheetJS for XLSX export -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<style>
+:root {
+  --navy:#0D1F3C; --navy2:#16325C; --blue:#1A5CBA; --blue2:#2270D8;
+  --accent:#00C2CB; --accent2:#00A8B0;
+  --success:#00B67A; --danger:#E53E3E;
+  --white:#FFFFFF; --off:#F4F7FB; --gray:#8899AA; --gray2:#C8D4E0;
+  --card:#FFFFFF; --border:rgba(26,92,186,0.13);
+  --shadow:0 4px 28px rgba(13,31,60,0.10);
+  --shadow2:0 2px 8px rgba(13,31,60,0.07);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans KR','Inter',sans-serif;background:var(--off);color:var(--navy);min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+
+/* TOP BAR */
+.topbar{width:100%;background:var(--navy);display:flex;align-items:center;padding:10px 20px;position:sticky;top:0;z-index:50;gap:8px;border-bottom:2px solid var(--blue);}
+.topbar-logo{font-family:'Inter',sans-serif;font-size:13px;font-weight:800;color:var(--white);letter-spacing:2px;margin-right:auto;display:flex;align-items:center;gap:8px;}
+.topbar-logo span{background:var(--accent);color:var(--navy);border-radius:4px;padding:2px 7px;font-size:11px;font-weight:800;letter-spacing:1px;}
+.hall-btn{padding:6px 14px;border-radius:6px;border:1.5px solid rgba(0,194,203,0.4);background:transparent;font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:700;color:var(--accent);cursor:pointer;letter-spacing:1px;transition:all 0.2s;margin-right:8px;}
+.hall-btn:hover{background:var(--accent);color:var(--navy);}
+.lang-btn{padding:6px 13px;border-radius:6px;border:1.5px solid rgba(255,255,255,0.2);background:transparent;font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);cursor:pointer;letter-spacing:1px;transition:all 0.2s;}
+.lang-btn.active{background:var(--blue2);border-color:var(--blue2);color:var(--white);}
+.lang-btn:hover:not(.active){border-color:rgba(255,255,255,0.5);color:var(--white);}
+
+/* CONTAINER */
+.container{width:100%;max-width:680px;padding:28px 20px 60px;}
+
+/* SCREEN */
+.screen{display:none;animation:fadeUp 0.4s ease;}
+.screen.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+/* CARD */
+.card{background:var(--card);border-radius:16px;padding:36px 32px;box-shadow:var(--shadow);border:1px solid var(--border);}
+
+/* ── START SCREEN ── */
+.start-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(26,92,186,0.08);border:1px solid rgba(26,92,186,0.2);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:700;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;}
+.start-title{font-family:'Inter',sans-serif;font-size:26px;font-weight:800;color:var(--navy);line-height:1.25;margin-bottom:6px;}
+.start-title em{color:var(--blue2);font-style:normal;}
+.start-sub{font-size:13px;color:var(--gray);letter-spacing:1px;margin-bottom:24px;font-weight:400;}
+.info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:28px;}
+.info-box{background:var(--off);border-radius:10px;padding:14px 12px;text-align:center;border:1px solid var(--border);}
+.info-box .val{font-family:'Inter',sans-serif;font-size:20px;font-weight:800;color:var(--blue2);}
+.info-box .lbl{font-size:10px;color:var(--gray);letter-spacing:1px;margin-top:3px;text-transform:uppercase;}
+.divider{height:1px;background:var(--border);margin:24px 0;}
+.field-label{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--blue);margin-bottom:8px;text-transform:uppercase;}
+.name-input{width:100%;padding:13px 16px;border:1.5px solid var(--gray2);border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:15px;color:var(--navy);background:var(--white);outline:none;margin-bottom:20px;transition:border-color 0.2s;}
+.name-input:focus{border-color:var(--blue2);box-shadow:0 0 0 3px rgba(26,92,186,0.10);}
+.name-input::placeholder{color:var(--gray2);}
+.count-label{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--blue);margin-bottom:12px;text-transform:uppercase;text-align:center;}
+.count-buttons{display:flex;gap:10px;justify-content:center;margin-bottom:24px;}
+.count-btn{flex:1;max-width:110px;padding:14px 8px;border:1.5px solid var(--gray2);background:var(--white);border-radius:10px;font-family:'Inter',sans-serif;font-size:22px;font-weight:800;color:var(--gray);cursor:pointer;transition:all 0.2s;text-align:center;}
+.count-btn span{display:block;font-family:'Noto Sans KR',sans-serif;font-size:10px;font-weight:500;color:var(--gray);margin-top:2px;letter-spacing:1px;}
+.count-btn:hover,.count-btn.selected{border-color:var(--blue2);background:rgba(26,92,186,0.06);color:var(--blue2);transform:translateY(-2px);box-shadow:0 4px 14px rgba(26,92,186,0.12);}
+.count-btn.selected span{color:var(--blue2);}
+.start-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:var(--white);border:none;border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all 0.25s;box-shadow:0 4px 18px rgba(26,92,186,0.30);}
+.start-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,92,186,0.38);}
+.start-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none;}
+.footer-note{text-align:center;font-size:11px;color:var(--gray);opacity:0.6;margin-top:20px;letter-spacing:1px;}
+
+/* ── QUIZ SCREEN ── */
+.quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.quiz-progress-text{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--blue);}
+.quiz-score-text{font-size:12px;color:var(--gray);font-weight:500;}
+.progress-bar{width:100%;height:5px;background:var(--gray2);border-radius:3px;margin-bottom:24px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--accent));border-radius:3px;transition:width 0.5s ease;}
+
+/* Q type badges */
+.type-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 12px;border-radius:20px;margin-bottom:12px;text-transform:uppercase;}
+.type-badge.ox{background:rgba(0,194,203,0.10);color:var(--accent2);border:1px solid rgba(0,194,203,0.25);}
+.type-badge.mc{background:rgba(26,92,186,0.08);color:var(--blue2);border:1px solid rgba(26,92,186,0.2);}
+
+.question-text{font-size:17px;font-weight:700;color:var(--navy);line-height:1.55;margin-bottom:22px;}
+
+/* OX options */
+.ox-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+.ox-btn{padding:22px 10px;border:2px solid var(--gray2);background:var(--white);border-radius:12px;font-family:'Inter',sans-serif;font-size:28px;font-weight:800;color:var(--gray);cursor:pointer;transition:all 0.2s;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.ox-btn span{font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;}
+.ox-btn:hover:not(:disabled){border-color:var(--blue2);background:rgba(26,92,186,0.04);transform:translateY(-2px);}
+.ox-btn.selected{border-color:var(--blue2);background:rgba(26,92,186,0.07);color:var(--blue2);}
+.ox-btn.correct{border-color:var(--success);background:rgba(0,182,122,0.08);color:var(--success);}
+.ox-btn.wrong{border-color:var(--danger);background:rgba(229,62,62,0.07);color:var(--danger);}
+.ox-btn:disabled{cursor:default;}
+
+/* MC options */
+.mc-grid{display:grid;grid-template-columns:1fr;gap:9px;margin-bottom:16px;}
+.mc-btn{padding:14px 16px;border:1.5px solid var(--gray2);background:var(--white);border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:500;color:var(--navy);cursor:pointer;transition:all 0.2s;text-align:left;line-height:1.4;display:flex;align-items:center;gap:12px;}
+.mc-btn-num{width:26px;height:26px;border-radius:50%;background:var(--off);border:1.5px solid var(--gray2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gray);flex-shrink:0;transition:all 0.2s;}
+.mc-btn:hover:not(:disabled){border-color:var(--blue2);background:rgba(26,92,186,0.04);}
+.mc-btn:hover:not(:disabled) .mc-btn-num{background:var(--blue2);border-color:var(--blue2);color:var(--white);}
+.mc-btn.selected{border-color:var(--blue2);background:rgba(26,92,186,0.06);}
+.mc-btn.selected .mc-btn-num{background:var(--blue2);border-color:var(--blue2);color:var(--white);}
+.mc-btn.correct{border-color:var(--success);background:rgba(0,182,122,0.07);}
+.mc-btn.correct .mc-btn-num{background:var(--success);border-color:var(--success);color:var(--white);}
+.mc-btn.wrong{border-color:var(--danger);background:rgba(229,62,62,0.06);}
+.mc-btn.wrong .mc-btn-num{background:var(--danger);border-color:var(--danger);color:var(--white);}
+.mc-btn:disabled{cursor:default;}
+
+.check-btn{width:100%;padding:14px;background:var(--navy);color:var(--white);border:none;border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all 0.2s;margin-bottom:12px;}
+.check-btn:hover:not(:disabled){background:var(--navy2);transform:translateY(-1px);}
+.check-btn:disabled{opacity:0.3;cursor:not-allowed;transform:none;}
+
+.feedback-box{display:none;border-radius:12px;padding:16px 18px;animation:slideUp 0.3s ease;}
+@keyframes slideUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.feedback-box.correct-fb{background:rgba(0,182,122,0.08);border:1.5px solid rgba(0,182,122,0.25);}
+.feedback-box.wrong-fb{background:rgba(229,62,62,0.06);border:1.5px solid rgba(229,62,62,0.2);}
+.feedback-result{font-size:14px;font-weight:700;margin-bottom:7px;}
+.correct-fb .feedback-result{color:var(--success);}
+.wrong-fb .feedback-result{color:var(--danger);}
+.feedback-explanation{font-size:12px;color:var(--navy);line-height:1.75;opacity:0.8;}
+.next-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:var(--white);border:none;border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:1px;margin-top:12px;display:none;transition:all 0.2s;box-shadow:0 4px 14px rgba(26,92,186,0.25);}
+.next-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,92,186,0.35);}
+
+/* ── RESULT SCREEN ── */
+.result-header{text-align:center;margin-bottom:24px;}
+.result-emoji{font-size:48px;margin-bottom:10px;}
+.result-title{font-family:'Inter',sans-serif;font-size:22px;font-weight:800;color:var(--navy);margin-bottom:4px;}
+.result-sub{font-size:12px;color:var(--gray);letter-spacing:2px;}
+.score-ring-wrap{display:flex;justify-content:center;margin:20px 0 24px;}
+.score-ring{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--accent));display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(26,92,186,0.30);}
+.score-num{font-family:'Inter',sans-serif;font-size:38px;font-weight:800;color:var(--white);line-height:1;}
+.score-denom{font-size:11px;color:rgba(255,255,255,0.75);margin-top:2px;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.stat-box{background:var(--off);border-radius:10px;padding:14px;text-align:center;border:1px solid var(--border);}
+.stat-val{font-family:'Inter',sans-serif;font-size:24px;font-weight:800;color:var(--blue2);}
+.stat-lbl{font-size:10px;color:var(--gray);letter-spacing:1px;margin-top:3px;text-transform:uppercase;}
+.result-msg{text-align:center;font-size:13px;line-height:1.8;color:var(--navy);opacity:0.7;margin-bottom:20px;font-style:italic;}
+.section-title{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--blue);margin-bottom:10px;text-align:center;text-transform:uppercase;}
+.top10-list{margin-bottom:20px;}
+.rank-row{display:flex;align-items:center;padding:9px 12px;border-radius:8px;margin-bottom:5px;background:var(--off);border:1px solid var(--border);}
+.rank-row.me{background:rgba(26,92,186,0.07);border-color:rgba(26,92,186,0.2);}
+.rank-num{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;width:30px;color:var(--gray);}
+.rank-num.gold{color:#D4A017;} .rank-num.silver{color:#8899AA;} .rank-num.bronze{color:#A0522D;}
+.rank-name{flex:1;font-size:13px;color:var(--navy);}
+.rank-score{font-size:13px;font-weight:700;color:var(--blue2);}
+.retry-btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:var(--white);border:none;border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all 0.25s;box-shadow:0 4px 18px rgba(26,92,186,0.28);}
+.retry-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,92,186,0.38);}
+
+/* ── HALL OF FAME ── */
+.hof-title-wrap{text-align:center;margin-bottom:24px;}
+.hof-icon{font-size:36px;margin-bottom:8px;}
+.hof-title{font-family:'Inter',sans-serif;font-size:22px;font-weight:800;color:var(--navy);margin-bottom:4px;}
+.hof-sub{font-size:11px;color:var(--gray);letter-spacing:2px;text-transform:uppercase;}
+.hof-table{width:100%;border-collapse:collapse;margin-bottom:24px;}
+.hof-table th{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--blue);text-align:left;padding:9px 12px;border-bottom:2px solid rgba(26,92,186,0.15);text-transform:uppercase;}
+.hof-table th:last-child{text-align:right;}
+.hof-table td{padding:11px 12px;font-size:13px;color:var(--navy);border-bottom:1px solid var(--border);}
+.hof-table td:last-child{text-align:right;font-weight:700;color:var(--blue2);}
+.hof-table tr:hover td{background:rgba(26,92,186,0.03);}
+.hof-rank-cell{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;width:40px;}
+.hof-back-btn{width:100%;padding:14px;background:var(--navy);color:var(--white);border:none;border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all 0.2s;margin-bottom:10px;}
+.hof-back-btn:hover{background:var(--navy2);transform:translateY(-1px);}
+.hof-restart-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:var(--white);border:none;border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all 0.2s;box-shadow:0 4px 14px rgba(26,92,186,0.25);}
+.hof-restart-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,92,186,0.35);}
+.download-btn{width:100%;padding:13px;background:var(--white);color:var(--accent2);border:1.5px solid var(--accent2);border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all 0.2s;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.download-btn:hover{background:var(--accent2);color:var(--white);transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,168,176,0.25);}
+.download-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.email-status{font-size:11px;color:var(--gray);text-align:center;margin-top:8px;letter-spacing:0.5px;}
+.email-status.success{color:var(--success);}
+.email-status.error{color:var(--danger);}
+.hof-loading{text-align:center;padding:36px;font-size:28px;animation:pulse 1.2s infinite;}
+@keyframes pulse{0%,100%{opacity:0.4;}50%{opacity:1;}}
+.hof-empty{text-align:center;padding:36px;color:var(--gray);font-size:13px;line-height:1.8;}
+
+/* SAVING */
+.saving-overlay{display:none;position:fixed;inset:0;background:rgba(13,31,60,0.55);z-index:100;align-items:center;justify-content:center;}
+.saving-overlay.show{display:flex;}
+.saving-box{background:var(--white);border-radius:16px;padding:28px 36px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.2);}
+.saving-spin{font-size:32px;animation:spin 1s linear infinite;display:inline-block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.saving-box p{font-size:14px;font-weight:700;color:var(--navy);margin-top:10px;}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <span>GMP</span> QUIZ
+  </div>
+  <button class="hall-btn" id="hall-btn" onclick="showHallOfFame()">🏆 명예의 전당</button>
+  <button class="lang-btn active" id="btn-ko" onclick="setLang('ko')">한국어</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+</div>
+
+<div class="container">
+
+  <!-- START -->
+  <div class="screen active" id="screen-start">
+    <div class="card">
+      <div class="start-badge" id="start-badge">📋 GMP Training Quiz</div>
+      <h1 class="start-title" id="start-title">생산팀을 위한<br><em>GMP Quiz</em></h1>
+      <p class="start-sub" id="start-sub">Good Documentation Practice · Aseptic Technique · FDA Inspection Cases</p>
+      <div class="info-grid">
+        <div class="info-box"><div class="val">30</div><div class="lbl" id="lbl-q">문제</div></div>
+        <div class="info-box"><div class="val">O/X</div><div class="lbl" id="lbl-ox">+ 객관식</div></div>
+        <div class="info-box"><div class="val">FDA</div><div class="lbl" id="lbl-fda">실사 기반</div></div>
+      </div>
+      <div class="divider"></div>
+      <p class="field-label" id="label-name">참여자 이름</p>
+      <input class="name-input" id="name-input" type="text" placeholder="이름을 입력하세요" oninput="onNameInput()">
+      <button class="start-btn" id="start-btn" onclick="startQuiz()" disabled id="start-btn">퀴즈 시작하기 →</button>
+    </div>
+    <p class="footer-note" id="footer-note">본 퀴즈는 생산팀 GMP 교육 목적으로 제작되었습니다</p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="screen" id="screen-quiz">
+    <div class="card">
+      <div class="quiz-header">
+        <span class="quiz-progress-text" id="progress-text">1 / 10</span>
+        <span class="quiz-score-text" id="score-text">점수: 0</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <span class="type-badge" id="type-badge"></span>
+      <p class="question-text" id="question-text"></p>
+      <div id="options-area"></div>
+      <button class="check-btn" id="check-btn" onclick="checkAnswer()" disabled>정답 확인</button>
+      <div class="feedback-box" id="feedback-box">
+        <p class="feedback-result" id="feedback-result"></p>
+        <p class="feedback-explanation" id="feedback-explanation"></p>
+      </div>
+      <button class="next-btn" id="next-btn" onclick="nextQuestion()">다음 문제 →</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screen-result">
+    <div class="card">
+      <div class="result-header">
+        <div class="result-emoji" id="result-emoji">🏆</div>
+        <div class="result-title" id="result-title">퀴즈 완료!</div>
+        <div class="result-sub">QUIZ COMPLETE</div>
+      </div>
+      <div class="score-ring-wrap">
+        <div class="score-ring">
+          <div class="score-num" id="final-score">0</div>
+          <div class="score-denom" id="final-total">/ 30 pts</div>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-box"><div class="stat-val" id="stat-correct">0</div><div class="stat-lbl" id="lbl-correct">정답</div></div>
+        <div class="stat-box"><div class="stat-val" id="stat-wrong">0</div><div class="stat-lbl" id="lbl-wrong">오답</div></div>
+      </div>
+      <p class="result-msg" id="result-msg"></p>
+      <p class="section-title" id="top10-title">🏅 TOP 10 랭킹</p>
+      <div class="top10-list" id="top10-list"><div class="hof-loading">⏳</div></div>
+      <button class="retry-btn" id="retry-btn" onclick="resetQuiz()">다시 도전하기 →</button>
+      <button class="download-btn" id="result-download-btn" onclick="downloadXlsx()" style="margin-top:10px;">📥 <span id="download-btn-label">전체 결과 엑셀 다운로드</span></button>
+      <p class="email-status" id="email-status"></p>
+    </div>
+  </div>
+
+  <!-- HALL OF FAME -->
+  <div class="screen" id="screen-hof">
+    <div class="card">
+      <div class="hof-title-wrap">
+        <div class="hof-icon">🏆</div>
+        <div class="hof-title" id="hof-title">명예의 전당</div>
+        <div class="hof-sub" id="hof-sub">TOP 20 RANKING</div>
+      </div>
+      <div id="hof-content"><div class="hof-loading">⏳</div></div>
+      <button class="hof-back-btn" id="hof-back-btn" onclick="goBack()">← 돌아가기</button>
+      <button class="hof-restart-btn" id="hof-restart-btn" onclick="resetQuiz()">처음으로 →</button>
+      <button class="download-btn" id="hof-download-btn" onclick="downloadXlsx()" style="margin-top:10px;">📥 <span id="hof-download-btn-label">전체 결과 엑셀 다운로드</span></button>
+    </div>
+  </div>
+
+</div>
+
+<div class="saving-overlay" id="saving-overlay">
+  <div class="saving-box">
+    <div class="saving-spin">⚙️</div>
+    <p id="saving-text">점수 저장 중...</p>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const app = initializeApp({
+  apiKey:"AIzaSyAJFodCtd0nZ9R3FIjKN0FSsBvFZkYVcqo",
+  authDomain:"cat-quiz-ece53.firebaseapp.com",
+  projectId:"cat-quiz-ece53",
+  storageBucket:"cat-quiz-ece53.firebasestorage.app",
+  messagingSenderId:"306933977395",
+  appId:"1:306933977395:web:bd9d55fc46d0091d95ae46"
+});
+const db = getFirestore(app);
+
+// ── QUIZ DATA (30문제) ────────────────────────────────────────────
+// type: 'ox' | 'mc'
+// answer: 'O'|'X' for ox / 0-indexed correct option index for mc
+const QUESTIONS = [
+  // ── GDP / 기록 관련 (O/X) ──
+  {
+    type:'ox',
+    qko:'사후 기록(Backdating)은 작업 종료 직후라도 ALCOA+ 원칙 위반에 해당한다.',
+    qen:'Backdating is a violation of ALCOA+ principles even if recorded shortly after completion.',
+    answer:'O',
+    exko:'ALCOA+ 원칙 중 Contemporaneous(동시 기록)에 따라 모든 기록은 작업 수행 즉시 작성해야 합니다. 지연 기록은 사후 재구성으로 간주됩니다.',
+    exen:'Under the ALCOA+ principle of Contemporaneous recording, all entries must be made at the time of activity. Delayed recording is considered retrospective reconstruction.'
+  },
+  {
+    type:'ox',
+    qko:'잘못 기재한 숫자를 수정할 때 수정액(White-Out)을 사용해도 원본이 보존되므로 GDP 위반이 아니다.',
+    qen:'Using White-Out to correct a wrong number is acceptable as long as the original value is documented separately.',
+    answer:'X',
+    exko:'수정액 사용은 원본 데이터 은폐에 해당하며 Data Integrity 위반의 직접적 증거로 FDA 경고장(Warning Letter)으로 직결됩니다. 올바른 수정은 한 줄 긋기 + 이니셜 + 날짜 + 사유 기재(CLIDE 원칙)입니다.',
+    exen:'White-Out conceals original data and is direct evidence of a Data Integrity violation, leading directly to an FDA Warning Letter. The correct method is a single strikethrough + initials + date + reason (CLIDE principle).'
+  },
+  {
+    type:'ox',
+    qko:'Batch Record의 특정 항목이 해당 없는 경우 반드시 "N/A"를 기재해야 한다.',
+    qen:'When a Batch Record field is not applicable, it must be marked "N/A" rather than left blank.',
+    answer:'O',
+    exko:'공란 방치는 기록 누락인지 의도적 생략인지 구분이 불가하여 FDA 483 지적 대상입니다. 해당 없는 항목은 반드시 "N/A"로 기재해야 합니다.',
+    exen:'Blank spaces cannot be distinguished from intentional omissions and are subject to FDA 483 observations. Non-applicable fields must be marked "N/A".'
+  },
+  {
+    type:'ox',
+    qko:'다른 직원이 바빠서 내가 대신 서명해 주는 것은 팀워크의 일환으로 허용된다.',
+    qen:'Signing on behalf of a busy colleague is acceptable as a form of teamwork.',
+    answer:'X',
+    exko:'대리 서명(Proxy Signing)은 기록의 진실성을 훼손하는 중대한 GDP 위반입니다. 서명은 반드시 해당 작업을 직접 수행한 본인만 해야 합니다.',
+    exen:'Proxy signing is a serious GDP violation that compromises record integrity. Only the person who directly performed the activity may sign.'
+  },
+  {
+    type:'ox',
+    qko:'연필로 기록한 Batch Record 항목도 FDA 실사 시 유효한 원본 기록으로 인정받는다.',
+    qen:'Entries made in pencil on a Batch Record are recognized as valid original records during FDA inspections.',
+    answer:'X',
+    exko:'연필은 지우거나 변경할 수 있어 데이터 무결성을 보장할 수 없습니다. 모든 기록은 지워지지 않는 잉크(볼펜)로 작성해야 합니다.',
+    exen:'Pencil entries can be erased or altered and cannot guarantee data integrity. All records must be made in indelible ink (ballpoint pen).'
+  },
+  {
+    type:'ox',
+    qko:'FDA 실사관은 제품 자체보다 기록을 통해 제조 과정을 평가한다.',
+    qen:'FDA inspectors evaluate the manufacturing process primarily through records rather than the products themselves.',
+    answer:'O',
+    exko:'"Records are the Product"는 FDA의 기본 원칙입니다. 실사관은 절차, 장비, 작업자, 환경, 데이터 무결성을 기록으로 검증합니다.',
+    exen:'"Records are the Product" is a fundamental FDA principle. Inspectors verify procedures, equipment, personnel, environment, and data integrity through records.'
+  },
+  {
+    type:'ox',
+    qko:'전자 시스템의 Audit Trail은 FDA 21 CFR Part 11에 따라 반드시 활성화되어야 한다.',
+    qen:'Audit Trails in electronic systems must be activated in accordance with FDA 21 CFR Part 11.',
+    answer:'O',
+    exko:'21 CFR Part 11은 전자 기록 및 전자 서명의 무결성을 보장하기 위한 법적 요건으로, Audit Trail 비활성화는 즉각적인 Data Integrity 위반입니다.',
+    exen:'21 CFR Part 11 is a legal requirement to ensure the integrity of electronic records and signatures. Disabling Audit Trails is an immediate Data Integrity violation.'
+  },
+  {
+    type:'ox',
+    qko:'Filter Integrity Test(FIT) 결과가 Fail인 경우, 재시험하여 Pass가 나오면 Fail 결과는 기록하지 않아도 된다.',
+    qen:'If a Filter Integrity Test (FIT) result is Fail, it does not need to be recorded if a subsequent retest yields a Pass.',
+    answer:'X',
+    exko:'Fail 결과도 원본 데이터입니다. 모든 시험 결과는 추적 가능해야 하며, Fail 결과 미저장 후 재시험은 "Testing into compliance"로 중대한 DI 위반입니다.',
+    exen:'Fail results are also raw data. All test results must be traceable. Retesting without saving Fail results is "testing into compliance" — a serious DI violation.'
+  },
+  {
+    type:'ox',
+    qko:'Aseptic 작업 중 손 소독(Hand Sanitization)은 Clean Room 입실 직전에만 1회 실시하면 충분하다.',
+    qen:'Hand sanitization during aseptic operations is sufficient when performed once, immediately before entering the clean room.',
+    answer:'X',
+    exko:'무균 작업 중 오염 가능성이 있는 행위(표면 접촉, 장갑 교체 등) 후에는 반복 소독이 필요합니다. 1회 소독으로는 무균 보증이 불충분합니다.',
+    exen:'Re-sanitization is required after any activity that may cause contamination (surface contact, glove change, etc.) during aseptic operations. A single sanitization is insufficient for sterility assurance.'
+  },
+  {
+    type:'ox',
+    qko:'Clean Room 내에서 개인 휴대폰 사용은 긴급 업무 연락 목적으로는 허용된다.',
+    qen:'Personal mobile phone use inside a Clean Room is permitted for urgent business communications.',
+    answer:'X',
+    exko:'Clean Room 내 개인 휴대폰 사용은 오염 위험(파티클, 미생물)과 Gowning 무결성 훼손으로 절대 금지입니다. FDA 실사 실제 지적 사례입니다(21 CFR 211.42).',
+    exen:'Personal phone use in Clean Rooms is strictly prohibited due to contamination risks (particles, microbes) and gowning integrity issues. This is an actual FDA 483 observation (21 CFR 211.42).'
+  },
+
+  // ── GDP / 기록 관련 (객관식) ──
+  {
+    type:'mc',
+    qko:'기록 수정 시 준수해야 하는 CLIDE 원칙에 해당하지 않는 것은?',
+    qen:'Which of the following is NOT part of the CLIDE principle for record corrections?',
+    options_ko:['Cross out (한 줄 긋기)','Liquid correction (수정액 사용)','Initial (이니셜)','Date & Explanation (날짜 및 사유)'],
+    options_en:['Cross out (single line strikethrough)','Liquid correction (use of White-Out)','Initial (your initials)','Date & Explanation (date and reason)'],
+    answer:1,
+    exko:'CLIDE 원칙은 Cross out → Initial → Date → Explanation의 약자입니다. 수정액(White-Out) 사용은 원본 데이터를 은폐하므로 절대 금지입니다.',
+    exen:'CLIDE stands for Cross out → Initial → Date → Explanation. Using liquid correction (White-Out) conceals original data and is strictly prohibited.'
+  },
+  {
+    type:'mc',
+    qko:'ALCOA+ 원칙에서 "A"가 의미하는 것은?',
+    qen:'What does the first "A" in the ALCOA+ principle stand for?',
+    options_ko:['Accurate (정확한)','Attributable (귀속 가능한)','Approved (승인된)','Archived (보관된)'],
+    options_en:['Accurate','Attributable','Approved','Archived'],
+    answer:1,
+    exko:'ALCOA+는 Attributable(귀속), Legible(판독), Contemporaneous(동시), Original(원본), Accurate(정확) + Complete, Consistent, Enduring, Available의 약자입니다.',
+    exen:'ALCOA+ stands for Attributable, Legible, Contemporaneous, Original, Accurate + Complete, Consistent, Enduring, Available.'
+  },
+  {
+    type:'mc',
+    qko:'FDA 483 Observation에서 가장 높은 위험도(★★★★★)를 갖지 않는 GDP 위반은?',
+    qen:'Which GDP violation does NOT carry the highest risk level (★★★★★) in FDA 483 Observations?',
+    options_ko:['사후 기록 (Backdating)','전자 기록 DI 위반','연필 사용 기록','대리 서명'],
+    options_en:['Backdating','Electronic Record DI Violation','Pencil-based entries','Signing for others'],
+    answer:2,
+    exko:'연필 사용 기록은 위험도 ★★★☆☆(3성)입니다. 사후 기록, 전자 기록 DI 위반, 대리 서명, 수정액 사용은 모두 ★★★★★(5성) 위험도로 Warning Letter로 직결됩니다.',
+    exen:'Pencil-based entries carry a risk level of ★★★☆☆ (3 stars). Backdating, e-record DI violations, proxy signing, and White-Out use all carry ★★★★★ (5 stars), directly triggering Warning Letters.'
+  },
+  {
+    type:'mc',
+    qko:'중요 장비에서 알람이 발생했을 때 올바른 처리 순서는?',
+    qen:'What is the correct sequence when a critical equipment alarm occurs?',
+    options_ko:['즉시 Reset → 구두 보고 → 계속 작업','발생 시각 기록 → Root Cause 분석 → 영향 Batch 평가 → Deviation 등록 → CAPA 수립','알람 무시 → 작업 완료 후 기록','상위 관리자에게 알람 사실만 보고'],
+    options_en:['Immediate reset → verbal report → continue work','Record timestamp → root cause analysis → batch impact → deviation log → CAPA','Ignore alarm → document after completion','Report alarm occurrence only to supervisor'],
+    answer:1,
+    exko:'"Reset Completed"는 답이 아닙니다. 알람 발생 시각 정확히 기록 → Root Cause 즉시 분석 → 영향 Batch 식별 및 평가 → Deviation 시스템 등록 → CAPA 수립의 순서를 따라야 합니다.',
+    exen:'"Reset Completed" is never an answer. The correct sequence is: record exact timestamp → immediate root cause analysis → identify & assess affected batches → log into deviation system → establish CAPA.'
+  },
+  {
+    type:'mc',
+    qko:'생산팀 행동 수칙 중 "CLIDE 원칙"과 관련된 항목은?',
+    qen:'Which item in the Production Team Code of Conduct relates to the "CLIDE principle"?',
+    options_ko:['즉시 기록 (Record Immediately)','수정 원칙 (Follow CLIDE Rule)','공란 금지 (No Blank Spaces)','내 서명만 (Sign Only Your Own Work)'],
+    options_en:['Record Immediately','Follow CLIDE Rule','No Blank Spaces','Sign Only Your Own Work'],
+    answer:1,
+    exko:'CLIDE 원칙은 기록 수정 방법에 관한 원칙입니다: Cross out → Initial → Date → Explanation. 수정액 사용은 절대 금지입니다.',
+    exen:'The CLIDE principle governs record corrections: Cross out → Initial → Date → Explanation. Use of correction fluid is strictly prohibited.'
+  },
+  {
+    type:'mc',
+    qko:'다음 중 FDA Warning Letter로 직결될 수 있는 행위가 아닌 것은?',
+    qen:'Which of the following actions does NOT directly lead to an FDA Warning Letter?',
+    options_ko:['불합격 Batch 기록 소급 수정','미승인 약어 사용','실사 중 기록 은닉','Audit Trail 비활성화'],
+    options_en:['Retroactively revising failed-batch records','Using unauthorized abbreviations','Hiding records during inspection','Disabling Audit Trail'],
+    answer:1,
+    exko:'미승인 약어 사용은 위험도 ★★★☆☆(3성)으로 개선 요구 사항입니다. 나머지 세 항목은 모두 ★★★★★ 수준의 심각한 위반으로 Warning Letter로 직결됩니다.',
+    exen:'Unauthorized abbreviations carry a ★★★☆☆ (3-star) risk level and are improvement items. The other three are ★★★★★ serious violations directly triggering Warning Letters.'
+  },
+
+  // ── Aseptic Technique ──
+  {
+    type:'ox',
+    qko:'Aseptic 작업 시 핵심 구역(Critical Zone)에 손이나 기구가 직접 통과하지 않도록 해야 한다.',
+    qen:'During aseptic operations, hands or instruments should not pass directly through the critical zone.',
+    answer:'O',
+    exko:'Critical Zone(Critical Surface 위 무균 구역)은 제품과 직접 접촉하는 영역입니다. 이 구역을 오버랩하거나 통과하면 오염이 발생합니다.',
+    exen:'The Critical Zone is the sterile area directly above critical surfaces in contact with the product. Overlapping or passing through this zone causes contamination.'
+  },
+  {
+    type:'ox',
+    qko:'Clean Room Gowning 절차는 어떤 경우에도 생략하거나 단축할 수 없다.',
+    qen:'Clean Room Gowning procedures cannot be omitted or shortened under any circumstances.',
+    answer:'O',
+    exko:'Gowning 미준수는 FDA 21 CFR 211.42 위반으로 실제 지적 사례입니다. Gowning은 무균 작업의 첫 번째 방어선이며 어떠한 예외도 허용되지 않습니다.',
+    exen:'Improper gowning is an actual FDA 483 observation under 21 CFR 211.42. Gowning is the first line of defense in aseptic operations, and no exceptions are permitted.'
+  },
+  {
+    type:'ox',
+    qko:'LAF(Laminar Air Flow) 장비 내에서 작업 시 기류 흐름을 방해하는 위치에 자재를 놓아도 품질에는 영향이 없다.',
+    qen:'Placing materials in positions that obstruct airflow within LAF (Laminar Air Flow) equipment has no impact on quality.',
+    answer:'X',
+    exko:'LAF 기류 방해는 Clean Zone의 공기 청정도를 저하시켜 미생물 오염 위험을 높입니다. 자재 배치는 항상 기류 방향을 고려해야 합니다.',
+    exen:'Obstructing LAF airflow reduces the air cleanliness of the clean zone and increases microbial contamination risk. Material placement must always consider airflow direction.'
+  },
+  {
+    type:'ox',
+    qko:'무균 작업 중 장갑에 구멍이 의심되면 즉시 작업을 중단하고 장갑을 교체해야 한다.',
+    qen:'If a glove puncture is suspected during aseptic operations, work must be stopped immediately and gloves replaced.',
+    answer:'O',
+    exko:'장갑 손상은 즉각적인 오염 위험입니다. 의심되는 경우 즉시 작업 중단, 장갑 교체, 오염 위험 평가 및 기록이 필요합니다.',
+    exen:'A damaged glove poses an immediate contamination risk. Suspected damage requires immediate work stoppage, glove replacement, contamination risk assessment, and documentation.'
+  },
+  {
+    type:'mc',
+    qko:'Aseptic 충전 작업 중 환경 모니터링(EM) Alert Level을 초과했을 때 올바른 조치는?',
+    qen:'What is the correct action when Environmental Monitoring (EM) Alert Level is exceeded during aseptic filling?',
+    options_ko:['재검 후 Pass이면 계속 작업 진행','즉시 작업 중단, 원인 조사, 영향 Batch 평가, CAPA 수립','Alert Level이므로 Action Level 초과 시에만 조치','담당자에게 구두 보고 후 계속 진행'],
+    options_en:['Continue if retest passes','Stop work immediately, investigate cause, assess batch impact, establish CAPA','Only act if Action Level is exceeded','Verbal report to supervisor and continue'],
+    answer:1,
+    exko:'Alert Level 초과 후 재검 후 Pass 처리는 실제 FDA 483 지적 사례입니다(21 CFR 211.42). Alert Level 초과도 즉각 조사 및 CAPA가 필요합니다.',
+    exen:'Retesting after an Alert Level exceedance and recording it as Pass is an actual FDA 483 observation (21 CFR 211.42). Alert Level exceedances also require immediate investigation and CAPA.'
+  },
+  {
+    type:'mc',
+    qko:'다음 중 Aseptic Technique의 핵심 원칙과 가장 거리가 먼 것은?',
+    qen:'Which of the following is LEAST aligned with the core principles of Aseptic Technique?',
+    options_ko:['Critical Surface는 절대 접촉하지 않는다','작업 속도를 높이기 위해 일부 소독 단계를 생략한다','모든 움직임은 천천히 의도적으로 수행한다','의심스러운 경우 즉시 작업을 중단하고 보고한다'],
+    options_en:['Never touch critical surfaces','Skip some disinfection steps to improve work speed','Perform all movements slowly and deliberately','Stop work and report immediately when in doubt'],
+    answer:1,
+    exko:'소독 단계 생략은 무균 보증의 근본을 훼손합니다. Aseptic Technique에서 속도보다 정확성과 무균성이 항상 우선입니다.',
+    exen:'Skipping disinfection steps undermines the foundation of sterility assurance. In Aseptic Technique, accuracy and sterility always take precedence over speed.'
+  },
+  {
+    type:'mc',
+    qko:'Media Fill(Process Simulation) 시험의 주요 목적은?',
+    qen:'What is the primary purpose of a Media Fill (Process Simulation) test?',
+    options_ko:['완제품 수율 측정','무균 충전 공정의 오염 제어 능력 검증','원자재 미생물 한도 시험','장비 세척 검증'],
+    options_en:['Measuring finished product yield','Validating contamination control capability of the aseptic filling process','Testing raw material microbial limits','Cleaning validation of equipment'],
+    answer:1,
+    exko:'Media Fill은 배지(성장 배양액)를 이용해 실제 충전 공정을 모사하여 무균 작업자의 기술, 환경, 장비의 오염 제어 능력을 종합 검증합니다.',
+    exen:'Media Fill simulates the actual filling process using growth media to comprehensively validate the contamination control capability of aseptic operators, environment, and equipment.'
+  },
+
+  // ── FDA Inspection Cases ──
+  {
+    type:'ox',
+    qko:'FDA 실사 중 원본 기록이 숨겨지거나 파기된 경우, 이는 21 CFR 211.180 위반에 해당한다.',
+    qen:'Concealing or destroying original records during an FDA inspection constitutes a violation of 21 CFR 211.180.',
+    answer:'O',
+    exko:'21 CFR 211.180(c)는 생산 기록의 보존 의무를 규정합니다. 실사 중 기록 은닉 및 임의 폐기는 Warning Letter의 직접적 원인이 됩니다.',
+    exen:'21 CFR 211.180(c) mandates the preservation of production records. Concealing or destroying records during inspection directly triggers Warning Letters.'
+  },
+  {
+    type:'ox',
+    qko:'신입 직원이 OJT(On-the-Job Training) 없이 즉시 생산 현장에 배치되어도 SOP만 읽었다면 문제가 없다.',
+    qen:'Assigning a new hire to the production floor immediately without OJT is acceptable as long as the employee has read the SOP.',
+    answer:'X',
+    exko:'OJT 없는 신입 배치는 FDA 21 CFR 211.68 위반으로 실제 지적 사례입니다. 훈련 기록 소급 작성도 추가적인 DI 위반입니다.',
+    exen:'Assigning new hires without OJT is an actual FDA violation under 21 CFR 211.68. Backdating training records to cover this is an additional DI violation.'
+  },
+  {
+    type:'ox',
+    qko:'HVAC 벤트를 상자로 막은 행위는 Clean Room 환경 위반으로 FDA 483 Observation 대상이다.',
+    qen:'Blocking HVAC vents with boxes is an environmental violation subject to FDA 483 Observation.',
+    answer:'O',
+    exko:'HVAC 벤트 차단은 공기압, 기류 패턴, 청정도를 저해합니다. 실제 FDA 483 사례(Eugia US 2023, 21 CFR 211.42)에 해당합니다.',
+    exen:'Blocking HVAC vents disrupts air pressure, airflow patterns, and cleanliness. This is an actual FDA 483 observation (Eugia US 2023, 21 CFR 211.42).'
+  },
+  {
+    type:'mc',
+    qko:'다음 중 FDA 실사에서 실제로 지적된 Data Integrity 위반 사례가 아닌 것은?',
+    qen:'Which of the following is NOT an actual Data Integrity violation observed in FDA inspections?',
+    options_ko:['ERP 출력 전 파라미터 수정','불합격 Batch 기록 소급 수정','작업 후 즉시 Batch Record 작성','중복 기록 발견'],
+    options_en:['Modifying parameters before ERP printing','Retroactively revising failed-batch records','Recording Batch Record immediately after activity','Duplicate records discovered'],
+    answer:2,
+    exko:'작업 후 즉시 Batch Record 작성은 ALCOA+ Contemporaneous 원칙에 부합하는 올바른 행동입니다. 나머지 세 가지는 모두 실제 FDA Warning Letter(2024)에 기재된 위반 사례입니다.',
+    exen:'Recording the Batch Record immediately after activity complies with the ALCOA+ Contemporaneous principle and is correct behavior. The other three are actual violations documented in FDA Warning Letters (2024).'
+  },
+  {
+    type:'mc',
+    qko:'FDA 실사관이 생산팀 점검 시 중점적으로 확인하는 5가지 항목이 아닌 것은?',
+    qen:'Which of the following is NOT among the 5 key areas FDA inspectors focus on when evaluating the production team?',
+    options_ko:['절차 (Procedure)','데이터 무결성 (Data Integrity)','제품 가격 (Product Pricing)','작업자 (Personnel)'],
+    options_en:['Procedure','Data Integrity','Product Pricing','Personnel'],
+    answer:2,
+    exko:'FDA 실사관은 절차(Procedure), 장비(Equipment), 작업자(Personnel), 환경(Environment), 데이터 무결성(Data Integrity)을 중점 점검합니다. 제품 가격은 FDA 실사 범위에 해당하지 않습니다.',
+    exen:'FDA inspectors focus on Procedure, Equipment, Personnel, Environment, and Data Integrity. Product pricing is outside the scope of FDA inspections.'
+  },
+  {
+    type:'mc',
+    qko:'FDA 실사 실제 사례(2024)에서 "생산팀 직원이 출력 전 Master Batch Record를 수정할 수 있었다"는 지적은 어떤 규정 위반인가?',
+    qen:'The 2024 FDA Warning Letter stating "production staff could alter master batch records before printing" is a violation of which regulation?',
+    options_ko:['21 CFR Part 11 (전자 기록/서명)','21 CFR 211.56 (위생 관리)','21 CFR 211.42 (건물 및 시설)','21 CFR 211.100 (제조 및 공정 관리)'],
+    options_en:['21 CFR Part 11 (Electronic Records/Signatures)','21 CFR 211.56 (Sanitation)','21 CFR 211.42 (Buildings and Facilities)','21 CFR 211.100 (Written Procedures/Deviations)'],
+    answer:0,
+    exko:'21 CFR Part 11은 전자 기록과 전자 서명의 무결성을 규정합니다. Master Batch Record의 전자 수정 가능성은 접근 권한 통제 실패로 Part 11 위반에 해당합니다.',
+    exen:'21 CFR Part 11 governs the integrity of electronic records and signatures. The ability to modify electronic batch records represents a failure of access controls, violating Part 11.'
+  },
+
+  // ── 종합/응용 ──
+  {
+    type:'ox',
+    qko:'"Human Error는 결과이지 원인이 아니다"는 GMP 관점에서 근본 원인 분석(Root Cause Analysis)의 핵심 원칙이다.',
+    qen:'"Human Error is the outcome, not the cause" is a core principle of Root Cause Analysis from a GMP perspective.',
+    answer:'O',
+    exko:'Human Error를 원인으로 종결하면 시스템적 개선이 이루어지지 않습니다. GMP에서는 Human Error 뒤에 있는 시스템, 절차, 교육, 환경적 요인을 찾아야 합니다.',
+    exen:'Closing investigations with "Human Error" as the cause prevents systemic improvement. GMP requires identifying the system, procedural, training, or environmental factors behind the error.'
+  },
+  {
+    type:'ox',
+    qko:'Deviation이 발생했을 때 구두 보고로 대체하고 문서 등록을 생략할 수 있다.',
+    qen:'When a deviation occurs, a verbal report can substitute for formal documentation in the deviation system.',
+    answer:'X',
+    exko:'Deviation은 반드시 편차 관리 시스템(Deviation System)에 등록해야 합니다. 구두 보고는 추적이 불가능하여 FDA 실사 시 CAPA 이행 확인이 불가합니다.',
+    exen:'Deviations must be logged in the formal deviation management system. Verbal reports cannot be tracked and prevent verification of CAPA implementation during FDA inspections.'
+  },
+  {
+    type:'mc',
+    qko:'"If it\'s not documented, it wasn\'t done."에서 가장 중요한 GMP 교훈은?',
+    qen:'What is the most important GMP lesson from "If it\'s not documented, it wasn\'t done"?',
+    options_ko:['기록은 사후에 정리하면 된다','기록되지 않은 작업은 수행되지 않은 것으로 간주된다','구두 보고로 기록을 대체할 수 있다','기록은 작업자 재량으로 선택할 수 있다'],
+    options_en:['Records can be organized after the fact','Undocumented work is considered as not having been performed','Verbal reports can replace written records','Documentation is at the discretion of the operator'],
+    answer:1,
+    exko:'FDA의 기본 원칙: 기록되지 않은 작업은 수행되지 않은 것입니다. 모든 제조 활동은 즉시, 정확하게, 판독 가능하게 기록되어야 합니다.',
+    exen:'FDA fundamental principle: undocumented work is considered not done. All manufacturing activities must be recorded immediately, accurately, and legibly.'
+  },
+  {
+    type:'mc',
+    qko:'Line Clearance의 목적으로 가장 적절한 것은?',
+    qen:'What is the most appropriate purpose of Line Clearance?',
+    options_ko:['생산 라인 청소 완료 확인','이전 배치 잔류물 및 오염 가능 물질 제거 확인 후 신규 배치 생산 허가','생산 장비 PM(예방 점검) 실시','생산 속도 최적화'],
+    options_en:['Confirming line cleaning is complete','Verifying removal of previous batch residues before authorizing new batch production','Conducting preventive maintenance (PM) on equipment','Optimizing production speed'],
+    answer:1,
+    exko:'Line Clearance는 새로운 배치 생산 시작 전 이전 배치의 잔류물, 라벨, 문서 등이 완전히 제거되었음을 공식 확인하는 절차입니다. 혼입(Mix-up) 방지의 핵심입니다.',
+    exen:'Line Clearance is the formal procedure to confirm complete removal of previous batch residues, labels, and documents before starting a new batch. It is critical for preventing mix-ups.'
+  },
+];
+
+// ── STATE ─────────────────────────────────────────────────────────
+let lang='ko', totalCount=30, questions=[], current=0, score=0;
+let answered=false, lastAnswerOk=false, playerName='', prevScreen='screen-start';
+let hofRows=[];
+
+// ── LANG ──────────────────────────────────────────────────────────
+function t(ko,en){return lang==='ko'?ko:en;}
+
+window.setLang=function(l){
+  lang=l;
+  document.getElementById('btn-ko').classList.toggle('active',l==='ko');
+  document.getElementById('btn-en').classList.toggle('active',l==='en');
+  document.getElementById('hall-btn').textContent=t('🏆 명예의 전당','🏆 Hall of Fame');
+  // start
+  document.getElementById('start-title').innerHTML=t('생산팀을 위한<br><em>GMP Quiz</em>','GMP Quiz<br><em>for Production Team</em>');
+  document.getElementById('start-sub').textContent=t('Good Documentation Practice · Aseptic Technique · FDA Inspection Cases','Good Documentation Practice · Aseptic Technique · FDA Inspection Cases');
+  document.getElementById('lbl-q').textContent=t('문제','Questions');
+  document.getElementById('lbl-ox').textContent=t('O/X + 객관식','O/X + MCQ');
+  document.getElementById('lbl-fda').textContent=t('실사 기반','FDA Based');
+  document.getElementById('label-name').textContent=t('참여자 이름','Your Name');
+  document.getElementById('name-input').placeholder=t('이름을 입력하세요','Enter your name');
+  document.getElementById('start-btn').textContent=t('퀴즈 시작하기 →','Start Quiz →');
+  document.getElementById('footer-note').textContent=t('본 퀴즈는 생산팀 GMP 교육 목적으로 제작되었습니다','This quiz is for GMP training purposes for the production team');
+  // result
+  document.getElementById('lbl-correct').textContent=t('정답','Correct');
+  document.getElementById('lbl-wrong').textContent=t('오답','Wrong');
+  document.getElementById('top10-title').textContent=t('🏅 TOP 10 랭킹','🏅 TOP 10 RANKING');
+  document.getElementById('retry-btn').textContent=t('다시 도전하기 →','Try Again →');
+  // hof
+  document.getElementById('hof-title').textContent=t('명예의 전당','Hall of Fame');
+  document.getElementById('hof-sub').textContent=t('TOP 20 랭킹','TOP 20 RANKING');
+  document.getElementById('hof-back-btn').textContent=t('← 돌아가기','← Go Back');
+  document.getElementById('hof-restart-btn').textContent=t('처음으로 →','Restart →');
+  document.getElementById('download-btn-label').textContent=t('전체 결과 엑셀 다운로드','Download All Results (XLSX)');
+  document.getElementById('hof-download-btn-label').textContent=t('전체 결과 엑셀 다운로드','Download All Results (XLSX)');
+  document.getElementById('saving-text').textContent=t('점수 저장 중...','Saving score...');
+
+  // 화면별 재렌더
+  if(document.getElementById('screen-quiz').classList.contains('active')&&questions.length){
+    renderQ();
+    if(answered) refreshFeedback();
+  }
+  if(document.getElementById('screen-result').classList.contains('active')&&questions.length) refreshResultLang();
+  if(document.getElementById('screen-hof').classList.contains('active')) renderHofTable();
+};
+
+// ── HELPERS ───────────────────────────────────────────────────────
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function buildQuestions(n){
+  const pool=shuffle([...QUESTIONS]);
+  return pool.slice(0,Math.min(n,pool.length));
+}
+
+// ── START ─────────────────────────────────────────────────────────
+window.onNameInput=function(){playerName=document.getElementById('name-input').value.trim();updateStartBtn();};
+function updateStartBtn(){document.getElementById('start-btn').disabled=!playerName;}
+window.startQuiz=function(){questions=buildQuestions(totalCount);current=0;score=0;showScreen('screen-quiz');loadQ();};
+
+function showScreen(id){
+  prevScreen=document.querySelector('.screen.active')?.id||'screen-start';
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ── QUIZ ──────────────────────────────────────────────────────────
+function loadQ(){
+  answered=false;
+  const q=questions[current];
+  document.getElementById('progress-text').textContent=`${current+1} / ${totalCount}`;
+  document.getElementById('score-text').textContent=t(`점수: ${score}`,`Score: ${score}`);
+  document.getElementById('progress-fill').style.width=`${(current/totalCount)*100}%`;
+  document.getElementById('feedback-box').style.display='none';
+  document.getElementById('next-btn').style.display='none';
+  document.getElementById('check-btn').disabled=true;
+  renderQ();
+}
+
+function renderQ(){
+  const q=questions[current];
+  const badge=document.getElementById('type-badge');
+  badge.className=`type-badge ${q.type}`;
+  badge.textContent=q.type==='ox'?t('O / X 퀴즈','O / X Quiz'):t('📝 객관식','📝 Multiple Choice');
+  document.getElementById('question-text').textContent=lang==='ko'?q.qko:q.qen;
+  document.getElementById('check-btn').textContent=t('정답 확인','Check Answer');
+  document.getElementById('score-text').textContent=t(`점수: ${score}`,`Score: ${score}`);
+  renderOptions();
+}
+
+function renderOptions(){
+  const q=questions[current];
+  const area=document.getElementById('options-area');
+  area.innerHTML='';
+
+  if(q.type==='ox'){
+    const grid=document.createElement('div'); grid.className='ox-grid';
+    ['O','X'].forEach(val=>{
+      const btn=document.createElement('button');
+      btn.className='ox-btn'; btn.dataset.val=val;
+      btn.innerHTML=`${val}<span>${val==='O'?t('맞다','True'):t('틀리다','False')}</span>`;
+      btn.onclick=()=>selectOpt(btn);
+      grid.appendChild(btn);
+    });
+    area.appendChild(grid);
+  } else {
+    const grid=document.createElement('div'); grid.className='mc-grid';
+    const opts=lang==='ko'?q.options_ko:q.options_en;
+    opts.forEach((opt,i)=>{
+      const btn=document.createElement('button');
+      btn.className='mc-btn'; btn.dataset.index=i;
+      btn.innerHTML=`<span class="mc-btn-num">${String.fromCharCode(65+i)}</span>${opt}`;
+      btn.onclick=()=>selectOpt(btn);
+      grid.appendChild(btn);
+    });
+    area.appendChild(grid);
+  }
+}
+
+function selectOpt(clickedBtn){
+  if(answered)return;
+  document.querySelectorAll('.ox-btn,.mc-btn').forEach(b=>b.classList.remove('selected'));
+  clickedBtn.classList.add('selected');
+  document.getElementById('check-btn').disabled=false;
+}
+
+window.checkAnswer=function(){
+  if(answered)return; answered=true;
+  const q=questions[current];
+  let ok=false;
+
+  if(q.type==='ox'){
+    const sel=document.querySelector('.ox-btn.selected');
+    const chosen=sel?sel.dataset.val:'';
+    ok=chosen===q.answer;
+    document.querySelectorAll('.ox-btn').forEach(btn=>{
+      btn.disabled=true;
+      if(btn.dataset.val===q.answer) btn.classList.add('correct');
+      else if(btn.dataset.val===chosen&&!ok) btn.classList.add('wrong');
+    });
+  } else {
+    const sel=document.querySelector('.mc-btn.selected');
+    const idx=sel?parseInt(sel.dataset.index):-1;
+    ok=idx===q.answer;
+    document.querySelectorAll('.mc-btn').forEach((btn,i)=>{
+      btn.disabled=true;
+      if(i===q.answer) btn.classList.add('correct');
+      else if(i===idx&&!ok) btn.classList.add('wrong');
+    });
+  }
+
+  lastAnswerOk=ok;
+  if(ok) score++;
+  refreshFeedback();
+  document.getElementById('check-btn').disabled=true;
+  document.getElementById('score-text').textContent=t(`점수: ${score}`,`Score: ${score}`);
+  if(current<totalCount-1){
+    document.getElementById('next-btn').style.display='block';
+    document.getElementById('next-btn').textContent=t('다음 문제 →','Next Question →');
+  } else {
+    setTimeout(()=>saveAndShowResult(),600);
+  }
+  playSound(ok);
+};
+
+function refreshFeedback(){
+  const q=questions[current];
+  const fb=document.getElementById('feedback-box');
+  fb.style.display='block';
+  fb.className=`feedback-box ${lastAnswerOk?'correct-fb':'wrong-fb'}`;
+  // 정답 오답 메시지
+  if(q.type==='ox'){
+    const ans=q.answer==='O'?t('"맞다" (O)','True (O)'):t('"틀리다" (X)','False (X)');
+    document.getElementById('feedback-result').textContent=lastAnswerOk
+      ?t('✅ 정답입니다!','✅ Correct!')
+      :t(`❌ 오답! 정답은 ${ans} 입니다.`,`❌ Wrong! The answer is ${ans}.`);
+  } else {
+    const opts=lang==='ko'?q.options_ko:q.options_en;
+    document.getElementById('feedback-result').textContent=lastAnswerOk
+      ?t('✅ 정답입니다!','✅ Correct!')
+      :t(`❌ 오답! 정답: ${String.fromCharCode(65+q.answer)}. ${opts[q.answer]}`,
+         `❌ Wrong! Answer: ${String.fromCharCode(65+q.answer)}. ${opts[q.answer]}`);
+  }
+  document.getElementById('feedback-explanation').textContent=`📖 ${lang==='ko'?q.exko:q.exen}`;
+  document.getElementById('check-btn').textContent=t('정답 확인','Check Answer');
+  document.getElementById('next-btn').textContent=t('다음 문제 →','Next Question →');
+
+  // 선택지 텍스트 재렌더(언어 전환 대응)
+  if(!answered) return;
+  if(q.type==='ox'){
+    document.querySelectorAll('.ox-btn').forEach(btn=>{
+      btn.innerHTML=`${btn.dataset.val}<span>${btn.dataset.val==='O'?t('맞다','True'):t('틀리다','False')}</span>`;
+    });
+  } else {
+    const opts=lang==='ko'?q.options_ko:q.options_en;
+    document.querySelectorAll('.mc-btn').forEach((btn,i)=>{
+      btn.innerHTML=`<span class="mc-btn-num">${String.fromCharCode(65+i)}</span>${opts[i]}`;
+    });
+  }
+}
+
+window.nextQuestion=function(){current++;loadQ();};
+
+// ── SOUND ─────────────────────────────────────────────────────────
+let audioCtx=null;
+let bgmNodes=[]; let bgmSessionId=0;
+
+function getACtx(){
+  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==='suspended') audioCtx.resume();
+  return audioCtx;
+}
+document.addEventListener('touchstart',function ia(){getACtx();document.removeEventListener('touchstart',ia);},{once:true});
+document.addEventListener('click',function ia(){getACtx();document.removeEventListener('click',ia);},{once:true});
+
+function playSound(ok){
+  try{
+    const ctx=getACtx(); const t0=ctx.currentTime;
+    if(ok){
+      [[523,0],[659,0.13],[784,0.26],[1047,0.40]].forEach(([f,d])=>{
+        const o=ctx.createOscillator(),g=ctx.createGain();
+        o.connect(g);g.connect(ctx.destination);o.type='sine';
+        o.frequency.setValueAtTime(f,t0+d);
+        g.gain.setValueAtTime(0,t0+d);g.gain.linearRampToValueAtTime(0.15,t0+d+0.04);g.gain.exponentialRampToValueAtTime(0.001,t0+d+0.22);
+        o.start(t0+d);o.stop(t0+d+0.23);
+      });
+    } else {
+      [[330,0,0.30],[262,0.35,0.30],[220,0.70,0.45]].forEach(([f,d,dur])=>{
+        const o=ctx.createOscillator(),g=ctx.createGain();
+        o.connect(g);g.connect(ctx.destination);o.type='sine';
+        o.frequency.setValueAtTime(f,t0+d);o.frequency.linearRampToValueAtTime(f*0.82,t0+d+dur);
+        g.gain.setValueAtTime(0,t0+d);g.gain.linearRampToValueAtTime(0.14,t0+d+0.04);g.gain.exponentialRampToValueAtTime(0.001,t0+d+dur+0.05);
+        o.start(t0+d);o.stop(t0+d+dur+0.06);
+      });
+    }
+  }catch(e){}
+}
+
+function stopBgm(){bgmSessionId++;bgmNodes.forEach(n=>{try{n.stop();}catch(e){}});bgmNodes=[];}
+
+function playBgm(){
+  stopBgm(); const myS=++bgmSessionId;
+  try{
+    const ctx=getACtx();
+    const mel=[[523,0,0.28],[659,0.33,0.28],[784,0.66,0.28],[880,1.0,0.42],[784,1.5,0.20],[659,1.75,0.20],[784,2.0,0.55],[698,2.66,0.28],[784,3.0,0.28],[880,3.33,0.28],[1047,3.66,0.42],[880,4.16,0.20],[784,4.41,0.20],[880,4.66,0.55],[784,5.33,0.20],[698,5.55,0.20],[659,5.77,0.20],[523,6.0,0.55],[659,6.66,0.20],[523,6.88,0.20],[440,7.10,0.20],[523,7.33,0.55]];
+    const bas=[[262,0,0.22],[196,0.33,0.22],[196,0.66,0.22],[262,1.0,0.22],[196,1.5,0.22],[196,2.0,0.22],[349,2.66,0.22],[262,3.0,0.22],[262,3.33,0.22],[349,3.66,0.22],[262,4.16,0.22],[262,4.66,0.22],[392,5.33,0.22],[294,5.77,0.22],[262,6.0,0.22],[330,6.66,0.22],[262,7.10,0.22],[262,7.33,0.22]];
+    const loop=8.0;
+    function sched(){
+      if(bgmSessionId!==myS)return;
+      const t0=ctx.currentTime+0.05;
+      [...mel].forEach(([f,w,d])=>{const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.type='triangle';o.frequency.setValueAtTime(f,t0+w);g.gain.setValueAtTime(0,t0+w);g.gain.linearRampToValueAtTime(0.07,t0+w+0.03);g.gain.exponentialRampToValueAtTime(0.001,t0+w+d);o.start(t0+w);o.stop(t0+w+d+0.01);bgmNodes.push(o);});
+      [...bas].forEach(([f,w,d])=>{const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.type='sine';o.frequency.setValueAtTime(f,t0+w);g.gain.setValueAtTime(0,t0+w);g.gain.linearRampToValueAtTime(0.05,t0+w+0.04);g.gain.exponentialRampToValueAtTime(0.001,t0+w+d);o.start(t0+w);o.stop(t0+w+d+0.01);bgmNodes.push(o);});
+      setTimeout(()=>{if(bgmSessionId===myS)sched();},(loop-0.3)*1000);
+    }
+    sched();
+  }catch(e){}
+}
+
+// ── EMAIL & EXCEL EXPORT ───────────────────────────────────────────
+const EMAILJS_PUBLIC_KEY='jPt14lizlL33u8-2T';
+const EMAILJS_SERVICE_ID='service_h6a0do9';
+const EMAILJS_TEMPLATE_ID='template_yl5g06g';
+const RECIPIENT_EMAIL='DM@samil-pharm.com';
+
+// EmailJS 초기화
+try{ emailjs.init({publicKey:EMAILJS_PUBLIC_KEY}); }catch(e){console.warn('EmailJS init failed',e);}
+
+async function sendResultEmail(){
+  const statusEl=document.getElementById('email-status');
+  if(!window.emailjs){
+    statusEl.textContent=t('이메일 라이브러리 로드 실패','Email library failed to load');
+    statusEl.className='email-status error';
+    return;
+  }
+  const pct=Math.round((score/totalCount)*100);
+  let grade;
+  if(pct>=90) grade=t('GMP 마스터','GMP Master');
+  else if(pct>=70) grade=t('우수 수료','Excellent');
+  else if(pct>=50) grade=t('기본기 양호','Good Foundation');
+  else grade=t('재교육 필요','Retraining Needed');
+
+  const now=new Date();
+  const datetime=now.toLocaleString(lang==='ko'?'ko-KR':'en-US');
+
+  // 이메일 본문 (한/영)
+  const messageKo=`안녕하세요,
+
+아래는 GMP Quiz 결과입니다.
+
+▣ 참여자: ${playerName}
+▣ 점수: ${score} / ${totalCount}
+▣ 정답률: ${pct}%
+▣ 등급: ${grade}
+▣ 응시 일시: ${datetime}
+
+본 메일은 자동 발송되었습니다.
+GMP Training System`;
+
+  const messageEn=`Hello,
+
+Below are the GMP Quiz results.
+
+▣ Participant: ${playerName}
+▣ Score: ${score} / ${totalCount}
+▣ Percentage: ${pct}%
+▣ Grade: ${grade}
+▣ Date: ${datetime}
+
+This email was sent automatically.
+GMP Training System`;
+
+  const subjectKo=`[GMP Quiz] ${playerName} 님의 퀴즈 결과`;
+  const subjectEn=`[GMP Quiz] ${playerName}'s Quiz Result`;
+
+  const params={
+    to_email: RECIPIENT_EMAIL,
+    participant_name: playerName,
+    score: String(score),
+    total: String(totalCount),
+    percentage: String(pct),
+    grade: grade,
+    datetime: datetime,
+    subject: lang==='ko'?subjectKo:subjectEn,
+    message: lang==='ko'?messageKo:messageEn
+  };
+
+  statusEl.textContent=t('📨 이메일 전송 중...','📨 Sending email...');
+  statusEl.className='email-status';
+  try{
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+    statusEl.textContent=t('✅ 결과가 이메일로 전송되었습니다','✅ Results sent via email');
+    statusEl.className='email-status success';
+  }catch(err){
+    console.error('EmailJS error:',err);
+    statusEl.textContent=t('⚠️ 이메일 전송 실패 (관리자에게 문의)','⚠️ Email failed (contact admin)');
+    statusEl.className='email-status error';
+  }
+}
+
+// 전체 점수 데이터를 가져와 XLSX로 다운로드
+window.downloadXlsx=async function(){
+  if(typeof XLSX==='undefined'){
+    alert(t('엑셀 라이브러리 로드 실패','Excel library failed to load'));
+    return;
+  }
+  const btn1=document.getElementById('result-download-btn');
+  const btn2=document.getElementById('hof-download-btn');
+  [btn1,btn2].forEach(b=>{if(b){b.disabled=true;}});
+  const lblKo='⏳ 다운로드 중...';
+  const lblEn='⏳ Downloading...';
+  document.getElementById('download-btn-label').textContent=t(lblKo,lblEn);
+  document.getElementById('hof-download-btn-label').textContent=t(lblKo,lblEn);
+
+  try{
+    // Firebase에서 전체 데이터 가져오기 (점수 내림차순)
+    const q2=query(collection(db,'gmp_scores'),orderBy('score','desc'));
+    const snap=await getDocs(q2);
+    const rows=[];
+    snap.forEach(doc=>{
+      const d=doc.data();
+      let dt='';
+      if(d.timestamp&&d.timestamp.toDate){
+        dt=d.timestamp.toDate().toLocaleString(lang==='ko'?'ko-KR':'en-US');
+      }
+      const pct=d.total?Math.round((d.score/d.total)*100):0;
+      rows.push({
+        rank: rows.length+1,
+        name: d.name||'',
+        score: d.score||0,
+        total: d.total||0,
+        percentage: pct,
+        datetime: dt
+      });
+    });
+
+    if(!rows.length){
+      alert(t('저장된 기록이 없습니다','No records found'));
+      return;
+    }
+
+    // 헤더 (언어에 따라)
+    const headers=lang==='ko'
+      ? [['순위','이름','점수','총문제','정답률(%)','응시 일시']]
+      : [['Rank','Name','Score','Total','Percentage(%)','Date']];
+    const dataMatrix=rows.map(r=>[r.rank,r.name,r.score,r.total,r.percentage,r.datetime]);
+    const finalData=[...headers,...dataMatrix];
+
+    const ws=XLSX.utils.aoa_to_sheet(finalData);
+    // 컬럼 너비
+    ws['!cols']=[{wch:6},{wch:18},{wch:8},{wch:8},{wch:12},{wch:22}];
+
+    const wb=XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, lang==='ko'?'GMP 퀴즈 결과':'GMP Quiz Results');
+
+    const today=new Date().toISOString().slice(0,10);
+    const fname=`GMP_Quiz_Results_${today}.xlsx`;
+    XLSX.writeFile(wb, fname);
+  }catch(err){
+    console.error('XLSX export error:',err);
+    alert(t('엑셀 다운로드 실패: '+err.message,'Excel download failed: '+err.message));
+  }finally{
+    [btn1,btn2].forEach(b=>{if(b){b.disabled=false;}});
+    document.getElementById('download-btn-label').textContent=t('전체 결과 엑셀 다운로드','Download All Results (XLSX)');
+    document.getElementById('hof-download-btn-label').textContent=t('전체 결과 엑셀 다운로드','Download All Results (XLSX)');
+  }
+};
+
+// ── SAVE & RESULT ──────────────────────────────────────────────────
+async function saveAndShowResult(){
+  document.getElementById('saving-overlay').classList.add('show');
+  try{await addDoc(collection(db,'gmp_scores'),{name:playerName,score,total:totalCount,timestamp:serverTimestamp()});}
+  catch(e){console.error(e);}
+  document.getElementById('saving-overlay').classList.remove('show');
+  await showResult();
+  // 결과 표시 후 이메일 전송 (백그라운드)
+  sendResultEmail();
+}
+
+async function showResult(){
+  showScreen('screen-result');
+  playBgm();
+  document.getElementById('email-status').textContent='';
+  document.getElementById('email-status').className='email-status';
+  const pct=score/totalCount;
+  let emoji,tko,ten,mko,men;
+  if(pct>=0.9){emoji='🏆';tko='GMP 마스터!';ten='GMP Master!';mko='"탁월한 GMP 이해도입니다! 현장의 든든한 수호자네요. 🌟"';men='"Outstanding GMP knowledge! You are a true guardian of the production floor. 🌟"';}
+  else if(pct>=0.7){emoji='⭐';tko='우수 수료!';ten='Excellent!';mko='"훌륭한 점수입니다! 조금 더 다듬으면 완벽해질 거예요. 💪"';men='"Great score! A little more practice and you\'ll be perfect. 💪"';}
+  else if(pct>=0.5){emoji='📋';tko='기본기 양호';ten='Good Foundation';mko='"기본기는 갖추었습니다. 취약 영역을 복습해 보세요. 📚"';men='"Solid foundation. Please review your weak areas. 📚"';}
+  else{emoji='📖';tko='재교육 필요';ten='Retraining Needed';mko='"GMP 교육 자료를 다시 한번 복습하고 재도전해 보세요! 🔄"';men='"Please review the GMP training materials and try again! 🔄"';}
+
+  document.getElementById('result-emoji').textContent=emoji;
+  document.getElementById('result-title').textContent=t(tko,ten);
+  document.getElementById('final-score').textContent=score;
+  document.getElementById('final-total').textContent=t(`/ ${totalCount} 점`,`/ ${totalCount} pts`);
+  document.getElementById('stat-correct').textContent=score;
+  document.getElementById('stat-wrong').textContent=totalCount-score;
+  document.getElementById('result-msg').textContent=t(mko,men);
+
+  const list=document.getElementById('top10-list');
+  list.innerHTML='<div class="hof-loading">⏳</div>';
+  try{
+    const q2=query(collection(db,'gmp_scores'),orderBy('score','desc'),limit(10));
+    const snap=await getDocs(q2);
+    const rows=[];snap.forEach(doc=>rows.push(doc.data()));
+    if(!rows.length){list.innerHTML=`<div class="hof-empty">${t('아직 기록이 없어요 🎯','No records yet 🎯')}</div>`;return;}
+    list.innerHTML='';
+    const medals=['🥇','🥈','🥉'];
+    rows.forEach((r,i)=>{
+      const isMe=r.name===playerName&&r.score===score;
+      const rc=i===0?'gold':i===1?'silver':i===2?'bronze':'';
+      const div=document.createElement('div');div.className=`rank-row${isMe?' me':''}`;
+      div.innerHTML=`<span class="rank-num ${rc}">${i<3?medals[i]:i+1}</span><span class="rank-name">${r.name}${isMe?t(' (나)',' (Me)'):''}</span><span class="rank-score">${r.score}${t('점','pts')}</span>`;
+      list.appendChild(div);
+    });
+  }catch(e){list.innerHTML=`<div class="hof-empty">${t('랭킹을 불러올 수 없어요','Could not load ranking')}</div>`;}
+}
+
+function refreshResultLang(){
+  const pct=score/totalCount;
+  let tko,ten,mko,men;
+  if(pct>=0.9){tko='GMP 마스터!';ten='GMP Master!';mko='"탁월한 GMP 이해도입니다! 현장의 든든한 수호자네요. 🌟"';men='"Outstanding GMP knowledge! You are a true guardian of the production floor. 🌟"';}
+  else if(pct>=0.7){tko='우수 수료!';ten='Excellent!';mko='"훌륭한 점수입니다! 조금 더 다듬으면 완벽해질 거예요. 💪"';men='"Great score! A little more practice and you\'ll be perfect. 💪"';}
+  else if(pct>=0.5){tko='기본기 양호';ten='Good Foundation';mko='"기본기는 갖추었습니다. 취약 영역을 복습해 보세요. 📚"';men='"Solid foundation. Please review your weak areas. 📚"';}
+  else{tko='재교육 필요';ten='Retraining Needed';mko='"GMP 교육 자료를 다시 한번 복습하고 재도전해 보세요! 🔄"';men='"Please review the GMP training materials and try again! 🔄"';}
+  document.getElementById('result-title').textContent=t(tko,ten);
+  document.getElementById('result-msg').textContent=t(mko,men);
+  document.getElementById('final-total').textContent=t(`/ ${totalCount} 점`,`/ ${totalCount} pts`);
+  document.getElementById('lbl-correct').textContent=t('정답','Correct');
+  document.getElementById('lbl-wrong').textContent=t('오답','Wrong');
+  document.getElementById('top10-title').textContent=t('🏅 TOP 10 랭킹','🏅 TOP 10 RANKING');
+  document.getElementById('retry-btn').textContent=t('다시 도전하기 →','Try Again →');
+  document.querySelectorAll('.rank-row').forEach(row=>{
+    const ne=row.querySelector('.rank-name');const se=row.querySelector('.rank-score');
+    if(ne){ne.textContent=ne.textContent.replace(' (나)','').replace(' (Me)','');if(row.classList.contains('me'))ne.textContent+=t(' (나)',' (Me)');}
+    if(se){const n=parseInt(se.textContent);if(!isNaN(n))se.textContent=`${n}${t('점','pts')}`;}
+  });
+}
+
+// ── HALL OF FAME ───────────────────────────────────────────────────
+function renderHofTable(){
+  const content=document.getElementById('hof-content');
+  if(!hofRows.length){content.innerHTML=`<div class="hof-empty">${t('아직 기록이 없어요.<br>퀴즈를 완료하면 이름이 올라와요! 🎯','No records yet.<br>Complete a quiz to appear here! 🎯')}</div>`;return;}
+  const medals=['🥇','🥈','🥉'];
+  let html=`<table class="hof-table"><thead><tr><th>${t('순위','Rank')}</th><th>${t('이름','Name')}</th><th>${t('점수','Score')}</th></tr></thead><tbody>`;
+  hofRows.forEach((r,i)=>{html+=`<tr><td class="hof-rank-cell">${i<3?medals[i]:i+1}</td><td>${r.name}</td><td>${r.score}${t('점','pts')}</td></tr>`;});
+  html+='</tbody></table>';content.innerHTML=html;
+}
+
+window.showHallOfFame=async function(){
+  prevScreen=document.querySelector('.screen.active')?.id||'screen-start';
+  showScreen('screen-hof');
+  stopBgm();
+  setLang(lang);
+  const content=document.getElementById('hof-content');content.innerHTML='<div class="hof-loading">⏳</div>';
+  try{
+    const q2=query(collection(db,'gmp_scores'),orderBy('score','desc'),limit(20));
+    const snap=await getDocs(q2);
+    hofRows=[];snap.forEach(doc=>hofRows.push(doc.data()));
+    renderHofTable();
+  }catch(e){content.innerHTML=`<div class="hof-empty">${t('데이터를 불러올 수 없어요','Could not load data')}</div>`;}
+};
+
+window.goBack=function(){
+  stopBgm();
+  showScreen(prevScreen);
+  if(prevScreen==='screen-result') playBgm();
+};
+
+window.resetQuiz=function(){
+  stopBgm();
+  totalCount=30;questions=[];current=0;score=0;answered=false;
+  document.getElementById('start-btn').disabled=true;
+  showScreen('screen-start');
+  setLang(lang);
+};
+
+// init
+setLang('ko');
+document.addEventListener('touchstart',function startB(){playBgm();document.removeEventListener('touchstart',startB);},{once:true});
+document.addEventListener('click',function startB(){playBgm();document.removeEventListener('click',startB);},{once:true});
+window.startQuiz=function(){questions=buildQuestions(totalCount);current=0;score=0;stopBgm();showScreen('screen-quiz');loadQ();};
+</script>
+</body>
+</html>
