@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DI Letter · VOL.03</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="letter.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="../index.html#top">
+      <span class="nav-badge"><span>3D</span><span>3O</span></span>
+      <span class="full">GMP&nbsp;Training&nbsp;·&nbsp;S1&nbsp;Plant</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="../index.html#di-letter" data-k="navLetter">DI 레터</a>
+        <a href="../index.html#di-quiz" data-k="navQuiz">DI 퀴즈</a>
+      </div>
+      <div class="langsel" role="group" aria-label="Language">
+        <button class="langbtn" data-l="ko">한</button>
+        <button class="langbtn" data-l="en">EN</button>
+        <button class="langbtn" data-l="vn">VN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="crumb"><a href="../index.html#di-letter" data-k="crumb">← 데이터 완전성 레터 목록</a></div>
+  <div id="art"></div>
+</article>
+
+<footer>
+  <div class="wrap">
+    <div data-k="footer">본 포털은 사내 GMP · 데이터 완전성 교육 목적으로 제작되었습니다.</div>
+    <div><b>3D 3O</b> · S1 Plant Data Management Team</div>
+  </div>
+</footer>
+
+<script>
+window.LETTER = {
+  vol:"VOL.03", date:"2026.06", readmin:6,
+  tags:["#DataIntegrity","#Contemporaneous","#ALCOA+","#OpenRecord"],
+  title:{ko:`기록은 '나중에'가 아니라 '지금'입니다`, en:`Record it now, not later.`, vn:`Hãy ghi ngay, đừng để sau.`},
+  series:{ko:`생산부 Mr. ALCOA 씨의 생산 현장에서 생긴 일 · 에피소드 #1`, en:`Tales from the floor with Mr. ALCOA, Production · Episode #1`, vn:`Chuyện hiện trường cùng Mr. ALCOA, bộ phận Sản xuất · Tập #1`},
+  intro:{
+    ko:`<b>데이터 완전성 레터</b>는 현장에서 바로 쓰는 데이터 완전성 이야기를 짧은 편지로 전합니다. 이번 호 주제는 ALCOA+의 'C' — <b>Contemporaneous(동시성)</b>입니다.`,
+    en:`<b>The Data Integrity Letter</b> shares short, practical stories straight from the floor. This issue is about the 'C' in ALCOA+ — <b>Contemporaneous</b>.`,
+    vn:`<b>Thư Toàn Vẹn Dữ Liệu</b> chia sẻ những câu chuyện ngắn, thiết thực ngay từ hiện trường. Số này nói về chữ 'C' trong ALCOA+ — <b>Contemporaneous (Tính đồng thời)</b>.`
+  },
+  blocks:[
+    {type:"figure", img:"img/ep1_hero.webp", cap:{
+      ko:`오늘도 정신없이 바쁜 S1 충전실. 막내 ALCOA 씨의 하루가 시작됩니다. (본문 삽화는 이해를 돕기 위한 가상 이미지입니다.)`,
+      en:`Another hectic morning in the S1 filling room. ALCOA's day begins. (Illustrations are fictional, for context only.)`,
+      vn:`Lại một buổi sáng tất bật ở phòng chiết rót S1. Ngày làm việc của ALCOA bắt đầu. (Hình minh họa là hư cấu, chỉ nhằm minh họa.)`}},
+
+    {type:"lead", text:{
+      ko:`ALCOA+를 외울 때 우리는 보통 'A'(Attributable)부터 떠올립니다. 그런데 현장에서 가장 자주, 가장 조용히 무너지는 글자는 의외로 가운데 있는 <strong>C, Contemporaneous(동시성)</strong>입니다. "기록은 행위가 일어난 바로 그 순간에 남긴다." 말은 쉽지만, 바쁜 생산 현장에서 이 한 줄을 지키는 일은 생각보다 어렵습니다.`,
+      en:`When we recite ALCOA+, we usually start with 'A' for Attributable. But the letter that quietly fails most often on the floor is the one in the middle — <strong>C, Contemporaneous</strong>. "Record it the moment it happens." Easy to say, surprisingly hard to keep on a busy line.`,
+      vn:`Khi nhắc đến ALCOA+, ta thường bắt đầu từ 'A' (Attributable). Nhưng chữ âm thầm bị vi phạm nhiều nhất ở hiện trường lại nằm ở giữa — <strong>C, Contemporaneous (Tính đồng thời)</strong>. "Ghi lại ngay tại thời điểm thao tác diễn ra." Nói thì dễ, nhưng giữ được điều đó trên một dây chuyền bận rộn lại khó hơn ta tưởng.`}},
+
+    {type:"p", text:{
+      ko:`오늘은 생산부 막내 <strong>Mr. ALCOA</strong> 씨의 이야기로, 그 이유를 함께 따라가 보겠습니다.`,
+      en:`Let's follow <strong>Mr. ALCOA</strong>, the newest member of the Production team, to see why.`,
+      vn:`Hãy cùng theo chân <strong>Mr. ALCOA</strong>, thành viên mới nhất của bộ phận Sản xuất, để hiểu vì sao.`}},
+
+    {type:"hr"},
+
+    {type:"h2", text:{ko:`에피소드 #1 — "이따 한꺼번에 적을게요"`, en:`Episode #1 — "I'll write it all down later"`, vn:`Tập #1 — "Để lát nữa tôi ghi một thể"`}},
+
+    {type:"figure", img:"img/ep1_scene1_note.webp", cap:{
+      ko:`바쁘면 손이 먼저 메모지로 갑니다. 하지만 그 메모지는 '기록'이 아닙니다.`,
+      en:`When things get busy, the hand reaches for a sticky note. But a sticky note is not a record.`,
+      vn:`Khi bận rộn, tay ta với lấy tờ giấy nhớ. Nhưng tờ giấy nhớ không phải là hồ sơ.`}},
+
+    {type:"p", text:{
+      ko:`오전 9시, 충전 라인이 막 돌기 시작했습니다. ALCOA 씨는 충전 시작 시각과 충전 속도, 환경 모니터링 값을 배치기록서(BR)에 적어야 했습니다. 그런데 하필 같은 시각에 라인 알람이 울렸고, Supervisor <strong>Ms. D</strong>가 "ALCOA 씨, 3번 노즐 좀 봐줘요!"라고 불렀습니다.`,
+      en:`9:00 a.m., the filling line had just started. ALCOA needed to record the start time, the fill speed and the environmental readings in the batch record (BR). At that exact moment the line alarm went off, and Supervisor <strong>Ms. D</strong> called out, "ALCOA, can you check nozzle #3!"`,
+      vn:`9 giờ sáng, dây chuyền chiết rót vừa khởi động. ALCOA phải ghi thời điểm bắt đầu, tốc độ chiết rót và các giá trị quan trắc môi trường vào hồ sơ lô (BR). Đúng lúc đó chuông báo dây chuyền vang lên, và Giám sát <strong>Ms. D</strong> gọi: "ALCOA, kiểm tra vòi số 3 giúp tôi!"`}},
+
+    {type:"p", text:{
+      ko:`손이 두 개뿐인 ALCOA 씨는 생각했습니다. <strong>'지금은 급하니까, 일단 메모지에 시간만 적어두고 이따 한꺼번에 옮겨 적자.'</strong> 노란 메모지에 '09:0?', '환경 OK' 같은 글자를 휘갈겨 주머니에 넣었습니다.`,
+      en:`With only two hands, ALCOA thought: <strong>"It's hectic right now — I'll just jot the time on a note and copy it all into the record later."</strong> He scribbled '09:0?' and 'env OK' on a yellow sticky note and slipped it into his pocket.`,
+      vn:`Chỉ có hai tay, ALCOA nghĩ: <strong>"Giờ đang gấp — cứ ghi tạm giờ ra giấy nhớ, lát nữa chép hết vào hồ sơ một thể."</strong> Anh nguệch ngoạc '09:0?', 'môi trường OK' lên tờ giấy nhớ vàng rồi nhét vào túi.`}},
+
+    {type:"p", text:{
+      ko:`그 순간에는 아무 문제도 없어 보였습니다. <strong>문제는 언제나, 그 순간에는 보이지 않습니다.</strong>`,
+      en:`In that moment, nothing seemed wrong. <strong>The problem never looks like a problem in that moment.</strong>`,
+      vn:`Khoảnh khắc đó, mọi thứ trông chẳng có gì sai. <strong>Vấn đề không bao giờ trông giống vấn đề ngay tại khoảnh khắc đó.</strong>`}},
+
+    {type:"h2", text:{ko:`교대가 끝나고, 기억은 사라지고`, en:`The shift ends, the memory fades`, vn:`Hết ca, ký ức phai dần`}},
+
+    {type:"figure", img:"img/ep1_scene2_desk.webp", cap:{
+      ko:`퇴근 직전 책상 앞. 그런데 메모지의 '09:0?'는 09시 1분이었을까, 9분이었을까.`,
+      en:`At the desk before clocking out. Was '09:0?' really 09:01… or 09:09?`,
+      vn:`Trước bàn làm việc khi sắp tan ca. '09:0?' là 09:01… hay 09:09?`}},
+
+    {type:"p", text:{
+      ko:`오후가 되자 ALCOA 씨는 더 정신없이 바빴습니다. 점심 후 라인 정지, 자재 교체, 갑작스러운 점검 요청까지. 교대가 끝날 무렵 책상에 앉아 BR을 펼쳤을 때, 주머니 속 메모지는 이미 땀에 번져 있었습니다.`,
+      en:`The afternoon was even busier — a line stop after lunch, a material change, a surprise check request. By the time he sat down with the BR at the end of the shift, the note in his pocket had smudged with sweat.`,
+      vn:`Buổi chiều còn bận hơn — dừng dây chuyền sau bữa trưa, thay nguyên liệu, một yêu cầu kiểm tra đột xuất. Đến cuối ca khi ngồi xuống mở hồ sơ lô, tờ giấy nhớ trong túi đã nhòe mồ hôi.`}},
+
+    {type:"p", text:{
+      ko:`'충전 시작이 9시 몇 분이었더라…' 환경 모니터링 값은 그냥 'OK'라고만 적혀 있었습니다. 정확한 숫자는 기억나지 않았습니다. ALCOA 씨는 잠시 고민하다 <strong>"늘 그 정도였으니까"</strong> 하며 평소와 비슷한 값을 적어 넣었습니다. 시간은 깔끔하게 '09:05'로요.`,
+      en:`'What minute did filling start again…?' The environmental reading just said 'OK'. He couldn't recall the exact numbers. After a pause, ALCOA wrote values close to the usual — <strong>"it's always about that anyway"</strong> — and a tidy '09:05' for the time.`,
+      vn:`'Chiết rót bắt đầu lúc 9 giờ mấy phút nhỉ…?' Giá trị môi trường chỉ ghi 'OK'. Anh không nhớ nổi con số chính xác. Ngập ngừng một lúc, ALCOA điền những giá trị gần với thường ngày — <strong>"thì lúc nào cũng tầm đó mà"</strong> — và một con số gọn gàng '09:05' cho thời gian.`}},
+
+    {type:"p", text:{
+      ko:`악의는 전혀 없었습니다. 그저 빈칸을 채우고 싶었을 뿐입니다. 하지만 바로 이 순간, <strong>'기억으로 채운 기록'</strong>이 만들어졌습니다. 그리고 기억으로 채운 기록은, 더 이상 데이터가 아닙니다.`,
+      en:`There was no bad intent. He just wanted to fill the blanks. But in that very moment, a <strong>record filled from memory</strong> was born. And a record filled from memory is no longer data.`,
+      vn:`Hoàn toàn không có ý xấu. Anh chỉ muốn điền cho đủ ô trống. Nhưng đúng khoảnh khắc đó, một <strong>bản ghi điền theo trí nhớ</strong> đã ra đời. Và một bản ghi điền theo trí nhớ thì không còn là dữ liệu nữa.`}},
+
+    {type:"h2", text:{ko:`한 달 뒤, QA의 모니터 앞에서`, en:`A month later, at QA's monitor`, vn:`Một tháng sau, trước màn hình của QA`}},
+
+    {type:"figure", img:"img/ep1_scene3_qa.webp", cap:{
+      ko:`QA 매니저 Ms. Reva. 사람의 기억은 흐려지지만, 시스템의 점검 기록(Audit Trail)은 흐려지지 않습니다.`,
+      en:`QA manager Ms. Reva. Human memory fades; the system's audit trail does not.`,
+      vn:`Quản lý QA Ms. Reva. Trí nhớ con người phai mờ; nhật ký kiểm tra (audit trail) của hệ thống thì không.`}},
+
+    {type:"p", text:{
+      ko:`한 달 뒤, QA 매니저 <strong>Ms. Reva</strong>가 정기 배치기록 검토를 하고 있었습니다. BR에는 충전 시작이 09:05로 적혀 있었는데, 충전 설비의 전자 로그(점검 기록)에는 가동 시작이 <strong>09:13</strong>으로 찍혀 있었습니다. 8분의 차이.`,
+      en:`A month later, QA manager <strong>Ms. Reva</strong> was doing the routine batch record review. The BR said filling started at 09:05 — but the equipment's electronic log (audit trail) stamped the start at <strong>09:13</strong>. An eight-minute gap.`,
+      vn:`Một tháng sau, quản lý QA <strong>Ms. Reva</strong> đang rà soát hồ sơ lô định kỳ. Hồ sơ ghi chiết rót bắt đầu lúc 09:05 — nhưng nhật ký điện tử của thiết bị (audit trail) lại đóng dấu thời điểm khởi động là <strong>09:13</strong>. Chênh nhau tám phút.`}},
+
+    {type:"p", text:{
+      ko:`작아 보이는 8분이지만, Ms. Reva의 눈에는 빨간불이 켜졌습니다. <strong>수기 기록과 전자 기록이 다르다는 것은, 둘 중 하나는 '그 순간'에 적힌 것이 아니라는 뜻</strong>이기 때문입니다.`,
+      en:`Eight minutes may look trivial, but a red flag went up for Ms. Reva. <strong>When the manual record and the electronic record disagree, it means one of them was not written at the moment it happened.</strong>`,
+      vn:`Tám phút nghe có vẻ nhỏ, nhưng đèn đỏ đã bật lên trong mắt Ms. Reva. <strong>Khi bản ghi tay và bản ghi điện tử không khớp, nghĩa là một trong hai đã không được ghi ngay tại thời điểm xảy ra.</strong>`}},
+
+    {type:"p", text:{
+      ko:`조사가 시작됐습니다. Deviation 담당자 <strong>Ms. April</strong>이 일탈을 등록했고, DI 책임자 <strong>Mr. Smile</strong>이 점검 기록을 들여다봤습니다. 결론은 명확했습니다. 환경 값과 시간이 <strong>실시간이 아니라 기억으로 사후 기입</strong>되었다는 것.`,
+      en:`An investigation began. Deviation owner <strong>Ms. April</strong> logged a deviation, and DI lead <strong>Mr. Smile</strong> examined the audit trail. The conclusion was clear: the readings and the time had been <strong>filled in afterward from memory, not in real time.</strong>`,
+      vn:`Một cuộc điều tra bắt đầu. Người phụ trách sai lệch <strong>Ms. April</strong> mở một hồ sơ sai lệch, và phụ trách DI <strong>Mr. Smile</strong> xem xét audit trail. Kết luận đã rõ: các giá trị và thời gian đã được <strong>điền vào sau theo trí nhớ, chứ không phải theo thời gian thực.</strong>`}},
+
+    {type:"h2", text:{ko:`작은 메모지가 만든 큰 파장`, en:`The big ripple from one small note`, vn:`Làn sóng lớn từ một tờ giấy nhớ nhỏ`}},
+
+    {type:"p", text:{
+      ko:`Mr. Smile은 ALCOA 씨를 혼내지 않았습니다. 대신 화이트보드에 ALCOA+를 적고, 가운데 'C'에 동그라미를 쳤습니다.`,
+      en:`Mr. Smile didn't scold ALCOA. Instead he wrote ALCOA+ on the whiteboard and circled the 'C' in the middle.`,
+      vn:`Mr. Smile không trách mắng ALCOA. Thay vào đó, anh viết ALCOA+ lên bảng và khoanh tròn chữ 'C' ở giữa.`}},
+
+    {type:"quote", text:{
+      ko:`"ALCOA 씨, 자네 잘못은 게으름이 아니야. <em>순서</em>를 바꾼 거지. 기록을 '행동 다음'이 아니라 '행동과 동시에' 두지 않은 것. 동시성(Contemporaneous)은 바로 그 순서에 관한 약속이거든."`,
+      en:`"ALCOA, your mistake wasn't laziness. You changed the <em>order</em>. You put the record 'after the action' instead of 'with the action.' Contemporaneous is a promise about that order."`,
+      vn:`"ALCOA này, lỗi của cậu không phải là lười. Cậu đã đổi <em>thứ tự</em>. Cậu đặt việc ghi 'sau thao tác' thay vì 'cùng lúc với thao tác'. Tính đồng thời (Contemporaneous) chính là lời cam kết về thứ tự đó."`}},
+
+    {type:"p", text:{
+      ko:`이 일로 해당 배치는 보류(hold)되어 추가 조사를 받았고, ALCOA 씨는 제조 책임자 <strong>Mr. P</strong>와 품질 책임자 <strong>Mr. H</strong> 앞에서 재발 방지 대책을 보고해야 했습니다. 노란 메모지 한 장이, 한 배치의 신뢰를 흔든 것입니다.`,
+      en:`Because of this, the batch was placed on hold for further investigation, and ALCOA had to present corrective actions before manufacturing head <strong>Mr. P</strong> and quality head <strong>Mr. H</strong>. One yellow sticky note had shaken the trust in an entire batch.`,
+      vn:`Vì việc này, lô hàng bị giữ lại (hold) để điều tra thêm, và ALCOA phải trình bày biện pháp khắc phục trước trưởng bộ phận sản xuất <strong>Mr. P</strong> và trưởng bộ phận chất lượng <strong>Mr. H</strong>. Một tờ giấy nhớ vàng đã làm lung lay niềm tin vào cả một lô hàng.`}},
+
+    {type:"hr"},
+
+    {type:"h2", text:{ko:`무엇이 문제였을까 — Contemporaneous(동시성)`, en:`What went wrong — Contemporaneous`, vn:`Vấn đề nằm ở đâu — Contemporaneous (Tính đồng thời)`}},
+
+    {type:"reg", rows:[
+      {dt:{ko:`정의`, en:`Definition`, vn:`Định nghĩa`}, dd:{
+        ko:`기록은 그 활동이 일어난 <strong>바로 그 시점</strong>에 작성되어야 한다. (ALCOA+의 'C')`,
+        en:`A record must be made at <strong>the time the activity takes place</strong>. (the 'C' in ALCOA+)`,
+        vn:`Hồ sơ phải được lập <strong>ngay tại thời điểm</strong> hoạt động diễn ra. (chữ 'C' trong ALCOA+)`}},
+      {dt:{ko:`왜 중요한가`, en:`Why it matters`, vn:`Vì sao quan trọng`}, dd:{
+        ko:`시간이 지나면 기억은 재구성됩니다. 사후 기입은 아무리 정확해 보여도 '진실성(truthfulness)'을 잃습니다.`,
+        en:`Memory reconstructs itself over time. A back-filled entry loses its truthfulness, however accurate it may look.`,
+        vn:`Theo thời gian, trí nhớ tự tái dựng lại. Một mục điền sau sẽ mất đi tính trung thực, dù trông có vẻ chính xác đến đâu.`}},
+      {dt:{ko:`무엇이 위반인가`, en:`What is a breach`, vn:`Thế nào là vi phạm`}, dd:{
+        ko:`메모지·장갑·손바닥에 임시로 적고 나중에 옮겨 적기, "늘 그 값"으로 빈칸 채우기, 작업이 끝난 뒤 한꺼번에 몰아 적기.`,
+        en:`Jotting on notes, gloves or palms and transcribing later; filling blanks with "the usual value"; batching all entries after the work is done.`,
+        vn:`Ghi tạm lên giấy nhớ, găng tay hay lòng bàn tay rồi chép lại sau; điền ô trống bằng "giá trị thường lệ"; dồn ghi tất cả sau khi đã xong việc.`}}
+    ], note:`관련 근거 · EU GMP Annex 11 · 21 CFR Part 11 · PIC/S PI 041 · ALCOA+ Principles`},
+
+    {type:"h2", text:{ko:`ALCOA 씨를 위한 3가지 약속`, en:`Three promises for ALCOA`, vn:`Ba lời hứa dành cho ALCOA`}},
+
+    {type:"check", head:{ko:`현장에서 바로 실천`, en:`Put it into practice on the floor`, vn:`Thực hành ngay tại hiện trường`}, items:[
+      {ko:`<strong>적는 시점 = 행동 시점.</strong> 기록에 '이따'는 없습니다. 행동과 동시에 남깁니다.`,
+       en:`<strong>Record when you act.</strong> There is no 'later' in recording — write it as it happens.`,
+       vn:`<strong>Ghi khi thao tác.</strong> Không có 'để lát nữa' trong việc ghi chép — ghi ngay khi nó diễn ra.`},
+      {ko:`<strong>메모지는 기록이 아닙니다.</strong> 임시 메모로 우회하지 말고, 정식 기록 매체에 바로 적습니다.`,
+       en:`<strong>A sticky note is not a record.</strong> Don't detour through temporary notes — write directly into the official record.`,
+       vn:`<strong>Giấy nhớ không phải là hồ sơ.</strong> Đừng đi đường vòng qua ghi chú tạm — ghi thẳng vào phương tiện hồ sơ chính thức.`},
+      {ko:`<strong>기억나지 않으면 추정하지 마세요.</strong> 빈칸은 사실대로, 누락은 정직하게 보고합니다. 정직한 일탈이 거짓된 완성보다 낫습니다.`,
+       en:`<strong>If you can't recall, don't estimate.</strong> Keep blanks truthful and report gaps honestly. An honest deviation beats a false completion.`,
+       vn:`<strong>Nếu không nhớ, đừng phỏng đoán.</strong> Để ô trống đúng sự thật và báo cáo phần thiếu một cách trung thực. Một sai lệch trung thực còn hơn một hồ sơ hoàn chỉnh giả tạo.`}
+    ]},
+
+    {type:"h2", text:{ko:`그래서, 3D 3O`, en:`And so, 3D 3O`, vn:`Và vì thế, 3D 3O`}},
+
+    {type:"p", text:{
+      ko:`이번 달 캠페인의 <strong>Open Record</strong>가 바로 이 이야기입니다. 숨기지 않고, 미루지 않고, 있는 그대로 — <strong>지금</strong> 기록하는 것. ALCOA 씨의 노란 메모지가 우리 모두에게 남긴 교훈입니다.`,
+      en:`This is exactly what <strong>Open Record</strong> in our campaign means. Don't hide it, don't delay it, write it as it is — <strong>now</strong>. That's the lesson ALCOA's yellow note leaves for all of us.`,
+      vn:`Đây chính là ý nghĩa của <strong>Open Record</strong> trong chiến dịch của chúng ta. Đừng giấu, đừng trì hoãn, ghi đúng như nó vốn có — <strong>ngay bây giờ</strong>. Đó là bài học mà tờ giấy nhớ vàng của ALCOA để lại cho tất cả chúng ta.`}},
+
+    {type:"figure", img:"img/ep1_scene4_redemption.webp", cap:{
+      ko:`다음 날의 ALCOA 씨. 이제는 라인 앞에서, 그 순간에 적습니다. Ms. D의 표정도 한결 편안해졌습니다.`,
+      en:`ALCOA the next day. Now he records right at the line, in the moment. Ms. D looks a lot more at ease, too.`,
+      vn:`ALCOA ngày hôm sau. Giờ anh ghi ngay tại dây chuyền, đúng thời điểm. Nét mặt Ms. D cũng thư thái hơn hẳn.`}},
+
+    {type:"next", label:{ko:`NEXT · 에피소드 #2`, en:`NEXT · Episode #2`, vn:`TIẾP THEO · Tập #2`}, text:{
+      ko:`ALCOA 씨, 이번엔 'Original(원본)' 앞에서 고민에 빠지다 — 출력물과 원본 데이터 이야기`,
+      en:`ALCOA faces 'Original' next — the story of printouts vs. original data`,
+      vn:`ALCOA đối mặt với 'Original (Bản gốc)' — câu chuyện về bản in và dữ liệu gốc`}},
+
+    {type:"cta", buttons:[
+      {label:{ko:`우리 부서 DI Quiz 풀어보기 →`, en:`Take your department's DI Quiz →`, vn:`Làm Quiz DI của bộ phận bạn →`}, href:"../index.html#di-quiz", primary:true},
+      {label:{ko:`다른 레터 보기`, en:`More letters`, vn:`Xem thư khác`}, href:"../index.html#di-letter"},
+      {label:{ko:`홈으로`, en:`Home`, vn:`Trang chủ`}, href:"../index.html#top"}
+    ]},
+
+    {type:"disclaimer", text:{
+      ko:`※ 본 이야기는 데이터 완전성 교육을 위한 가상의 시나리오이며, 등장인물(Mr. ALCOA, Ms. D, Mr. O, Ms. Reva, Mr. P, Mr. H, Mr. Smile, Ms. April 등)과 사건은 실제와 무관합니다. 삽화는 생성형 이미지로 제작되었습니다.`,
+      en:`※ This is a fictional scenario for data integrity training. The characters (Mr. ALCOA, Ms. D, Mr. O, Ms. Reva, Mr. P, Mr. H, Mr. Smile, Ms. April, etc.) and events are not real. Illustrations are AI-generated.`,
+      vn:`※ Đây là tình huống hư cấu phục vụ đào tạo về tính toàn vẹn dữ liệu. Các nhân vật (Mr. ALCOA, Ms. D, Mr. O, Ms. Reva, Mr. P, Mr. H, Mr. Smile, Ms. April, v.v.) và sự kiện đều không có thật. Hình minh họa do AI tạo.`}}
+  ]
+};
+</script>
+<script src="letter.js"></script>
+</body>
+</html>

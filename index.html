@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>3D 3O · Data Integrity Culture · S1 Plant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0D1F3C; --blue:#1A5CBA; --accent:#00C2CB; --teal:#00A9B5; --teal-tx:#0398A3;
+    --gray:#8899AA; --sub:#90A1B4; --body:#42546E; --brand:#5A6B80;
+    --off:#F4F7FB; --card:#FFFFFF; --border:rgba(13,31,60,0.10);
+    --shadow:0 4px 28px rgba(13,31,60,0.10); --shadow-hover:0 18px 48px rgba(13,31,60,0.18);
+    --en:'Inter','Noto Sans KR',sans-serif; --ko:'Noto Sans KR','Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:64px}
+  body{font-family:var(--en);color:var(--navy);background:var(--off);line-height:1.5}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:1220px;margin:0 auto;padding:0 36px}
+
+  /* ===== sticky nav ===== */
+  .nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(10px);
+       background:rgba(244,247,251,.82);border-bottom:1px solid var(--border)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:14px}
+  .nav-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;letter-spacing:.3px;flex:none}
+  .nav-badge{width:30px;height:30px;border-radius:8px;flex:none;font-size:10px;line-height:1;
+    background:linear-gradient(135deg,var(--blue),var(--accent));color:#fff;font-weight:800;
+    display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .nav-right{display:flex;align-items:center;gap:18px}
+  .nav-links{display:flex;gap:22px;font-size:14.5px;font-weight:600;color:var(--body)}
+  .nav-links a{transition:color .15s;white-space:nowrap} .nav-links a:hover{color:var(--blue)}
+  .langsel{display:flex;gap:3px;background:rgba(13,31,60,.06);border-radius:999px;padding:3px}
+  .langbtn{font-family:var(--en);font-size:12px;font-weight:700;color:var(--brand);padding:5px 9px;
+    border-radius:999px;cursor:pointer;border:0;background:transparent;transition:all .15s}
+  .langbtn.on{background:#fff;color:var(--blue);box-shadow:0 1px 4px rgba(13,31,60,.12)}
+
+  /* ===== HERO banner ===== */
+  .banner{background:
+      linear-gradient(90deg,rgba(26,92,186,0.04) 1px,transparent 1px),
+      linear-gradient(rgba(26,92,186,0.04) 1px,transparent 1px),var(--off);
+      background-size:42px 42px,42px 42px,auto;padding:50px 0 54px}
+  .hero-grid{display:grid;grid-template-columns:minmax(260px,0.92fr) 1.55fr;gap:54px;align-items:center}
+  .brand{display:flex;align-items:center;gap:13px;margin-bottom:24px}
+  .badge{width:46px;height:46px;border-radius:12px;flex:none;
+    background:linear-gradient(135deg,var(--blue),var(--accent));
+    color:#fff;font-weight:800;font-size:14px;line-height:1.02;letter-spacing:.5px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .bt1{font-size:16px;font-weight:800;letter-spacing:.3px}
+  .bt2{font-size:11.5px;font-weight:600;letter-spacing:1.4px;color:var(--brand);margin-top:2px}
+  .kicker{font-size:13px;font-weight:600;letter-spacing:5px;color:var(--gray);margin-bottom:10px}
+  .title{font-size:clamp(56px,6.6vw,104px);font-weight:800;letter-spacing:1px;line-height:1.0}
+  .grad{background:linear-gradient(120deg,var(--blue),var(--accent));
+        -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .clar{font-size:16px;font-weight:700;letter-spacing:2.5px;color:var(--gray);margin-top:14px}
+  .clar .bd{color:var(--blue);font-weight:800}.clar .bt{color:var(--teal-tx);font-weight:800}
+  .tag{font-size:19px;font-weight:500;color:var(--body);margin-top:14px}
+  .hgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px 30px}
+  .colhead{font-size:19px;font-weight:800}
+  .colhead .muted{font-size:14px;font-weight:500;color:var(--gray);margin-left:14px}
+  .bd{color:var(--blue)}.bt{color:var(--teal-tx)}
+  .vcard{display:flex;align-items:center;gap:15px;background:var(--card);border:1px solid var(--border);
+    border-radius:16px;padding:16px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+    transition:transform .18s,box-shadow .18s,border-color .18s}
+  .vcard::before{content:"";position:absolute;top:7px;left:18px;right:18px;height:4px;border-radius:2px}
+  .vcard.d::before{background:var(--blue)}.vcard.o::before{background:var(--teal)}
+  .vcard:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover)}
+  .vcard.d:hover{border-color:rgba(26,92,186,.35)}.vcard.o:hover{border-color:rgba(0,169,181,.40)}
+  .ico{width:58px;height:58px;border-radius:50%;flex:none;display:grid;place-items:center;margin-top:3px}
+  .vcard.d .ico{background:rgba(26,92,186,.10);color:var(--blue)}
+  .vcard.o .ico{background:rgba(0,169,181,.12);color:var(--teal-tx)}
+  .ico svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+  .ico .fill{fill:currentColor;stroke:none}
+  .pf{font-size:13.5px;font-weight:700;letter-spacing:2px;color:var(--sub)}
+  .pf .first{font-size:20px;font-weight:800}
+  .vcard.d .pf .first{color:var(--blue)}.vcard.o .pf .first{color:var(--teal-tx)}
+  .hd{font-size:25px;font-weight:800;color:var(--navy);line-height:1.1;margin-top:1px}
+
+  /* ===== sections ===== */
+  section{padding:70px 0}
+  #di-letter{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  #di-quiz{background:var(--off)}
+  .sec-kicker{font-size:13px;font-weight:700;letter-spacing:4px;color:var(--gray)}
+  .sec-h2{font-size:clamp(30px,3.6vw,42px);font-weight:800;margin:8px 0 6px;letter-spacing:-.5px}
+  .sec-sub{font-family:var(--ko);font-size:16px;color:var(--body);max-width:660px}
+  .sec-head{margin-bottom:38px}
+
+  /* ===== DI Letter ===== */
+  .letters{display:flex;flex-direction:column;gap:26px}
+  .empty-note{background:var(--off);border:1px dashed var(--border);border-radius:16px;
+    padding:26px;font-family:var(--ko);font-size:14.5px;color:var(--gray);text-align:center}
+  /* featured (wide) */
+  .feature{display:grid;grid-template-columns:minmax(260px,42%) 1fr;background:var(--card);
+    border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;
+    transition:transform .18s,box-shadow .18s}
+  .feature:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .feature .fthumb{position:relative;min-height:236px;background:var(--off) center/cover no-repeat}
+  .feature .fthumb::after{content:"NEW";position:absolute;top:14px;left:14px;font-family:var(--en);
+    font-size:11px;font-weight:800;letter-spacing:1px;color:#fff;background:linear-gradient(135deg,var(--blue),var(--accent));
+    padding:5px 10px;border-radius:999px}
+  .feature .fbody{padding:30px 32px 26px;display:flex;flex-direction:column}
+  .vol{align-self:flex-start;font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--blue);
+    background:rgba(26,92,186,.08);padding:6px 12px;border-radius:999px}
+  .feature h3{font-family:var(--ko);font-size:23px;font-weight:800;line-height:1.4;margin:14px 0 12px;color:var(--navy)}
+  .feature p{font-family:var(--ko);font-size:15px;color:var(--body);line-height:1.7;margin:0}
+  .readmore{display:inline-flex;align-items:center;gap:7px;margin-top:auto;padding-top:18px;
+    font-weight:700;font-size:15px;color:var(--blue);transition:gap .18s}
+  .readmore:hover{gap:13px}
+  /* past grid 3x1 */
+  .arch-title{font-family:var(--ko);font-size:14px;font-weight:800;letter-spacing:1px;color:var(--gray);
+    text-transform:uppercase;margin:4px 0 -8px}
+  .past-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .pcard{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);
+    border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:transform .16s,box-shadow .16s,border-color .16s}
+  .pcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover);border-color:rgba(26,92,186,.30)}
+  .pcard .pthumb{aspect-ratio:16/9;background:var(--off) center/cover no-repeat}
+  .pcard .pbody{padding:15px 17px 16px;display:flex;flex-direction:column;flex:1}
+  .pcard .ldate{font-size:12px;font-weight:800;letter-spacing:1px;color:var(--accent)}
+  .pcard .ltitle{font-family:var(--ko);font-size:16px;font-weight:800;color:var(--navy);margin:4px 0 7px;line-height:1.4;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .pcard .lsum{font-family:var(--ko);font-size:13px;color:var(--body);line-height:1.62;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .pcard .pmore{margin-top:auto;padding-top:12px;font-size:13px;font-weight:800;color:var(--blue)}
+  .pcard.muted{opacity:.6;pointer-events:none}
+  .viewall-wrap{display:flex;justify-content:flex-end}
+  .viewall{display:inline-block;font-family:var(--ko);font-weight:800;font-size:14px;color:var(--blue);cursor:pointer}
+  .viewall:hover{text-decoration:underline}
+  /* modal rows (with thumb) */
+  .litem{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--border);
+    border-radius:14px;padding:11px 13px;box-shadow:var(--shadow);transition:transform .16s,box-shadow .16s,border-color .16s}
+  .litem:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:rgba(26,92,186,.30)}
+  .litem.muted{opacity:.6;pointer-events:none}
+  .litem .lthumb{width:84px;height:52px;border-radius:9px;flex:none;background:var(--off) center/cover no-repeat}
+  .litem .ldate{font-size:11.5px;font-weight:800;letter-spacing:1px;color:var(--accent)}
+  .litem .ltitle{font-family:var(--ko);font-size:14.5px;font-weight:700;color:var(--navy);margin-top:2px;line-height:1.4}
+
+  /* ===== modal (all letters) ===== */
+  .modal{position:fixed;inset:0;z-index:100;background:rgba(13,31,60,.45);display:grid;place-items:center;padding:24px}
+  .modal[hidden]{display:none}
+  .modal-card{background:#fff;border-radius:20px;max-width:560px;width:100%;max-height:82vh;overflow:auto;padding:26px;box-shadow:0 30px 80px rgba(13,31,60,.3)}
+  .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+  .modal-head .mh{font-family:var(--ko);font-size:20px;font-weight:800;color:var(--navy)}
+  .modal-close{border:0;background:var(--off);width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;color:var(--body)}
+  #allList{display:flex;flex-direction:column;gap:12px}
+
+  /* ===== DI Quiz dept cards ===== */
+  .qgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+  .qcard{position:relative;display:flex;flex-direction:column;background:var(--card);
+    border:1px solid var(--border);border-radius:18px;padding:24px 22px 20px;box-shadow:var(--shadow);
+    overflow:hidden;transition:transform .18s,box-shadow .18s,border-color .18s}
+  .qcard::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--c)}
+  .qcard:hover{transform:translateY(-7px);box-shadow:var(--shadow-hover);border-color:var(--c)}
+  .qcode{align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:1.2px;color:var(--c);
+    background:var(--tint);padding:5px 11px;border-radius:999px;text-transform:uppercase}
+  .qname{font-size:23px;font-weight:800;color:var(--navy);margin-top:14px}
+  .qko{font-family:var(--ko);font-size:13.5px;font-weight:700;color:var(--c);margin-top:2px}
+  .qdesc{font-family:var(--ko);font-size:13.5px;color:var(--body);margin-top:12px;flex:1;line-height:1.55}
+  .qgo{display:inline-flex;align-items:center;gap:7px;margin-top:18px;font-size:14px;font-weight:800;color:var(--c);transition:gap .18s}
+  .qcard:hover .qgo{gap:13px}
+
+  /* ===== footer ===== */
+  footer{background:var(--navy);color:#AEB9C6;padding:34px 0;font-family:var(--ko);font-size:13.5px}
+  footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}
+  footer b{color:#fff;font-weight:700;font-family:var(--en)}
+
+  @media(max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:34px}
+    .feature{grid-template-columns:1fr}
+    .feature .fthumb{min-height:200px;aspect-ratio:16/9}
+    .past-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:620px){
+    .wrap{padding:0 20px}.banner{padding:34px 0 40px}section{padding:52px 0}
+    .hgrid{grid-template-columns:1fr;gap:16px}
+    .feature .fbody{padding:24px 22px}
+    .past-grid{grid-template-columns:1fr}
+    .nav-brand span.full{display:none}
+    .nav-links{gap:14px;font-size:13.5px} .nav-right{gap:12px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="#top">
+      <span class="nav-badge"><span>3D</span><span>3O</span></span>
+      <span class="full">GMP&nbsp;Training&nbsp;·&nbsp;S1&nbsp;Plant</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#di-letter" data-k="navLetter">DI 레터</a>
+        <a href="#di-quiz" data-k="navQuiz">DI 퀴즈</a>
+      </div>
+      <div class="langsel" role="group" aria-label="Language">
+        <button class="langbtn" data-l="ko">한</button>
+        <button class="langbtn" data-l="en">EN</button>
+        <button class="langbtn" data-l="vn">VN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<header class="banner" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero">
+      <div class="brand">
+        <div class="badge"><span>3D</span><span>3O</span></div>
+        <div>
+          <div class="bt1">GMP TRAINING</div>
+          <div class="bt2">S1 PLANT · DATA MANAGEMENT TEAM</div>
+        </div>
+      </div>
+      <div class="kicker" data-k="bannerKicker">데이터 완전성 문화</div>
+      <h1 class="title">3D <span class="grad">3O</span></h1>
+      <div class="clar">3 <span class="bd">D</span>O&nbsp;&nbsp;·&nbsp;&nbsp;3 <span class="bt">O</span>PEN</div>
+      <div class="tag" data-k="bannerTag">제대로 하고, 투명하게 공유합니다.</div>
+    </div>
+
+    <div class="hgrid">
+      <div class="colhead">3 <span class="bd">D</span><span class="muted" data-k="workDesc">우리가 일하는 방식</span></div>
+      <div class="colhead">3 <span class="bt">O</span><span class="muted" data-k="shareDesc">우리가 공유하는 방식</span></div>
+
+      <div class="vcard d">
+        <div class="ico"><svg viewBox="0 0 30 30"><path d="M15 3 l10 4 v7 c0 8 -5 12 -10 14 c-5 -2 -10 -6 -10 -14 v-7 z"/><path d="M10 14 l4 4 l7 -8"/></svg></div>
+        <div><div class="pf"><span class="first">D</span>O&nbsp;IT</div><div class="hd">Honestly</div></div>
+      </div>
+      <div class="vcard o">
+        <div class="ico"><svg viewBox="0 0 30 30"><rect x="6" y="3" width="15" height="20" rx="2.5"/><line x1="9" y1="9" x2="18" y2="9"/><line x1="9" y1="14" x2="18" y2="14"/><line x1="9" y1="19" x2="15" y2="19"/></svg></div>
+        <div><div class="pf"><span class="first">O</span>PEN</div><div class="hd">Record</div></div>
+      </div>
+
+      <div class="vcard d">
+        <div class="ico"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="10"/><path d="M10 15 l4 5 l8 -9"/></svg></div>
+        <div><div class="pf"><span class="first">D</span>O&nbsp;IT</div><div class="hd">Right</div></div>
+      </div>
+      <div class="vcard o">
+        <div class="ico"><svg viewBox="0 0 30 30"><line x1="5" y1="23" x2="25" y2="23"/><rect class="fill" x="7" y="13" width="4.5" height="8"/><rect class="fill" x="13" y="8" width="4.5" height="13"/><rect class="fill" x="19" y="4" width="4.5" height="17"/></svg></div>
+        <div><div class="pf"><span class="first">O</span>PEN</div><div class="hd">Report</div></div>
+      </div>
+
+      <div class="vcard d">
+        <div class="ico"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="9"/><circle cx="15" cy="15" r="4.5"/><circle class="fill" cx="15" cy="15" r="1.7"/></svg></div>
+        <div><div class="pf"><span class="first">D</span>O&nbsp;IT</div><div class="hd">Accurately</div></div>
+      </div>
+      <div class="vcard o">
+        <div class="ico"><svg viewBox="0 0 30 30"><path d="M15 4 a9 9 0 0 1 5 16 v3 h-10 v-3 a9 9 0 0 1 5 -16 z"/><line x1="11" y1="26" x2="19" y2="26"/></svg></div>
+        <div><div class="pf"><span class="first">O</span>PEN</div><div class="hd">Mind</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== DI LETTER ===================== -->
+<section id="di-letter">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker" data-k="letterKicker">데이터 완전성 레터</div>
+      <h2 class="sec-h2"><span data-k="letterH2a">데이터 완전성으로 완성하는 </span><span class="grad" data-k="letterH2b">품질 시스템</span></h2>
+      <p class="sec-sub" data-k="letterSub">현장에서 바로 쓰는 데이터 완전성 이야기를, 짧은 레터로 전합니다.</p>
+    </div>
+
+    <div class="letters">
+      <div id="featuredWrap"></div>
+      <div class="arch-title" data-k="pastTitle">지난 레터</div>
+      <div class="past-grid" id="pastList"></div>
+      <div class="viewall-wrap"><span class="viewall" id="viewAllBtn" data-k="viewAll">전체 레터 보기 →</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DI QUIZ ===================== -->
+<section id="di-quiz">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker" data-k="quizKicker">데이터 완전성 퀴즈</div>
+      <h2 class="sec-h2"><span data-k="quizH2a">부서별 </span><span class="grad">DI Quiz</span></h2>
+      <p class="sec-sub" data-k="quizSub">소속 팀을 선택하면 해당 부서의 데이터 완전성 교육 퀴즈로 이동합니다.</p>
+    </div>
+
+    <div class="qgrid">
+      <a class="qcard" style="--c:#00A9B5;--tint:rgba(0,169,181,.12)" href="https://avenzia.github.io/qa-gmp-quiz">
+        <span class="qcode">QA Department</span><span class="qname">QA Team</span>
+        <span class="qko" data-k="qa_line">품질보증 · Quality Assurance</span>
+        <span class="qdesc" data-k="qa_desc">문서관리·일탈·변경관리 중심의 품질보증 DI 퀴즈</span>
+        <span class="qgo"><span data-k="startQuiz">퀴즈 시작하기</span> <span>→</span></span>
+      </a>
+      <a class="qcard" style="--c:#00B67A;--tint:rgba(0,182,122,.12)" href="https://avenzia.github.io/gmp-quiz/pr.html">
+        <span class="qcode">PR Department</span><span class="qname">PR Team</span>
+        <span class="qko" data-k="pr_line">생산 · Production</span>
+        <span class="qdesc" data-k="pr_desc">무균 충전·기록작성(GDP)·작업 준수 중심의 생산팀 DI 퀴즈</span>
+        <span class="qgo"><span data-k="startQuiz">퀴즈 시작하기</span> <span>→</span></span>
+      </a>
+      <a class="qcard" style="--c:#1A5CBA;--tint:rgba(26,92,186,.10)" href="https://avenzia.github.io/qc-gmp-quiz">
+        <span class="qcode">QC Department</span><span class="qname">QC Team</span>
+        <span class="qko" data-k="qc_line">품질관리 · Quality Control</span>
+        <span class="qdesc" data-k="qc_desc">시험·데이터 완전성·시스템 관리 중심의 품질관리 DI 퀴즈</span>
+        <span class="qgo"><span data-k="startQuiz">퀴즈 시작하기</span> <span>→</span></span>
+      </a>
+      <a class="qcard" style="--c:#6D5BD0;--tint:rgba(109,91,208,.12)" href="https://avenzia.github.io/pm-gmp-quiz">
+        <span class="qcode">PM Department</span><span class="qname">PM Team</span>
+        <span class="qko" data-k="pm_line">생산관리 · Production Mgmt</span>
+        <span class="qdesc" data-k="pm_desc">자재·포장·생산관리 흐름과 추적성 중심의 PM DI 퀴즈</span>
+        <span class="qgo"><span data-k="startQuiz">퀴즈 시작하기</span> <span>→</span></span>
+      </a>
+      <a class="qcard" style="--c:#E0892B;--tint:rgba(224,137,43,.13)" href="https://avenzia.github.io/en-gmp-quiz">
+        <span class="qcode">EN Department</span><span class="qname">EN Team</span>
+        <span class="qko" data-k="en_line">엔지니어링 · Engineering</span>
+        <span class="qdesc" data-k="en_desc">설비·유틸리티·적격성평가 중심의 엔지니어링 DI 퀴즈</span>
+        <span class="qgo"><span data-k="startQuiz">퀴즈 시작하기</span> <span>→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div data-k="footerNote">본 포털은 사내 GMP · 데이터 완전성 교육 목적으로 제작되었습니다.</div>
+    <div><b>3D 3O</b> · S1 Plant Data Management Team</div>
+  </div>
+</footer>
+
+<!-- ===================== MODAL : all letters ===================== -->
+<div class="modal" id="lettersModal" hidden>
+  <div class="modal-card">
+    <div class="modal-head"><span class="mh" data-k="allTitle">전체 레터</span><button class="modal-close" id="modalClose" aria-label="close">×</button></div>
+    <div id="allList"></div>
+  </div>
+</div>
+
+<script>
+/* ===================== LETTERS DATA =====================
+   새 레터 추가: 이 배열 "맨 위"에 항목 1개를 추가하면
+   featured · 지난 레터(3×1) · 전체 모달이 자동 갱신됩니다.
+   (letter-builder.html 로 항목을 자동 생성할 수 있습니다.)
+   file:"#" 이면 아직 미게시(링크 비활성)로 표시됩니다.        */
+window.DI_LETTERS = [
+  { vol:"VOL.03", date:"2026.06", file:"vol03.html", thumb:"letters/img/ep1_hero.webp",
+    title:{ko:"기록은 '나중에'가 아니라 '지금'입니다", en:"Record it now, not later.", vn:"Hãy ghi ngay, đừng để sau."},
+    excerpt:{ko:"동시성(Contemporaneous)은 거창한 시스템이 아니라, 행위가 일어난 그 순간에 남기는 한 줄에서 시작됩니다.", en:"Contemporaneous recording doesn't start with a big system — it starts with one line written the moment the work happens.", vn:"Tính đồng thời (Contemporaneous) không bắt đầu từ một hệ thống lớn — mà từ một dòng được ghi ngay tại thời điểm thao tác diễn ra."}},
+  { vol:"VOL.02", date:"2026.05", file:"vol02.html", thumb:"letters/img/ep2_hero.webp",
+    title:{ko:"OOS, 숨기지 않을 용기 — Open Report", en:"OOS: the courage not to hide it — Open Report", vn:"OOS: dũng khí không che giấu — Open Report"},
+    excerpt:{ko:"예정에 없던 결과(OOS)를 마주했을 때, 우리가 가장 먼저 해야 할 일.", en:"What to do first when you face an unexpected out-of-specification (OOS) result.", vn:"Việc đầu tiên cần làm khi gặp một kết quả ngoài tiêu chuẩn (OOS) không lường trước."}},
+  { vol:"VOL.01", date:"2026.04", file:"vol01.html", thumb:"letters/img/ep1_scene3_qa.webp",
+    title:{ko:"점검 기록은 감시가 아니라 보호입니다", en:"The audit trail protects you, it doesn't watch you.", vn:"Nhật ký kiểm tra bảo vệ bạn, không giám sát bạn."},
+    excerpt:{ko:"점검 기록(Audit Trail)을 둘러싼 오해와, 그것이 현장을 지키는 방식.", en:"Common myths about the audit trail — and how it actually protects the floor.", vn:"Những hiểu lầm thường gặp về nhật ký kiểm tra — và cách nó thực sự bảo vệ hiện trường."}},
+  { vol:"VOL.00", date:"2026.03", file:"vol00.html", thumb:"letters/img/ep1_scene4_redemption.webp",
+    title:{ko:"왜 지금, 데이터 완전성인가", en:"Why data integrity, why now.", vn:"Vì sao là tính toàn vẹn dữ liệu, và vì sao là lúc này."},
+    excerpt:{ko:"데이터 완전성 레터를 시작하며 — 우리가 이 이야기를 나누는 이유.", en:"Kicking off the Data Integrity Letter — why we're sharing these stories.", vn:"Khởi đầu Thư Toàn Vẹn Dữ Liệu — lý do chúng tôi chia sẻ những câu chuyện này."}}
+];
+</script>
+<script>
+  const T = {
+    ko:{navLetter:"DI 레터",navQuiz:"DI 퀴즈",bannerKicker:"데이터 완전성 문화",bannerTag:"제대로 하고, 투명하게 공유합니다.",workDesc:"우리가 일하는 방식",shareDesc:"우리가 공유하는 방식",letterKicker:"데이터 완전성 레터",letterH2a:"데이터 완전성으로 완성하는 ",letterH2b:"품질 시스템",letterSub:"현장에서 바로 쓰는 데이터 완전성 이야기를, 짧은 레터로 전합니다.",readmore:"전문 읽기",pastTitle:"지난 레터",viewAll:"전체 레터 보기 →",allTitle:"전체 레터",quizKicker:"데이터 완전성 퀴즈",quizH2a:"부서별 ",quizSub:"소속 팀을 선택하면 해당 부서의 데이터 완전성 교육 퀴즈로 이동합니다.",startQuiz:"퀴즈 시작하기",qa_line:"품질보증 · Quality Assurance",qa_desc:"문서관리·일탈·변경관리 중심의 품질보증 DI 퀴즈",pr_line:"생산 · Production",pr_desc:"무균 충전·기록작성(GDP)·작업 준수 중심의 생산팀 DI 퀴즈",qc_line:"품질관리 · Quality Control",qc_desc:"시험·데이터 완전성·시스템 관리 중심의 품질관리 DI 퀴즈",pm_line:"생산관리 · Production Mgmt",pm_desc:"자재·포장·생산관리 흐름과 추적성 중심의 PM DI 퀴즈",en_line:"엔지니어링 · Engineering",en_desc:"설비·유틸리티·적격성평가 중심의 엔지니어링 DI 퀴즈",footerNote:"본 포털은 사내 GMP · 데이터 완전성 교육 목적으로 제작되었습니다."},
+    en:{navLetter:"DI Letter",navQuiz:"DI Quiz",bannerKicker:"DATA INTEGRITY CULTURE",bannerTag:"Do it right. Keep it open.",workDesc:"The way we work",shareDesc:"The way we share",letterKicker:"DATA INTEGRITY LETTER",letterH2a:"The quality system, completed by ",letterH2b:"data integrity",letterSub:"Short letters on data integrity, written straight from the floor.",readmore:"Read more",pastTitle:"Past letters",viewAll:"View all letters →",allTitle:"All letters",quizKicker:"DATA INTEGRITY QUIZ",quizH2a:"Department ",quizSub:"Choose your team to start your department's data integrity quiz.",startQuiz:"Start the quiz",qa_line:"Quality Assurance",qa_desc:"DI quiz for QA — document control, deviations and change control.",pr_line:"Production",pr_desc:"DI quiz for Production — aseptic filling, good documentation (GDP) and compliance.",qc_line:"Quality Control",qc_desc:"DI quiz for QC — testing, data integrity and system management.",pm_line:"Production Management",pm_desc:"DI quiz for PM — materials, packaging and traceability.",en_line:"Engineering",en_desc:"DI quiz for Engineering — equipment, utilities and qualification.",footerNote:"This portal is for internal GMP and data integrity training."},
+    vn:{navLetter:"Thư DI",navQuiz:"Quiz DI",bannerKicker:"VĂN HÓA TOÀN VẸN DỮ LIỆU",bannerTag:"Làm đúng. Luôn minh bạch.",workDesc:"Cách chúng ta làm việc",shareDesc:"Cách chúng ta chia sẻ",letterKicker:"THƯ TOÀN VẸN DỮ LIỆU",letterH2a:"Hệ thống chất lượng, hoàn thiện nhờ ",letterH2b:"tính toàn vẹn dữ liệu",letterSub:"Những lá thư ngắn về tính toàn vẹn dữ liệu, viết ngay tại hiện trường.",readmore:"Đọc toàn bài",pastTitle:"Các thư trước",viewAll:"Xem tất cả thư →",allTitle:"Tất cả thư",quizKicker:"QUIZ TOÀN VẸN DỮ LIỆU",quizH2a:"Theo bộ phận · ",quizSub:"Chọn bộ phận của bạn để bắt đầu bài quiz tính toàn vẹn dữ liệu tương ứng.",startQuiz:"Bắt đầu quiz",qa_line:"Đảm bảo chất lượng",qa_desc:"Quiz DI cho QA — kiểm soát tài liệu, sai lệch và kiểm soát thay đổi.",pr_line:"Sản xuất",pr_desc:"Quiz DI cho Sản xuất — chiết rót vô trùng, ghi chép tốt (GDP) và tuân thủ thao tác.",qc_line:"Kiểm tra chất lượng",qc_desc:"Quiz DI cho QC — kiểm nghiệm, tính toàn vẹn dữ liệu và quản lý hệ thống.",pm_line:"Quản lý sản xuất",pm_desc:"Quiz DI cho PM — nguyên vật liệu, đóng gói và khả năng truy xuất nguồn gốc.",en_line:"Kỹ thuật (Cơ điện)",en_desc:"Quiz DI cho Kỹ thuật — thiết bị, hệ thống phụ trợ và đánh giá thẩm định.",footerNote:"Cổng thông tin này phục vụ đào tạo GMP và tính toàn vẹn dữ liệu nội bộ."}
+  };
+
+  let LANG = 'ko';
+  try{ const s=localStorage.getItem('di_lang'); if(s&&T[s]) LANG=s; }catch(e){}
+
+  const pick = o => (o && (o[LANG]||o.en||o.ko)) || '';
+  const href = f => (f && f!=='#') ? ('letters/'+f) : '#';
+  const bg = t => t ? (' style="background-image:url(\''+t+'\')"') : '';
+
+  function applyStatic(){
+    document.documentElement.lang = (LANG==='vn'?'vi':LANG);
+    document.querySelectorAll('[data-k]').forEach(el=>{
+      const k=el.getAttribute('data-k');
+      const v=(T[LANG]&&T[LANG][k]); if(v!==undefined) el.textContent=v;
+    });
+  }
+
+  // past card (3x1 grid) — thumbnail + title + summary
+  function pastCard(x){
+    const dead=(!x.file||x.file==='#');
+    const cls='pcard'+(dead?' muted':'');
+    const tag=dead?'div':'a';
+    const hattr=dead?'':(' href="'+href(x.file)+'"');
+    return '<'+tag+' class="'+cls+'"'+hattr+'>'+
+      '<div class="pthumb"'+bg(x.thumb)+'></div>'+
+      '<div class="pbody">'+
+        '<div class="ldate">'+x.vol+' · '+x.date+'</div>'+
+        '<div class="ltitle">'+pick(x.title)+'</div>'+
+        '<div class="lsum">'+pick(x.excerpt)+'</div>'+
+        (dead?'':'<div class="pmore">'+T[LANG].readmore+' →</div>')+
+      '</div></'+tag+'>';
+  }
+  // modal row — small thumbnail + title
+  function modalRow(x){
+    const dead=(!x.file||x.file==='#');
+    const cls='litem'+(dead?' muted':'');
+    const tag=dead?'div':'a';
+    const hattr=dead?'':(' href="'+href(x.file)+'"');
+    return '<'+tag+' class="'+cls+'"'+hattr+'>'+
+      '<div class="lthumb"'+bg(x.thumb)+'></div>'+
+      '<div><div class="ldate">'+x.vol+' · '+x.date+'</div><div class="ltitle">'+pick(x.title)+'</div></div>'+
+      '</'+tag+'>';
+  }
+
+  function renderLetters(){
+    const L=(window.DI_LETTERS||[]);
+    const fw=document.getElementById('featuredWrap');
+    if(!L.length){
+      fw.innerHTML='<div class="empty-note">레터 목록을 불러오지 못했습니다. (index.html 을 letters/ 폴더와 함께 배포했는지 확인하세요.)</div>';
+      document.getElementById('pastList').innerHTML='';
+      document.getElementById('allList').innerHTML='';
+      return;
+    }
+    const feat=L[0], past=L.slice(1,4);
+    const dead=(!feat.file||feat.file==='#');
+    fw.innerHTML =
+      '<'+(dead?'div':'a')+' class="feature"'+(dead?'':(' href="'+href(feat.file)+'"'))+'>'+
+        '<div class="fthumb"'+bg(feat.thumb)+'></div>'+
+        '<div class="fbody">'+
+          '<span class="vol">'+feat.vol+' · '+feat.date+'</span>'+
+          '<h3>'+pick(feat.title)+'</h3>'+
+          '<p>'+pick(feat.excerpt)+'</p>'+
+          (dead?'':'<span class="readmore">'+T[LANG].readmore+' <span>→</span></span>')+
+        '</div>'+
+      '</'+(dead?'div':'a')+'>';
+    document.getElementById('pastList').innerHTML = past.map(pastCard).join('');
+    document.getElementById('allList').innerHTML = L.map(modalRow).join('');
+  }
+
+  function setLang(l){
+    if(!T[l]) return; LANG=l;
+    try{ localStorage.setItem('di_lang', l); }catch(e){}
+    applyStatic(); renderLetters();
+    document.querySelectorAll('.langbtn').forEach(b=>b.classList.toggle('on', b.dataset.l===l));
+  }
+
+  applyStatic(); renderLetters();
+  document.querySelectorAll('.langbtn').forEach(b=>{
+    b.classList.toggle('on', b.dataset.l===LANG);
+    b.addEventListener('click', ()=>setLang(b.dataset.l));
+  });
+
+  const modal=document.getElementById('lettersModal');
+  document.getElementById('viewAllBtn').addEventListener('click', ()=>{ modal.hidden=false; });
+  document.getElementById('modalClose').addEventListener('click', ()=>{ modal.hidden=true; });
+  modal.addEventListener('click', e=>{ if(e.target===modal) modal.hidden=true; });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') modal.hidden=true; });
+</script>
+</body>
+</html>

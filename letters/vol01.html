@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DI Letter · VOL.01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="letter.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="../index.html#top">
+      <span class="nav-badge"><span>3D</span><span>3O</span></span>
+      <span class="full">GMP&nbsp;Training&nbsp;·&nbsp;S1&nbsp;Plant</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="../index.html#di-letter" data-k="navLetter">DI 레터</a>
+        <a href="../index.html#di-quiz" data-k="navQuiz">DI 퀴즈</a>
+      </div>
+      <div class="langsel" role="group" aria-label="Language">
+        <button class="langbtn" data-l="ko">한</button>
+        <button class="langbtn" data-l="en">EN</button>
+        <button class="langbtn" data-l="vn">VN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="crumb"><a href="../index.html#di-letter" data-k="crumb">← 데이터 완전성 레터 목록</a></div>
+  <div id="art"></div>
+</article>
+
+<footer>
+  <div class="wrap">
+    <div data-k="footer">본 포털은 사내 GMP · 데이터 완전성 교육 목적으로 제작되었습니다.</div>
+    <div><b>3D 3O</b> · S1 Plant Data Management Team</div>
+  </div>
+</footer>
+
+<script>
+window.LETTER = {
+  vol:"VOL.01", date:"2026.04", readmin:5,
+  tags:["#DataIntegrity","#AuditTrail","#OpenMind","#ALCOA+"],
+  title:{ko:`점검 기록은 감시가 아니라 보호입니다`, en:`The audit trail protects you, it doesn't watch you.`, vn:`Nhật ký kiểm tra bảo vệ bạn, không giám sát bạn.`},
+  series:{ko:`데이터 완전성 현장 이야기 · 점검 기록(Audit Trail) 편`, en:`Stories from the floor · The Audit Trail`, vn:`Chuyện hiện trường · Nhật ký kiểm tra (Audit Trail)`},
+  intro:{
+    ko:`많은 현장 동료들이 점검 기록(Audit Trail)을 '나를 감시하는 장치'로 느낍니다. 이번 호는 그 오해를 함께 풀어보려 합니다.`,
+    en:`Many of us feel the audit trail is 'a device watching me'. This issue tries to clear up that misunderstanding.`,
+    vn:`Nhiều đồng nghiệp ở hiện trường cảm thấy nhật ký kiểm tra là 'thứ giám sát mình'. Số này muốn cùng gỡ bỏ hiểu lầm đó.`
+  },
+  blocks:[
+    {type:"figure", img:"img/ep1_scene3_qa.webp", cap:{
+      ko:`점검 기록은 누가 무엇을, 언제 했는지를 조용히 남깁니다. 그런데 그것은 정말 '감시'일까요?`,
+      en:`The audit trail quietly records who did what, and when. But is that really 'surveillance'?`,
+      vn:`Nhật ký kiểm tra lặng lẽ ghi lại ai đã làm gì, khi nào. Nhưng đó có thật sự là 'giám sát'?`}},
+
+    {type:"lead", text:{
+      ko:`"내가 언제 로그인했는지, 무슨 값을 바꿨는지 전부 남는다고요?" 신입 ALCOA 씨가 처음 점검 기록을 봤을 때의 반응이었습니다. <strong>마치 누군가 어깨너머로 늘 지켜보는 기분</strong>이었죠.`,
+      en:`"It records when I log in and every value I change?" That was ALCOA's first reaction to the audit trail. <strong>It felt like someone was always watching over his shoulder.</strong>`,
+      vn:`"Nó ghi lại cả lúc tôi đăng nhập và mọi giá trị tôi thay đổi sao?" Đó là phản ứng đầu tiên của ALCOA khi nhìn thấy nhật ký kiểm tra. <strong>Cảm giác như luôn có ai đó dõi theo sau lưng.</strong>`}},
+
+    {type:"h2", text:{ko:`감시처럼 느껴지는 이유`, en:`Why it feels like surveillance`, vn:`Vì sao nó giống như giám sát`}},
+
+    {type:"p", text:{
+      ko:`감시처럼 느껴지는 건 자연스럽습니다. 점검 기록은 분명 '누가, 무엇을, 언제, 왜'를 남기니까요. 하지만 그 목적은 사람을 의심하기 위해서가 아닙니다. <strong>데이터가 만들어지고 바뀐 과정을 신뢰할 수 있게 만들기 위해서</strong>입니다. 사람을 향한 카메라가 아니라, 데이터를 향한 보증서에 가깝습니다.`,
+      en:`It's natural that it feels that way — the audit trail does capture 'who, what, when, why'. But its purpose isn't to suspect people. It's to <strong>make the way data is created and changed trustworthy.</strong> It's less a camera pointed at people, and more a warranty placed on the data.`,
+      vn:`Cảm giác đó là tự nhiên — nhật ký kiểm tra đúng là ghi lại 'ai, cái gì, khi nào, vì sao'. Nhưng mục đích của nó không phải để nghi ngờ con người. Mà để <strong>khiến cho cách dữ liệu được tạo ra và thay đổi trở nên đáng tin cậy.</strong> Nó không phải chiếc camera chĩa vào con người, mà giống một sự bảo chứng cho dữ liệu.`}},
+
+    {type:"h2", text:{ko:`점검 기록이 당신을 지켜줄 때`, en:`When the audit trail protects you`, vn:`Khi nhật ký kiểm tra bảo vệ bạn`}},
+
+    {type:"p", text:{
+      ko:`한 번은 어떤 배치에 문제가 제기됐을 때, 점검 기록이 ALCOA 씨가 <strong>정확한 시각에, 올바른 순서로</strong> 작업했음을 그대로 보여줬습니다. 의심은 그 자리에서 사라졌습니다. <strong>기록이 없었다면, 결백을 증명할 방법도 없었을 것</strong>입니다.`,
+      en:`Once, when a batch was questioned, the audit trail showed that ALCOA had worked <strong>at the right time, in the right order</strong>. The doubt vanished on the spot. <strong>Without the record, there would have been no way to prove he'd done it right.</strong>`,
+      vn:`Có lần, khi một lô hàng bị nghi vấn, nhật ký kiểm tra cho thấy ALCOA đã thao tác <strong>đúng thời điểm, đúng trình tự</strong>. Nghi ngờ tan biến ngay tại chỗ. <strong>Nếu không có bản ghi, sẽ chẳng có cách nào chứng minh anh đã làm đúng.</strong>`}},
+
+    {type:"quote", text:{
+      ko:`"점검 기록은 당신을 감시하는 카메라가 아니라, 당신의 정직을 증언해 주는 목격자입니다."`,
+      en:`"The audit trail isn't a camera watching you — it's a witness that vouches for your honesty."`,
+      vn:`"Nhật ký kiểm tra không phải camera giám sát bạn — mà là nhân chứng làm chứng cho sự trung thực của bạn."`}},
+
+    {type:"h2", text:{ko:`올바르게, 함께 쓰는 법`, en:`Using it the right way, together`, vn:`Cùng sử dụng đúng cách`}},
+
+    {type:"check", head:{ko:`점검 기록과 친해지기`, en:`Get comfortable with the audit trail`, vn:`Làm quen với nhật ký kiểm tra`}, items:[
+      {ko:`<strong>점검 기록을 끄거나 우회하지 않습니다.</strong> 비활성화·계정 공유는 그 자체가 중대한 일탈입니다.`,
+       en:`<strong>Never disable or bypass the audit trail.</strong> Turning it off or sharing accounts is itself a serious deviation.`,
+       vn:`<strong>Không tắt hoặc đi vòng nhật ký kiểm tra.</strong> Việc vô hiệu hóa hay dùng chung tài khoản tự nó là một sai lệch nghiêm trọng.`},
+      {ko:`<strong>수정에는 이유를 남깁니다.</strong> 값을 바꿀 땐 '왜 바꿨는지'를 함께 기록합니다.`,
+       en:`<strong>Leave a reason for every change.</strong> When you change a value, record why you changed it.`,
+       vn:`<strong>Ghi lý do cho mỗi lần sửa.</strong> Khi thay đổi một giá trị, hãy ghi lại vì sao bạn thay đổi.`},
+      {ko:`<strong>점검 기록 검토(ATR)는 의심이 아니라 점검입니다.</strong> 정기 검토는 사람을 잡으려는 게 아니라 시스템을 건강하게 유지하기 위한 절차입니다.`,
+       en:`<strong>Audit trail review (ATR) is a check, not an accusation.</strong> Routine review keeps the system healthy — it isn't about catching people.`,
+       vn:`<strong>Rà soát nhật ký kiểm tra (ATR) là việc kiểm tra, không phải buộc tội.</strong> Việc rà soát định kỳ giữ cho hệ thống lành mạnh — không nhằm 'bắt lỗi' con người.`}
+    ]},
+
+    {type:"cta", buttons:[
+      {label:{ko:`이어 보기 · VOL.03 동시성 편 →`, en:`Continue · VOL.03 Contemporaneous →`, vn:`Đọc tiếp · VOL.03 Tính đồng thời →`}, href:"vol03.html", primary:true},
+      {label:{ko:`DI Quiz 풀어보기`, en:`Take the DI Quiz`, vn:`Làm Quiz DI`}, href:"../index.html#di-quiz"},
+      {label:{ko:`레터 목록`, en:`All letters`, vn:`Danh sách thư`}, href:"../index.html#di-letter"}
+    ]},
+
+    {type:"disclaimer", text:{
+      ko:`※ 본 이야기는 데이터 완전성 교육을 위한 가상의 시나리오이며, 등장인물(Mr. ALCOA 등)과 사건은 실제와 무관합니다. 삽화는 생성형 이미지로 제작되었습니다.`,
+      en:`※ This is a fictional scenario for data integrity training. The characters (Mr. ALCOA, etc.) and events are not real. Illustrations are AI-generated.`,
+      vn:`※ Đây là tình huống hư cấu phục vụ đào tạo về tính toàn vẹn dữ liệu. Các nhân vật (Mr. ALCOA, v.v.) và sự kiện đều không có thật. Hình minh họa do AI tạo.`}}
+  ]
+};
+</script>
+<script src="letter.js"></script>
+</body>
+</html>

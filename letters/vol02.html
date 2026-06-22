@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DI Letter · VOL.02</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="letter.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="../index.html#top">
+      <span class="nav-badge"><span>3D</span><span>3O</span></span>
+      <span class="full">GMP&nbsp;Training&nbsp;·&nbsp;S1&nbsp;Plant</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="../index.html#di-letter" data-k="navLetter">DI 레터</a>
+        <a href="../index.html#di-quiz" data-k="navQuiz">DI 퀴즈</a>
+      </div>
+      <div class="langsel" role="group" aria-label="Language">
+        <button class="langbtn" data-l="ko">한</button>
+        <button class="langbtn" data-l="en">EN</button>
+        <button class="langbtn" data-l="vn">VN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="crumb"><a href="../index.html#di-letter" data-k="crumb">← 데이터 완전성 레터 목록</a></div>
+  <div id="art"></div>
+</article>
+
+<footer>
+  <div class="wrap">
+    <div data-k="footer">본 포털은 사내 GMP · 데이터 완전성 교육 목적으로 제작되었습니다.</div>
+    <div><b>3D 3O</b> · S1 Plant Data Management Team</div>
+  </div>
+</footer>
+
+<script>
+window.LETTER = {
+  vol:"VOL.02", date:"2026.05", readmin:5,
+  tags:["#DataIntegrity","#OOS","#OpenReport","#ALCOA+"],
+  title:{ko:`OOS, 숨기지 않을 용기 — Open Report`, en:`OOS: the courage not to hide it`, vn:`OOS: dũng khí không che giấu`},
+  series:{ko:`생산부 Mr. ALCOA 씨의 현장 이야기 · Open Report 편`, en:`Stories from the floor with Mr. ALCOA · Open Report`, vn:`Chuyện hiện trường cùng Mr. ALCOA · Số Open Report`},
+  intro:{
+    ko:`이번 호 주제는 <b>Open Report</b> — 예정에 없던 결과(OOS)를 마주했을 때, 숨기지 않고 보고하는 용기에 관한 이야기입니다.`,
+    en:`This issue is about <b>Open Report</b> — the courage to report, not hide, an unexpected out-of-specification (OOS) result.`,
+    vn:`Số này nói về <b>Open Report</b> — dũng khí để báo cáo, thay vì che giấu, một kết quả ngoài tiêu chuẩn (OOS) không lường trước.`
+  },
+  blocks:[
+    {type:"figure", img:"img/ep2_hero.webp", cap:{
+      ko:`화면에 뜬 빨간 숫자. ALCOA 씨의 심장이 철렁 내려앉습니다.`,
+      en:`A red number on the screen. ALCOA's heart sinks.`,
+      vn:`Một con số đỏ trên màn hình. Tim ALCOA chùng xuống.`}},
+
+    {type:"lead", text:{
+      ko:`현장에서 가장 무서운 순간은 사고가 난 순간이 아닙니다. <strong>'이걸 보고해야 하나, 그냥 넘어가도 되나'를 혼자 저울질하는 순간</strong>입니다. 오늘 ALCOA 씨가 바로 그 갈림길에 섭니다.`,
+      en:`The scariest moment on the floor isn't when something goes wrong. It's the moment you weigh, alone, <strong>"do I report this, or let it slide?"</strong> Today ALCOA stands at exactly that fork.`,
+      vn:`Khoảnh khắc đáng sợ nhất ở hiện trường không phải lúc sự cố xảy ra. Đó là lúc bạn một mình cân nhắc: <strong>"mình nên báo cáo, hay cứ cho qua?"</strong> Hôm nay ALCOA đứng ngay tại ngã rẽ đó.`}},
+
+    {type:"hr"},
+
+    {type:"h2", text:{ko:`예정에 없던 빨간 숫자`, en:`The red number nobody expected`, vn:`Con số đỏ không ai ngờ tới`}},
+
+    {type:"p", text:{
+      ko:`공정 중 중간 점검에서, ALCOA 씨가 확인한 측정값 하나가 관리 기준을 살짝 벗어났습니다. 화면에는 빨갛게 'OUT'이 떠 있었습니다. 머릿속에 두 목소리가 동시에 떠올랐습니다. <strong>'다시 측정하면 정상일지도 몰라.'</strong> 그리고 <strong>'한 번 더 재서 정상 나오면, 아무 일도 없던 게 되는 거 아닐까?'</strong>`,
+      en:`During an in-process check, one of ALCOA's readings drifted just outside the control limit. The screen flashed a red 'OUT'. Two voices rose at once. <strong>"Maybe it'll be fine if I measure again."</strong> And then: <strong>"If I re-measure and it reads normal, it's like nothing happened, right?"</strong>`,
+      vn:`Trong một lần kiểm tra giữa công đoạn, một giá trị ALCOA đo được lệch ra ngoài giới hạn kiểm soát một chút. Màn hình hiện chữ 'OUT' màu đỏ. Hai giọng nói vang lên cùng lúc. <strong>"Đo lại có khi lại bình thường ấy chứ."</strong> Rồi: <strong>"Nếu đo lại mà ra bình thường, thì coi như chưa có gì xảy ra, đúng không?"</strong>`}},
+
+    {type:"figure", img:"img/ep2_scene1_hesitate.webp", cap:{
+      ko:`보고서를 쥔 손이 멈칫합니다. 가장 위험한 건 '조용히 다시 하기'의 유혹입니다.`,
+      en:`The hand holding the form hesitates. The real danger is the temptation to 'quietly redo it'.`,
+      vn:`Bàn tay cầm tờ biểu mẫu khựng lại. Nguy hiểm thật sự là cám dỗ 'lặng lẽ làm lại'.`}},
+
+    {type:"p", text:{
+      ko:`여기서 '조용히 다시 측정해서 정상값만 남기는 것' — 이것이 바로 데이터 완전성에서 가장 경계하는 <strong>테스팅 인투 컴플라이언스(testing into compliance)</strong>입니다. 마음에 드는 값이 나올 때까지 다시 시도하고, 마음에 안 드는 값은 없던 일로 만드는 것이죠.`,
+      en:`Quietly re-measuring and keeping only the 'good' value — this is exactly what data integrity guards against most: <strong>testing into compliance</strong>. Retrying until you get a value you like, and making the one you don't like disappear.`,
+      vn:`Lặng lẽ đo lại và chỉ giữ lại giá trị 'đẹp' — đây chính là điều mà tính toàn vẹn dữ liệu cảnh giác nhất: <strong>testing into compliance</strong> (thử cho đến khi đạt). Thử lại đến khi ra con số vừa ý, và làm cho con số không vừa ý biến mất.`}},
+
+    {type:"p", text:{
+      ko:`ALCOA 씨는 잠시 눈을 감았습니다. VOL.03에서 배운 한 줄이 떠올랐습니다. <strong>'정직한 일탈이 거짓된 완성보다 낫다.'</strong>`,
+      en:`ALCOA closed his eyes for a moment. A line from VOL.03 came back to him: <strong>"An honest deviation beats a false completion."</strong>`,
+      vn:`ALCOA nhắm mắt lại một lúc. Một câu trong VOL.03 hiện về: <strong>"Một sai lệch trung thực còn hơn một hồ sơ hoàn chỉnh giả tạo."</strong>`}},
+
+    {type:"h2", text:{ko:`그래서 그는, 손을 들었다`, en:`So he raised his hand`, vn:`Vậy là anh giơ tay lên`}},
+
+    {type:"figure", img:"img/ep2_scene2_report.webp", cap:{
+      ko:`"팀장님, 보고드릴 게 있습니다." — 가장 어려운 한 문장이, 가장 중요한 한 문장입니다.`,
+      en:`"Ms. D, I have something to report." — the hardest sentence is the most important one.`,
+      vn:`"Ms. D, em có việc cần báo cáo." — câu khó nói nhất lại là câu quan trọng nhất.`}},
+
+    {type:"p", text:{
+      ko:`ALCOA 씨는 측정값을 지우지 않았습니다. 대신 Supervisor <strong>Ms. D</strong>에게 그대로 보고했습니다. Ms. D는 화를 내지 않았습니다. 오히려 "잘 가져왔어요"라고 말했습니다. 곧 Deviation 담당자 <strong>Ms. April</strong>이 정식 절차를 열었고, 원인 조사가 시작됐습니다.`,
+      en:`ALCOA didn't erase the reading. Instead he reported it as-is to Supervisor <strong>Ms. D</strong>. She didn't get angry — she said, "Good that you brought it." Deviation owner <strong>Ms. April</strong> opened the formal process, and a root-cause investigation began.`,
+      vn:`ALCOA không xóa giá trị đo. Thay vào đó anh báo cáo đúng như vậy cho Giám sát <strong>Ms. D</strong>. Cô không nổi giận — cô nói: "May là em đã mang nó đến." Người phụ trách sai lệch <strong>Ms. April</strong> mở quy trình chính thức, và việc điều tra nguyên nhân bắt đầu.`}},
+
+    {type:"p", text:{
+      ko:`조사 결과, 원인은 측정 직전의 사소한 절차 누락이었습니다. 덕분에 같은 실수가 다른 라인에서 반복되지 않도록 절차가 보완됐습니다. <strong>한 사람의 정직한 보고가, 공장 전체의 위험 하나를 줄인 것입니다.</strong>`,
+      en:`The investigation traced it to a small procedural miss just before measurement. Thanks to that, the procedure was strengthened so the same mistake wouldn't repeat on other lines. <strong>One person's honest report removed one risk for the whole plant.</strong>`,
+      vn:`Cuộc điều tra truy ra nguyên nhân là một thiếu sót nhỏ trong thao tác ngay trước khi đo. Nhờ đó, quy trình được bổ sung để lỗi tương tự không lặp lại ở các dây chuyền khác. <strong>Báo cáo trung thực của một người đã loại bỏ một rủi ro cho cả nhà máy.</strong>`}},
+
+    {type:"hr"},
+
+    {type:"h2", text:{ko:`무엇이 핵심인가 — Open Report`, en:`The key idea — Open Report`, vn:`Điều cốt lõi — Open Report`}},
+
+    {type:"reg", rows:[
+      {dt:{ko:`원칙`, en:`Principle`, vn:`Nguyên tắc`}, dd:{
+        ko:`예상과 다른 결과(OOS·OOT 등)는 <strong>발견 즉시, 있는 그대로</strong> 보고한다.`,
+        en:`Unexpected results (OOS, OOT, etc.) are reported <strong>immediately and as-is</strong>, the moment they're found.`,
+        vn:`Kết quả ngoài dự kiến (OOS, OOT, v.v.) phải được báo cáo <strong>ngay lập tức và đúng nguyên trạng</strong>, ngay khi phát hiện.`}},
+      {dt:{ko:`금지`, en:`Never`, vn:`Không được`}, dd:{
+        ko:`마음에 드는 값이 나올 때까지 재시험, 원본 값 삭제·은폐, '조용히 다시 하기'.`,
+        en:`Re-testing until you like the result, deleting or hiding the original value, 'quietly redoing it'.`,
+        vn:`Thử lại đến khi ra kết quả vừa ý, xóa hoặc giấu giá trị gốc, 'lặng lẽ làm lại'.`}},
+      {dt:{ko:`문화`, en:`Culture`, vn:`Văn hóa`}, dd:{
+        ko:`보고한 사람을 탓하지 않는다. <strong>보고는 문제의 시작이 아니라 해결의 시작</strong>이다.`,
+        en:`Don't blame the person who reports. <strong>A report is not the start of a problem — it's the start of a solution.</strong>`,
+        vn:`Đừng trách người báo cáo. <strong>Một báo cáo không phải khởi đầu của vấn đề — mà là khởi đầu của giải pháp.</strong>`}}
+    ], note:`관련 근거 · EU GMP Annex 11 · 21 CFR Part 11 · PIC/S PI 041 · ALCOA+ Principles`},
+
+    {type:"h2", text:{ko:`기억할 한 문장`, en:`One line to remember`, vn:`Một câu để ghi nhớ`}},
+
+    {type:"quote", text:{
+      ko:`"숨긴 OOS는 시한폭탄이 되고, 보고된 OOS는 개선의 출발점이 된다."`,
+      en:`"A hidden OOS becomes a time bomb; a reported OOS becomes a starting point for improvement."`,
+      vn:`"Một OOS bị giấu sẽ thành quả bom hẹn giờ; một OOS được báo cáo sẽ thành điểm khởi đầu cho cải tiến."`}},
+
+    {type:"cta", buttons:[
+      {label:{ko:`이어 보기 · VOL.03 동시성 편 →`, en:`Continue · VOL.03 Contemporaneous →`, vn:`Đọc tiếp · VOL.03 Tính đồng thời →`}, href:"vol03.html", primary:true},
+      {label:{ko:`DI Quiz 풀어보기`, en:`Take the DI Quiz`, vn:`Làm Quiz DI`}, href:"../index.html#di-quiz"},
+      {label:{ko:`레터 목록`, en:`All letters`, vn:`Danh sách thư`}, href:"../index.html#di-letter"}
+    ]},
+
+    {type:"disclaimer", text:{
+      ko:`※ 본 이야기는 데이터 완전성 교육을 위한 가상의 시나리오이며, 등장인물(Mr. ALCOA, Ms. D, Ms. April 등)과 사건은 실제와 무관합니다. 삽화는 생성형 이미지로 제작되었습니다.`,
+      en:`※ This is a fictional scenario for data integrity training. The characters (Mr. ALCOA, Ms. D, Ms. April, etc.) and events are not real. Illustrations are AI-generated.`,
+      vn:`※ Đây là tình huống hư cấu phục vụ đào tạo về tính toàn vẹn dữ liệu. Các nhân vật (Mr. ALCOA, Ms. D, Ms. April, v.v.) và sự kiện đều không có thật. Hình minh họa do AI tạo.`}}
+  ]
+};
+</script>
+<script src="letter.js"></script>
+</body>
+</html>

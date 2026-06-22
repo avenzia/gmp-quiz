@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DI Letter · VOL.00</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="letter.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="../index.html#top">
+      <span class="nav-badge"><span>3D</span><span>3O</span></span>
+      <span class="full">GMP&nbsp;Training&nbsp;·&nbsp;S1&nbsp;Plant</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="../index.html#di-letter" data-k="navLetter">DI 레터</a>
+        <a href="../index.html#di-quiz" data-k="navQuiz">DI 퀴즈</a>
+      </div>
+      <div class="langsel" role="group" aria-label="Language">
+        <button class="langbtn" data-l="ko">한</button>
+        <button class="langbtn" data-l="en">EN</button>
+        <button class="langbtn" data-l="vn">VN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="crumb"><a href="../index.html#di-letter" data-k="crumb">← 데이터 완전성 레터 목록</a></div>
+  <div id="art"></div>
+</article>
+
+<footer>
+  <div class="wrap">
+    <div data-k="footer">본 포털은 사내 GMP · 데이터 완전성 교육 목적으로 제작되었습니다.</div>
+    <div><b>3D 3O</b> · S1 Plant Data Management Team</div>
+  </div>
+</footer>
+
+<script>
+window.LETTER = {
+  vol:"VOL.00", date:"2026.03", readmin:4,
+  tags:["#DataIntegrity","#OpenMind","#3D3O"],
+  title:{ko:`왜 지금, 데이터 완전성인가`, en:`Why data integrity, why now.`, vn:`Vì sao là tính toàn vẹn dữ liệu, và vì sao là lúc này.`},
+  series:{ko:`데이터 완전성 레터를 시작하며 · 창간호`, en:`Launching the Data Integrity Letter · Issue Zero`, vn:`Khởi đầu Thư Toàn Vẹn Dữ Liệu · Số mở đầu`},
+  intro:{
+    ko:`<b>데이터 완전성 레터</b>의 첫 편지입니다. 규정과 시스템 이야기에 앞서, '왜 우리가 이 이야기를 시작하는지'를 먼저 나누고 싶습니다.`,
+    en:`This is the very first <b>Data Integrity Letter</b>. Before regulations and systems, we want to share why we're starting these letters at all.`,
+    vn:`Đây là lá <b>Thư Toàn Vẹn Dữ Liệu</b> đầu tiên. Trước khi nói về quy định và hệ thống, chúng tôi muốn chia sẻ vì sao chúng tôi bắt đầu những lá thư này.`
+  },
+  blocks:[
+    {type:"figure", img:"img/ep1_hero.webp", cap:{
+      ko:`한 알의 약 뒤에는, 수많은 사람이 남긴 수많은 기록이 있습니다.`,
+      en:`Behind a single tablet lie countless records left by countless people.`,
+      vn:`Đằng sau một viên thuốc là vô số bản ghi do biết bao con người để lại.`}},
+
+    {type:"lead", text:{
+      ko:`우리가 만드는 것은 약이지만, 우리가 매일 남기는 것은 <strong>데이터</strong>입니다. 환자는 우리의 공정을 직접 볼 수 없습니다. 환자가 신뢰하는 것은 오직 하나 — <strong>우리가 남긴 기록이 진실하다는 것</strong>입니다.`,
+      en:`What we make is medicine, but what we leave behind every day is <strong>data</strong>. Patients can't see our process. The one thing they trust is this: <strong>that the records we leave are truthful.</strong>`,
+      vn:`Thứ chúng ta tạo ra là thuốc, nhưng thứ chúng ta để lại mỗi ngày là <strong>dữ liệu</strong>. Bệnh nhân không thể nhìn thấy quy trình của chúng ta. Điều duy nhất họ tin tưởng là: <strong>những bản ghi chúng ta để lại là trung thực.</strong>`}},
+
+    {type:"h2", text:{ko:`데이터 완전성이란, 결국 신뢰입니다`, en:`Data integrity is, in the end, trust`, vn:`Tính toàn vẹn dữ liệu, rốt cuộc, là niềm tin`}},
+
+    {type:"p", text:{
+      ko:`데이터 완전성(Data Integrity)은 어렵게 들리지만, 핵심은 단순합니다. <strong>'기록이 실제로 일어난 일을 그대로 담고 있는가.'</strong> ALCOA+라 부르는 원칙들 — 귀속성·가독성·동시성·원본성·정확성, 그리고 완전성·일관성·지속성·가용성 — 은 모두 이 한 가지 질문을 지키기 위한 장치입니다.`,
+      en:`Data integrity sounds complex, but the core is simple: <strong>does the record faithfully hold what actually happened?</strong> The principles we call ALCOA+ — Attributable, Legible, Contemporaneous, Original, Accurate, plus Complete, Consistent, Enduring, Available — all exist to protect that one question.`,
+      vn:`Tính toàn vẹn dữ liệu nghe có vẻ phức tạp, nhưng cốt lõi rất đơn giản: <strong>bản ghi có phản ánh trung thực điều đã thực sự xảy ra hay không?</strong> Các nguyên tắc ALCOA+ — Attributable, Legible, Contemporaneous, Original, Accurate, cùng với Complete, Consistent, Enduring, Available — đều tồn tại để bảo vệ đúng câu hỏi đó.`}},
+
+    {type:"h2", text:{ko:`그래서, 3D 3O`, en:`And so, 3D 3O`, vn:`Và vì thế, 3D 3O`}},
+
+    {type:"p", text:{
+      ko:`우리는 이 약속을 외우기 쉬운 말로 바꿨습니다. <strong>3D</strong>는 우리가 일하는 방식 — 정직하게(Honestly), 제대로(Right), 정확하게(Accurately). <strong>3O</strong>는 우리가 공유하는 방식 — 기록을 열고(Open Record), 보고를 열고(Open Report), 마음을 여는 것(Open Mind). 거창한 시스템보다 먼저, 이 태도가 데이터 완전성의 출발점입니다.`,
+      en:`We turned that promise into words that are easy to remember. <strong>3D</strong> is how we work — Honestly, Right, Accurately. <strong>3O</strong> is how we share — Open Record, Open Report, Open Mind. Before any grand system, this attitude is where data integrity begins.`,
+      vn:`Chúng tôi đã biến lời cam kết đó thành những từ dễ nhớ. <strong>3D</strong> là cách chúng ta làm việc — Honestly (trung thực), Right (đúng cách), Accurately (chính xác). <strong>3O</strong> là cách chúng ta chia sẻ — Open Record, Open Report, Open Mind. Trước mọi hệ thống lớn lao, chính thái độ này là nơi tính toàn vẹn dữ liệu bắt đầu.`}},
+
+    {type:"quote", text:{
+      ko:`"좋은 데이터는 좋은 시스템이 아니라, 좋은 사람에게서 시작됩니다."`,
+      en:`"Good data starts not with a good system, but with good people."`,
+      vn:`"Dữ liệu tốt không bắt đầu từ một hệ thống tốt, mà từ những con người tốt."`}},
+
+    {type:"p", text:{
+      ko:`앞으로 이 레터는 매 호마다 현장의 작은 이야기 하나를 들고 찾아오겠습니다. 생산부 ALCOA 씨의 좌충우돌을 함께 따라가다 보면, 어느새 ALCOA+가 머리가 아니라 손에 익게 될 것입니다. 함께해 주세요.`,
+      en:`From here on, each issue will bring one small story from the floor. Follow ALCOA's stumbles with us, and ALCOA+ will move from your head into your hands. Come along with us.`,
+      vn:`Từ nay, mỗi số thư sẽ mang đến một câu chuyện nhỏ từ hiện trường. Theo dõi những vấp váp của ALCOA cùng chúng tôi, rồi ALCOA+ sẽ chuyển từ trong đầu xuống đôi tay bạn. Hãy đồng hành cùng chúng tôi.`}},
+
+    {type:"cta", buttons:[
+      {label:{ko:`첫 에피소드 읽기 · VOL.03 →`, en:`Read the first episode · VOL.03 →`, vn:`Đọc tập đầu tiên · VOL.03 →`}, href:"vol03.html", primary:true},
+      {label:{ko:`DI Quiz 풀어보기`, en:`Take the DI Quiz`, vn:`Làm Quiz DI`}, href:"../index.html#di-quiz"},
+      {label:{ko:`레터 목록`, en:`All letters`, vn:`Danh sách thư`}, href:"../index.html#di-letter"}
+    ]},
+
+    {type:"disclaimer", text:{
+      ko:`※ 데이터 완전성 레터는 사내 교육용 콘텐츠입니다. 등장인물은 가상이며, 삽화는 생성형 이미지로 제작되었습니다.`,
+      en:`※ The Data Integrity Letter is internal training content. The characters are fictional, and illustrations are AI-generated.`,
+      vn:`※ Thư Toàn Vẹn Dữ Liệu là nội dung đào tạo nội bộ. Các nhân vật là hư cấu, và hình minh họa do AI tạo.`}}
+  ]
+};
+</script>
+<script src="letter.js"></script>
+</body>
+</html>
