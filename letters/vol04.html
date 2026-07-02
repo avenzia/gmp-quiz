@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DI Letter · VOL.04</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="letter.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="../index.html#top">
+      <span class="nav-badge"><span>3D</span><span>3O</span></span>
+      <span class="full">GMP&nbsp;Training&nbsp;·&nbsp;S1&nbsp;Plant</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="../index.html#di-letter" data-k="navLetter">DI 레터</a>
+        <a href="../index.html#di-quiz" data-k="navQuiz">DI 퀴즈</a>
+      </div>
+      <div class="langsel" role="group" aria-label="Language">
+        <button class="langbtn" data-l="ko">한</button>
+        <button class="langbtn" data-l="en">EN</button>
+        <button class="langbtn" data-l="vn">VN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="crumb"><a href="../index.html#di-letter" data-k="crumb">← 데이터 완전성 레터 목록</a></div>
+  <div id="art"></div>
+</article>
+
+<footer>
+  <div class="wrap">
+    <div data-k="footer">본 포털은 사내 GMP · 데이터 완전성 교육 목적으로 제작되었습니다.</div>
+    <div><b>3D 3O</b> · S1 Plant Data Management Team</div>
+  </div>
+</footer>
+
+<script>
+window.LETTER = {
+  vol:"VOL.04", date:"2026.07", readmin:5,
+  tags:["#DataIntegrity","#Reanalysis","#AuditTrail","#Complete","#ALCOA+"],
+  title:{ko:`몰래 다시 돌린 재시험, 점검 기록은 알고 있었다`, en:`The quiet re-test the audit trail never forgot`, vn:`Lần kiểm nghiệm lại lén lút mà nhật ký kiểm tra không quên`},
+  series:{ko:`현장 이야기 · QC 편 — 점검 기록이 기억하는 것`, en:`Stories from the floor · QC — what the audit trail remembers`, vn:`Chuyện hiện trường · QC — điều nhật ký kiểm tra ghi nhớ`},
+  intro:{
+    ko:`이번 호 주제는 <b>Complete(완전)</b> — 마음에 드는 값이 나올 때까지 조용히 다시 돌린 재시험이, 왜 데이터 완전성의 가장 큰 구멍이 되는지에 관한 이야기입니다.`,
+    en:`This issue is about <b>Complete</b> — why a quietly repeated re-test, run until the number looks right, becomes one of the biggest holes in data integrity.`,
+    vn:`Số này nói về <b>Complete (tính đầy đủ)</b> — vì sao việc lặng lẽ kiểm nghiệm lại đến khi ra con số vừa ý lại trở thành một trong những lỗ hổng lớn nhất của tính toàn vẹn dữ liệu.`
+  },
+  blocks:[
+    {type:"figure", img:"img/v04_hero.webp", cap:{
+      ko:`값이 살짝 마음에 안 든다. QC 분석자 Ms. Chi의 손이 '다시 분석' 버튼 위에서 멈칫합니다.`,
+      en:`The number is just slightly off. QC analyst Ms. Chi's hand pauses over the 're-analyze' button.`,
+      vn:`Con số hơi không như ý. Bàn tay của phân tích viên QC Ms. Chi khựng lại trên nút 'phân tích lại'.`}},
+
+    {type:"lead", text:{
+      ko:`나쁜 마음이 있었던 게 아닙니다. Ms. Chi는 배운 대로 했을 뿐입니다. <strong>"이럴 땐 한 번 더 돌리면 돼"</strong> — 선배에게 그렇게 배웠고, 다들 그렇게 했으니까요. 문제는, 그 '관행'이 데이터 완전성에서 가장 위험한 습관이라는 것이었습니다.`,
+      en:`There was no bad intent. Ms. Chi simply did what she was taught. <strong>"When this happens, just run it once more"</strong> — that's what a senior showed her, and everyone did the same. The problem is that this 'practice' is one of the most dangerous habits in data integrity.`,
+      vn:`Không hề có ý xấu. Ms. Chi chỉ làm theo những gì được dạy. <strong>"Gặp thế này thì chạy lại một lần nữa"</strong> — một đàn anh đã chỉ cô như vậy, và ai cũng làm thế. Vấn đề là 'lệ cũ' đó lại là một trong những thói quen nguy hiểm nhất đối với tính toàn vẹn dữ liệu.`}},
+
+    {type:"hr"},
+
+    {type:"h2", text:{ko:`"이럴 땐 다시 돌리면 돼" — 물려받은 관행`, en:`"Just run it again" — an inherited habit`, vn:`"Gặp thế này thì chạy lại" — thói quen được truyền lại`}},
+
+    {type:"p", text:{
+      ko:`함량 시험 결과가 규격 하한에 아슬아슬하게 걸렸습니다. Ms. Chi는 크게 고민하지 않았습니다. 시료를 다시 주입해 재분석을 돌렸고, 결과가 마음에 안 들면 또 돌렸습니다. 서너 번째에 드디어 여유 있게 <strong>적합</strong>인 값이 나왔고, 그 마지막 결과만 시험기록서에 옮겨 적어 보고했습니다.`,
+      en:`An assay result landed right at the lower spec limit. Ms. Chi didn't think twice. She re-injected the sample and re-ran the analysis; when she didn't like the result, she ran it again. On the third or fourth try a comfortably <strong>passing</strong> value appeared, and only that last result was transcribed into the record and reported.`,
+      vn:`Một kết quả thử hàm lượng rơi sát ngưỡng dưới của tiêu chuẩn. Ms. Chi không nghĩ ngợi nhiều. Cô tiêm lại mẫu và chạy phân tích lại; kết quả không vừa ý thì chạy tiếp. Đến lần thứ ba, thứ tư mới ra một giá trị <strong>đạt</strong> thoải mái, và chỉ kết quả cuối cùng đó được chép vào hồ sơ và báo cáo.`}},
+
+    {type:"figure", img:"img/v04_scene1_repeat.webp", cap:{
+      ko:`앞선 결과들은 조용히 서랍 속으로. 마지막 한 장만 세상에 남습니다.`,
+      en:`The earlier results quietly slide into a drawer. Only the last sheet is allowed to exist.`,
+      vn:`Những kết quả trước đó lặng lẽ trôi vào ngăn kéo. Chỉ tờ cuối cùng được phép tồn tại.`}},
+
+    {type:"p", text:{
+      ko:`여기서 두 가지 규칙이 동시에 무너졌습니다. 첫째, 규격에 걸린 결과는 <strong>OOS(기준일탈) 조사 절차</strong>를 열어야 하는데 그러지 않았습니다. 둘째, 실패한 결과를 남기지 않고 마음에 드는 값만 보고하는 것 — 이것이 바로 <strong>적합이 나올 때까지 반복 시험(testing into compliance)</strong>이며, 재시험을 <strong>문서화 없이 임의로</strong> 반복한 것입니다.`,
+      en:`Two rules broke at once. First, a result that hit the spec limit should have triggered an <strong>OOS (out-of-specification) investigation</strong> — it didn't. Second, discarding the failing results and reporting only the value you like is exactly <strong>testing into compliance</strong>, with re-tests repeated <strong>arbitrarily and without documentation</strong>.`,
+      vn:`Hai nguyên tắc sụp đổ cùng lúc. Thứ nhất, một kết quả chạm ngưỡng tiêu chuẩn lẽ ra phải mở <strong>điều tra OOS (ngoài tiêu chuẩn)</strong> — nhưng đã không. Thứ hai, loại bỏ các kết quả không đạt và chỉ báo cáo giá trị vừa ý chính là <strong>thử cho đến khi đạt (testing into compliance)</strong>, với việc kiểm nghiệm lại được lặp <strong>tùy tiện và không có tài liệu</strong>.`}},
+
+    {type:"p", text:{
+      ko:`그런데 Ms. Chi는 이것이 '문제'라고 인식조차 하지 못했습니다. 입사 이후 늘 그렇게 해 왔고, 아무도 문제 삼지 않았기 때문입니다. <strong>가장 위험한 위반은 나쁜 의도가 아니라, 위험한 줄 모르는 관행에서 나옵니다.</strong>`,
+      en:`Yet Ms. Chi didn't even register this as a 'problem'. It was how things had always been done since she joined, and no one had ever questioned it. <strong>The most dangerous breaches come not from bad intent, but from habits nobody realizes are dangerous.</strong>`,
+      vn:`Vậy mà Ms. Chi thậm chí không nhận ra đây là một 'vấn đề'. Từ khi vào làm mọi việc vẫn diễn ra như thế, và chưa ai từng thắc mắc. <strong>Những vi phạm nguy hiểm nhất không đến từ ý đồ xấu, mà từ những thói quen không ai nhận ra là nguy hiểm.</strong>`}},
+
+    {type:"h2", text:{ko:`점검 기록(Audit Trail)은 지우지 못한다`, en:`The audit trail can't be erased`, vn:`Nhật ký kiểm tra (Audit Trail) không thể xóa`}},
+
+    {type:"figure", img:"img/v04_scene2_audit.webp", cap:{
+      ko:`QA의 Mr. Trail이 점검 기록을 넘기다 한 줄에서 멈춥니다. 같은 시료, 여러 번의 분석.`,
+      en:`In QA, Mr. Trail scrolls the audit trail and stops at one line: the same sample, analyzed many times.`,
+      vn:`Bên QA, Mr. Trail lướt nhật ký kiểm tra và dừng lại ở một dòng: cùng một mẫu, được phân tích nhiều lần.`}},
+
+    {type:"p", text:{
+      ko:`정기 점검 기록 검토에서, QA의 <strong>Mr. Trail</strong>은 크로마토그래피 시스템(CDS)의 감사 추적을 열었습니다. 시험기록서에는 결과가 한 번뿐이었지만, 시스템에는 같은 시료에 대한 <strong>여러 번의 주입과 재적분(reprocessing) 이력</strong>이 시간 순서대로 고스란히 남아 있었습니다. 종이가 잊은 것을, 시스템은 기억하고 있었습니다.`,
+      en:`During a routine audit-trail review, QA's <strong>Mr. Trail</strong> opened the chromatography system (CDS) audit trail. The record on paper showed a single result — but the system held the full, time-ordered history of <strong>multiple injections and reprocessing</strong> of the same sample. What the paper forgot, the system remembered.`,
+      vn:`Trong một lần rà soát nhật ký kiểm tra định kỳ, <strong>Mr. Trail</strong> của QA mở audit trail của hệ thống sắc ký (CDS). Hồ sơ trên giấy chỉ có một kết quả — nhưng hệ thống lưu đầy đủ, theo trình tự thời gian, lịch sử <strong>nhiều lần tiêm và xử lý lại (reprocessing)</strong> cùng một mẫu. Điều tờ giấy quên, hệ thống vẫn nhớ.`}},
+
+    {type:"p", text:{
+      ko:`왜 이것이 중대한 문제일까요? 시험 결과는 결국 <strong>환자에게 나가는 의약품의 품질을 보증</strong>하는 근거입니다. 실패한 결과를 숨기고 합격 값만 남기면, 그 배치가 정말 적합했는지 아무도 알 수 없게 됩니다. 그래서 ALCOA+는 <strong>Complete(완전)</strong> — 모든 결과를 하나도 빠짐없이 — 와 <strong>Original(원본)</strong> 유지를 요구합니다.`,
+      en:`Why does this matter so much? A test result is ultimately the basis that <strong>assures the quality of medicine reaching a patient</strong>. Hide the failing results and keep only the pass, and no one can ever know whether that batch was truly conforming. That is why ALCOA+ demands <strong>Complete</strong> — every result, none omitted — and the preservation of the <strong>Original</strong> data.`,
+      vn:`Vì sao điều này lại nghiêm trọng đến vậy? Kết quả thử nghiệm rốt cuộc là cơ sở <strong>bảo đảm chất lượng thuốc đến tay bệnh nhân</strong>. Giấu các kết quả không đạt và chỉ giữ kết quả đạt, thì không ai còn biết được lô đó có thực sự phù hợp hay không. Vì thế ALCOA+ yêu cầu <strong>Complete (đầy đủ)</strong> — mọi kết quả, không bỏ sót — và giữ nguyên dữ liệu <strong>Original (gốc)</strong>.`}},
+
+    {type:"h2", text:{ko:`책임을 묻기 전에, 시스템을 묻다`, en:`Before blaming a person, question the system`, vn:`Trước khi trách một người, hãy hỏi lại hệ thống`}},
+
+    {type:"figure", img:"img/v04_scene3_talk.webp", cap:{
+      ko:`"이게… 문제가 되는 거였어요?" Ms. Chi의 놀란 얼굴. Mr. Trail은 다그치지 않습니다.`,
+      en:`"Wait — this was a problem?" Ms. Chi is stunned. Mr. Trail doesn't scold her.`,
+      vn:`"Ơ… chuyện này là vấn đề sao?" Ms. Chi sững người. Mr. Trail không hề trách mắng.`}},
+
+    {type:"p", text:{
+      ko:`Mr. Trail이 사실을 보여주자 Ms. Chi는 진심으로 놀랐습니다. <strong>"저는 그게 문제가 되는 줄 정말 몰랐어요. 다들 그렇게 하길래…"</strong> 그 말은 변명이 아니라, 조직이 함께 풀어야 할 진짜 신호였습니다. 한 사람만 탓하고 끝내면, 다음 달 다른 분석자가 똑같이 반복할 테니까요.`,
+      en:`When Mr. Trail showed her the facts, Ms. Chi was genuinely shocked. <strong>"I honestly didn't know it was a problem. Everyone did it that way…"</strong> That wasn't an excuse — it was the real signal the organization needed to solve together. Blame one person and stop there, and next month another analyst repeats exactly the same thing.`,
+      vn:`Khi Mr. Trail cho cô xem sự thật, Ms. Chi thực sự sốc. <strong>"Em thật lòng không biết đây là vấn đề. Mọi người đều làm vậy mà…"</strong> Đó không phải lời bào chữa — mà là tín hiệu thật sự mà tổ chức cần cùng nhau giải quyết. Chỉ trách một người rồi thôi, thì tháng sau một phân tích viên khác lại lặp lại y hệt.`}},
+
+    {type:"p", text:{
+      ko:`그래서 이 사건은 징계가 아니라 <strong>재발 방지</strong>로 이어졌습니다. 재시험이 필요한 경우의 명확한 기준과 OOS 절차를 다시 교육하고, 재적분·재주입 권한과 사유 기록을 정비하고, 점검 기록 검토를 정기 업무로 못박았습니다. Ms. Chi는 이제 팀에서 이 주제를 가장 잘 설명하는 사람이 되었습니다.`,
+      en:`So this case led not to punishment but to <strong>prevention</strong>. The team re-trained on when a re-test is allowed and on the OOS process, tightened permissions and mandatory reasons for reprocessing and re-injection, and made audit-trail review a routine task. Ms. Chi is now the person who explains this topic best on her team.`,
+      vn:`Vì vậy vụ việc này dẫn đến <strong>phòng ngừa</strong> chứ không phải kỷ luật. Nhóm được đào tạo lại về khi nào được phép kiểm nghiệm lại và về quy trình OOS, siết lại quyền và lý do bắt buộc cho việc xử lý lại/tiêm lại, và đưa việc rà soát nhật ký kiểm tra thành công việc định kỳ. Giờ đây Ms. Chi là người giải thích chủ đề này rõ nhất trong nhóm.`}},
+
+    {type:"hr"},
+
+    {type:"h2", text:{ko:`무엇이 핵심인가 — Complete & Audit Trail`, en:`The key idea — Complete & Audit Trail`, vn:`Điều cốt lõi — Complete & Audit Trail`}},
+
+    {type:"reg", rows:[
+      {dt:{ko:`원칙`, en:`Principle`, vn:`Nguyên tắc`}, dd:{
+        ko:`규격에 걸린 결과는 <strong>OOS 절차</strong>로 조사하고, 재시험은 <strong>사전 승인·사유·문서화</strong> 아래에서만. 모든 결과는 하나도 빠짐없이 보존한다(Complete·Original).`,
+        en:`Investigate any out-of-spec result through the <strong>OOS process</strong>; re-test only under <strong>prior approval, a documented reason, and full records</strong>. Keep every result, none omitted (Complete, Original).`,
+        vn:`Điều tra mọi kết quả ngoài tiêu chuẩn theo <strong>quy trình OOS</strong>; chỉ kiểm nghiệm lại khi có <strong>phê duyệt trước, lý do và tài liệu đầy đủ</strong>. Giữ mọi kết quả, không bỏ sót (Complete, Original).`}},
+      {dt:{ko:`금지`, en:`Never`, vn:`Không được`}, dd:{
+        ko:`적합이 나올 때까지 몰래 반복 분석, 실패 결과 폐기·은폐, 마지막 값만 골라 보고, 사유 없는 재적분·재주입.`,
+        en:`Secretly repeating analysis until it passes, discarding or hiding failing results, cherry-picking only the last value, reprocessing or re-injecting without a reason.`,
+        vn:`Lén lút phân tích lại đến khi đạt, loại bỏ hoặc giấu kết quả không đạt, chỉ chọn báo cáo giá trị cuối, xử lý lại hoặc tiêm lại không có lý do.`}},
+      {dt:{ko:`문화`, en:`Culture`, vn:`Văn hóa`}, dd:{
+        ko:`"관행이니까"는 근거가 아니다. 한 사람을 탓하기 전에 절차와 교육을 먼저 묻는다. <strong>점검 기록은 감시가 아니라, 우리를 지켜주는 기억</strong>이다.`,
+        en:`"It's just how we do it" is not a justification. Question the procedure and training before blaming a person. <strong>The audit trail isn't surveillance — it's the memory that protects us.</strong>`,
+        vn:`"Vì xưa nay vẫn thế" không phải là lý lẽ. Hãy xem lại quy trình và đào tạo trước khi trách một người. <strong>Nhật ký kiểm tra không phải sự giám sát — mà là ký ức bảo vệ chúng ta.</strong>`}}
+    ], note:`관련 근거 · EU GMP Annex 11 · 21 CFR Part 11 · PIC/S PI 041 · ALCOA+ Principles · OOS 조사 (FDA Guidance)`},
+
+    {type:"h2", text:{ko:`기억할 한 문장`, en:`One line to remember`, vn:`Một câu để ghi nhớ`}},
+
+    {type:"quote", text:{
+      ko:`"버린 결과는 사라지지 않는다. 점검 기록에 남아, 언젠가 우리에게 되돌아온다."`,
+      en:`"A discarded result never disappears. It stays in the audit trail, and one day it comes back to us."`,
+      vn:`"Một kết quả bị vứt bỏ không bao giờ biến mất. Nó nằm lại trong nhật ký kiểm tra, và một ngày nào đó sẽ quay lại tìm ta."`}},
+
+    {type:"cta", buttons:[
+      {label:{ko:`이어 보기 · VOL.02 OOS 편 →`, en:`Related · VOL.02 OOS →`, vn:`Liên quan · VOL.02 OOS →`}, href:"vol02.html", primary:true},
+      {label:{ko:`QC DI 퀴즈 풀어보기`, en:`Take the QC DI Quiz`, vn:`Làm Quiz DI của QC`}, href:"https://avenzia.github.io/qc-gmp-quiz"},
+      {label:{ko:`레터 목록`, en:`All letters`, vn:`Danh sách thư`}, href:"../index.html#di-letter"}
+    ]},
+
+    {type:"disclaimer", text:{
+      ko:`※ 본 이야기는 데이터 완전성 교육을 위한 가상의 시나리오이며, 등장인물(Ms. Chi, Mr. Trail 등)과 사건은 실제와 무관합니다. 삽화는 생성형 이미지로 제작되었습니다.`,
+      en:`※ This is a fictional scenario for data integrity training. The characters (Ms. Chi, Mr. Trail, etc.) and events are not real. Illustrations are AI-generated.`,
+      vn:`※ Đây là tình huống hư cấu phục vụ đào tạo về tính toàn vẹn dữ liệu. Các nhân vật (Ms. Chi, Mr. Trail, v.v.) và sự kiện đều không có thật. Hình minh họa do AI tạo.`}}
+  ]
+};
+</script>
+<script src="letter.js"></script>
+</body>
+</html>
