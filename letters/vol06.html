@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DI Letter · VOL.06</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="letter.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="../index.html#top">
+      <span class="nav-badge"><span>3D</span><span>3O</span></span>
+      <span class="full">GMP&nbsp;Training&nbsp;·&nbsp;S1&nbsp;Plant</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="../index.html#di-letter" data-k="navLetter">DI 레터</a>
+        <a href="../index.html#di-quiz" data-k="navQuiz">DI 퀴즈</a>
+      </div>
+      <div class="langsel" role="group" aria-label="Language">
+        <button class="langbtn" data-l="ko">한</button>
+        <button class="langbtn" data-l="en">EN</button>
+        <button class="langbtn" data-l="vn">VN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="crumb"><a href="../index.html#di-letter" data-k="crumb">← 데이터 완전성 레터 목록</a></div>
+  <div id="art"></div>
+</article>
+
+<footer>
+  <div class="wrap">
+    <div data-k="footer">본 포털은 사내 GMP · 데이터 완전성 교육 목적으로 제작되었습니다.</div>
+    <div><b>3D 3O</b> · S1 Plant Data Management Team</div>
+  </div>
+</footer>
+
+<script>
+window.LETTER = {
+  vol:"VOL.06", date:"2026.09", readmin:5,
+  tags:["#DataIntegrity","#Contemporaneous","#Logbook","#ALCOA+","#OpenRecord"],
+  title:{ko:`미리 적어 둔 N/A — 아직 오지 않은 날을 기록할 수는 없다`, en:`The N/A written in advance — you can't record a day that hasn't happened`, vn:`Chữ N/A ghi trước — không thể ghi lại một ngày chưa đến`},
+  series:{ko:`현장 이야기 · QC 편 — 기록은 미래를 앞서갈 수 없다`, en:`Stories from the floor · QC — a record cannot run ahead of time`, vn:`Chuyện hiện trường · QC — hồ sơ không thể đi trước thời gian`},
+  intro:{
+    ko:`이번 호 주제는 <b>Contemporaneous(동시성)</b> — 선의로 미리 채운 한 칸이, 왜 기록의 신뢰를 통째로 흔드는지에 관한 이야기입니다.`,
+    en:`This issue is about <b>Contemporaneous</b> — how one box filled in advance, with the best of intentions, can shake the credibility of an entire record.`,
+    vn:`Số này nói về <b>Contemporaneous (tính đồng thời)</b> — vì sao một ô được điền trước với thiện ý lại có thể làm lung lay toàn bộ độ tin cậy của hồ sơ.`
+  },
+  blocks:[
+    {type:"figure", img:"img/v06_hero.webp", cap:{
+      ko:`금요일 오후, QC 분석자 Ms. Han이 저울 일일 점검을 마치고 점검 로그북을 정리합니다.`,
+      en:`Friday afternoon: QC analyst Ms. Han finishes the daily balance check and tidies up the logbook.`,
+      vn:`Chiều thứ Sáu: phân tích viên QC Ms. Han hoàn tất kiểm tra cân hằng ngày và sắp xếp lại sổ nhật ký.`}},
+
+    {type:"lead", text:{
+      ko:`Ms. Han은 성실한 분석자입니다. 매일 저울을 쓰기 전 일일 점검을 하고, 로그북을 빠짐없이 채웁니다. 그날도 점검을 마치고 기록을 적다가, <strong>주말 이틀은 휴일이고 저울을 쓸 일이 없다</strong>는 생각에 그 두 칸까지 <strong>미리 'N/A'로 채워 두었습니다.</strong> 빈칸을 남기지 않으려는 마음이었습니다.`,
+      en:`Ms. Han is a diligent analyst. She runs the daily check before using the balance and fills in the logbook without fail. That day, after finishing the check, she thought about the coming two days — <strong>a holiday weekend, with no plan to use the balance</strong> — and <strong>filled those two rows in advance with 'N/A'.</strong> She simply didn't want to leave blanks.`,
+      vn:`Ms. Han là một phân tích viên tận tâm. Cô luôn kiểm tra hằng ngày trước khi dùng cân và điền sổ nhật ký đầy đủ. Hôm đó, sau khi kiểm tra xong, cô nghĩ đến hai ngày sắp tới — <strong>cuối tuần nghỉ lễ, không có kế hoạch dùng cân</strong> — và <strong>điền trước hai dòng đó bằng chữ 'N/A'.</strong> Cô chỉ đơn giản không muốn để trống.`}},
+
+    {type:"hr"},
+
+    {type:"h2", text:{ko:`"어차피 안 쓸 거니까" — 7월 29일 금요일`, en:`"We won't use it anyway" — Friday, 29 July`, vn:`"Dù sao cũng không dùng" — Thứ Sáu, 29/7`}},
+
+    {type:"p", text:{
+      ko:`7월 29일 금요일. Ms. Han은 저울 일일 점검을 정상적으로 수행하고 그날 칸에 결과를 기록했습니다. 그리고 바로 아래, <strong>7월 30일과 31일 칸에도 같은 날 펜으로 'N/A'를 적었습니다.</strong> 이틀 모두 휴일이라 저울을 사용할 계획이 없었기 때문입니다.`,
+      en:`Friday, 29 July. Ms. Han performed the daily balance check as usual and recorded the result in that day's row. Then, right below it, <strong>she wrote 'N/A' in the rows for 30 and 31 July with the same pen, on the same day.</strong> Both were holidays, and there was no plan to use the balance.`,
+      vn:`Thứ Sáu, ngày 29/7. Ms. Han thực hiện kiểm tra cân hằng ngày như thường lệ và ghi kết quả vào dòng của ngày hôm đó. Rồi ngay bên dưới, <strong>cô viết 'N/A' vào các dòng ngày 30 và 31/7 bằng cùng cây bút, trong cùng một ngày.</strong> Cả hai ngày đều là ngày nghỉ, và không có kế hoạch dùng cân.`}},
+
+    {type:"figure", img:"img/v06_scene1_prefill.webp", cap:{
+      ko:`오늘 칸 아래, 아직 오지 않은 두 날의 칸이 미리 채워집니다. 악의는 없었습니다.`,
+      en:`Below today's row, two rows for days that haven't arrived are filled in advance. There was no bad intent.`,
+      vn:`Bên dưới dòng hôm nay, hai dòng của những ngày chưa đến đã được điền trước. Hoàn toàn không có ý xấu.`}},
+
+    {type:"p", text:{
+      ko:`Ms. Han의 생각은 이랬습니다. <strong>"어차피 쉬는 날이고, 아무도 저울을 쓰지 않을 테니까. 빈칸으로 두는 것보다 N/A라고 적어 두는 게 깔끔하잖아."</strong> 실제로 주말에 저울은 사용되지 않았습니다. 결과만 놓고 보면 그 'N/A'는 사실과 다르지 않았습니다.`,
+      en:`Ms. Han's reasoning was this: <strong>"They're days off anyway, and no one will use the balance. Writing N/A is tidier than leaving it blank."</strong> And in fact, the balance wasn't used over the weekend. Judged by the outcome alone, that 'N/A' didn't turn out to be untrue.`,
+      vn:`Suy nghĩ của Ms. Han là: <strong>"Dù sao cũng là ngày nghỉ, sẽ chẳng ai dùng cân. Viết N/A cho gọn còn hơn để trống."</strong> Và thực tế, cuối tuần đó chiếc cân không được sử dụng. Nếu chỉ xét kết quả, chữ 'N/A' ấy hóa ra không sai sự thật.`}},
+
+    {type:"p", text:{
+      ko:`바로 여기에 함정이 있습니다. <strong>결과적으로 맞았다는 사실이, 그 기록을 올바른 기록으로 만들어 주지는 않습니다.</strong> 문제는 내용이 아니라 <strong>기록한 시점</strong>이었습니다.`,
+      en:`And here lies the trap. <strong>The fact that it turned out to be correct does not make it a correct record.</strong> The problem was never the content — it was <strong>when it was written</strong>.`,
+      vn:`Và đây chính là cái bẫy. <strong>Việc nó hóa ra đúng không biến nó thành một ghi chép đúng đắn.</strong> Vấn đề chưa bao giờ nằm ở nội dung — mà ở <strong>thời điểm ghi</strong>.`}},
+
+    {type:"h2", text:{ko:`동시성(Contemporaneous)이 무너지는 순간`, en:`The moment Contemporaneous breaks`, vn:`Khoảnh khắc tính đồng thời sụp đổ`}},
+
+    {type:"figure", img:"img/v06_scene2_review.webp", cap:{
+      ko:`로그북을 검토하던 QA의 Mr. Trail이 아래 두 줄에서 시선을 멈춥니다. 날짜는 미래인데, 이미 채워져 있습니다.`,
+      en:`Reviewing the logbook, QA's Mr. Trail stops at two rows: the dates are in the future, yet they're already filled in.`,
+      vn:`Khi rà soát sổ nhật ký, Mr. Trail của QA dừng lại ở hai dòng: ngày tháng còn ở tương lai, vậy mà đã được điền sẵn.`}},
+
+    {type:"p", text:{
+      ko:`ALCOA+의 <strong>Contemporaneous(동시성)</strong>는 <strong>행위가 일어난 그 시점에 기록하라</strong>는 원칙입니다. 점검을 했으면 그때 적고, 하지 않았으면 그 사유를 그날 적습니다. 그런데 7월 30일·31일의 'N/A'는 <strong>29일에 작성</strong>되었습니다. 아직 오지 않은 날에 대해, 일어나지도 않은 일을 <strong>미리 단정해 적은 것</strong>입니다.`,
+      en:`In ALCOA+, <strong>Contemporaneous</strong> means <strong>record it at the time the activity happens</strong>. If you performed the check, write it then; if you didn't, write the reason on that day. But the 'N/A' for 30 and 31 July was <strong>written on the 29th</strong> — a conclusion recorded <strong>in advance</strong> about days that had not yet come and events that had not yet occurred.`,
+      vn:`Trong ALCOA+, <strong>Contemporaneous</strong> nghĩa là <strong>ghi lại ngay tại thời điểm hoạt động diễn ra</strong>. Nếu đã kiểm tra thì ghi ngay lúc đó; nếu không kiểm tra thì ghi lý do trong chính ngày đó. Nhưng chữ 'N/A' cho ngày 30 và 31/7 lại được <strong>viết vào ngày 29</strong> — một kết luận được ghi <strong>trước</strong> về những ngày chưa đến và những việc chưa xảy ra.`}},
+
+    {type:"p", text:{
+      ko:`더 큰 문제는 <strong>미래의 불확실한 상황을 단정</strong>했다는 점입니다. 주말에 긴급 시험이 들어왔다면? 다른 분석자가 저울을 썼다면? 정전이나 이상이 생겼다면? 그때 로그북에는 이미 '해당 없음'이라고 적혀 있습니다. <strong>기록이 현실을 앞질러 버리면, 현실이 달라져도 기록은 그대로 남습니다.</strong> 그 순간 로그북은 사실이 아닌 문서가 됩니다.`,
+      en:`The deeper issue is that it <strong>asserted an uncertain future as settled</strong>. What if an urgent test had come in over the weekend? What if another analyst had used the balance? What if there'd been a power failure or a malfunction? The logbook would already say 'not applicable'. <strong>When a record runs ahead of reality, reality can change while the record stays put.</strong> At that moment the logbook becomes a document that isn't true.`,
+      vn:`Vấn đề sâu xa hơn là nó đã <strong>khẳng định chắc chắn một tương lai chưa chắc chắn</strong>. Nếu cuối tuần có một phép thử khẩn cấp thì sao? Nếu một phân tích viên khác dùng cân thì sao? Nếu mất điện hay có sự cố thì sao? Sổ nhật ký khi đó đã ghi sẵn 'không áp dụng'. <strong>Khi hồ sơ chạy trước thực tế, thực tế có thể đổi thay còn hồ sơ thì vẫn đứng yên.</strong> Ngay khoảnh khắc đó, sổ nhật ký trở thành một tài liệu không đúng sự thật.`}},
+
+    {type:"p", text:{
+      ko:`점검자·감사자의 눈에는 더 단순하게 보입니다. <strong>미리 채워진 칸이 하나 발견되면, 그 로그북 전체가 "정말 그때 적은 게 맞나?"라는 의심을 받습니다.</strong> 한 칸의 편의가, 수개월치 기록의 신뢰를 흔드는 셈입니다.`,
+      en:`To an inspector or auditor it looks even simpler. <strong>Find one box filled in advance, and the whole logbook invites the question: "was any of this really written at the time?"</strong> One small convenience puts months of records under suspicion.`,
+      vn:`Với thanh tra viên hay đánh giá viên, mọi thứ còn đơn giản hơn. <strong>Chỉ cần phát hiện một ô được điền trước, cả cuốn sổ sẽ bị đặt câu hỏi: "liệu có phần nào thực sự được ghi đúng lúc không?"</strong> Một tiện lợi nhỏ khiến hồ sơ hàng tháng trời bị nghi ngờ.`}},
+
+    {type:"h2", text:{ko:`그럼, 어떻게 적어야 할까`, en:`So how should it be recorded?`, vn:`Vậy nên ghi thế nào?`}},
+
+    {type:"figure", img:"img/v06_scene3_talk.webp", cap:{
+      ko:`"결과가 맞았어도, 미리 적은 건 다른 문제예요." Mr. Trail은 다그치지 않고 이유를 설명합니다.`,
+      en:`"Even if it turned out right, writing it in advance is a different matter." Mr. Trail explains rather than scolds.`,
+      vn:`"Dù kết quả có đúng, việc ghi trước lại là chuyện khác." Mr. Trail giải thích chứ không trách mắng.`}},
+
+    {type:"p", text:{
+      ko:`Mr. Trail의 설명을 듣고 Ms. Han은 진심으로 놀랐습니다. <strong>"빈칸을 남기지 않는 게 오히려 꼼꼼한 건 줄 알았어요."</strong> 그 마음이 잘못된 건 아니었습니다. 방법이 틀렸을 뿐입니다. 올바른 방법은 간단합니다.`,
+      en:`Hearing Mr. Trail's explanation, Ms. Han was genuinely surprised. <strong>"I thought leaving no blanks was the more careful thing to do."</strong> Her intention wasn't wrong — only the method was. The right way is simple.`,
+      vn:`Nghe Mr. Trail giải thích, Ms. Han thực sự bất ngờ. <strong>"Em cứ tưởng không để trống ô nào mới là cẩn thận."</strong> Ý định của cô không sai — chỉ có cách làm là sai. Cách đúng thì rất đơn giản.`}},
+
+    {type:"check", head:{ko:`휴일·미사용일, 이렇게 처리합니다`, en:`Holidays and non-use days — do it this way`, vn:`Ngày nghỉ và ngày không sử dụng — hãy làm thế này`}, items:[
+      {ko:`해당 날짜가 <strong>지난 뒤</strong>, 그 사실이 확정된 시점에 기록한다. (예: 휴일이 끝나고 복귀한 날, 해당 칸에 'N/A · 휴일 미사용'으로 기재)`,
+       en:`Record it <strong>after</strong> the date has passed, once the fact is settled. (e.g. on the day you return, enter 'N/A · not used, holiday' in that row.)`,
+       vn:`Ghi lại <strong>sau khi</strong> ngày đó đã qua, khi sự việc đã chắc chắn. (ví dụ: vào ngày đi làm lại, ghi 'N/A · không sử dụng, ngày nghỉ' vào dòng đó.)`},
+      {ko:`일일 점검은 <strong>'사용 전 점검'</strong>이 원칙이다. 사용하지 않은 날은 점검 의무가 없으며, 그 사실을 나중에 남기면 충분하다.`,
+       en:`A daily check is fundamentally a <strong>'check before use'</strong>. On days with no use there's no check obligation — noting that fact afterwards is enough.`,
+       vn:`Kiểm tra hằng ngày về bản chất là <strong>'kiểm tra trước khi dùng'</strong>. Ngày không sử dụng thì không có nghĩa vụ kiểm tra — ghi lại điều đó sau là đủ.`},
+      {ko:`미래 날짜 칸은 <strong>비워 둔다.</strong> 빈칸은 잘못이 아니다. 미리 채운 칸이 잘못이다.`,
+       en:`Leave future-dated rows <strong>blank</strong>. A blank is not a fault — a pre-filled box is.`,
+       vn:`Hãy để trống các dòng có ngày trong tương lai. Ô trống không phải là lỗi — ô điền trước mới là lỗi.`},
+      {ko:`기록 방식이 애매하면 <strong>혼자 판단하지 말고</strong> 팀장·QA에게 묻는다. 묻는 것은 절차의 일부다.`,
+       en:`If the recording method is unclear, <strong>don't decide alone</strong> — ask your supervisor or QA. Asking is part of the procedure.`,
+       vn:`Nếu chưa rõ cách ghi, <strong>đừng tự quyết định</strong> — hãy hỏi giám sát hoặc QA. Hỏi cũng là một phần của quy trình.`}
+    ]},
+
+    {type:"p", text:{
+      ko:`이 일 역시 징계가 아니라 <strong>재발 방지</strong>로 이어졌습니다. 로그북 작성 지침에 "미래 날짜 칸 사전 기재 금지"와 "휴일·미사용일 사후 기재 방법"을 명확히 넣고, 팀 전체가 함께 교육했습니다. Ms. Han은 이제 신입에게 이 이야기를 가장 먼저 들려주는 사람이 되었습니다.`,
+      en:`This case, too, led not to punishment but to <strong>prevention</strong>. The logbook instructions now state clearly that future-dated rows must not be pre-filled, and how to record holidays and non-use days after the fact; the whole team was trained together. Ms. Han is now the first to tell this story to new hires.`,
+      vn:`Vụ việc này cũng dẫn đến <strong>phòng ngừa</strong> chứ không phải kỷ luật. Hướng dẫn ghi sổ nay nêu rõ không được điền trước các dòng ngày tương lai, và cách ghi ngày nghỉ/ngày không sử dụng sau khi sự việc đã qua; cả nhóm được đào tạo cùng nhau. Giờ đây Ms. Han là người đầu tiên kể lại câu chuyện này cho nhân viên mới.`}},
+
+    {type:"hr"},
+
+    {type:"h2", text:{ko:`무엇이 핵심인가 — Contemporaneous`, en:`The key idea — Contemporaneous`, vn:`Điều cốt lõi — Contemporaneous`}},
+
+    {type:"reg", rows:[
+      {dt:{ko:`원칙`, en:`Principle`, vn:`Nguyên tắc`}, dd:{
+        ko:`기록은 <strong>행위가 일어난 그 시점에</strong> 남긴다. 사용하지 않은 날의 'N/A'도 <strong>그 날짜가 지난 뒤</strong> 사실로 확정되었을 때 적는다.`,
+        en:`Record <strong>at the time the activity happens</strong>. Even an 'N/A' for a non-use day is written <strong>after that date has passed</strong>, once it is an established fact.`,
+        vn:`Ghi lại <strong>ngay tại thời điểm hoạt động diễn ra</strong>. Ngay cả chữ 'N/A' cho ngày không sử dụng cũng chỉ được ghi <strong>sau khi ngày đó đã qua</strong>, khi nó đã là sự thật xác định.`}},
+      {dt:{ko:`금지`, en:`Never`, vn:`Không được`}, dd:{
+        ko:`미래 날짜 칸 사전 기재, 며칠치 몰아 쓰기, 예상으로 'N/A'·'이상 없음' 단정, 빈칸을 채우기 위한 임의 기재.`,
+        en:`Pre-filling future-dated rows, back-filling several days at once, asserting 'N/A' or 'no issues' from expectation, writing anything just to fill a blank.`,
+        vn:`Điền trước các dòng ngày tương lai, ghi dồn nhiều ngày một lúc, khẳng định 'N/A' hay 'không có vấn đề' theo phỏng đoán, viết bừa chỉ để lấp ô trống.`}},
+      {dt:{ko:`문화`, en:`Culture`, vn:`Văn hóa`}, dd:{
+        ko:`<strong>빈칸은 잘못이 아니다. 미리 채운 칸이 잘못이다.</strong> 성실함은 칸을 메우는 것이 아니라, 사실을 그대로 남기는 것이다.`,
+        en:`<strong>A blank is not a fault — a pre-filled box is.</strong> Diligence isn't filling every box; it's leaving the facts exactly as they were.`,
+        vn:`<strong>Ô trống không phải là lỗi — ô điền trước mới là lỗi.</strong> Tận tâm không phải là lấp đầy mọi ô, mà là ghi lại sự thật đúng như nó vốn có.`}}
+    ], note:`관련 근거 · EU GMP Annex 11 · 21 CFR Part 11 · PIC/S PI 041 · ALCOA+ Principles · Good Documentation Practice (GDP)`},
+
+    {type:"h2", text:{ko:`기억할 한 문장`, en:`One line to remember`, vn:`Một câu để ghi nhớ`}},
+
+    {type:"quote", text:{
+      ko:`"기록은 미래를 앞서갈 수 없다. 아직 오지 않은 날의 칸은, 비워 두는 것이 정답이다."`,
+      en:`"A record cannot run ahead of time. For a day that hasn't come, the right entry is no entry at all."`,
+      vn:`"Hồ sơ không thể đi trước thời gian. Với một ngày chưa đến, câu trả lời đúng là để trống."`}},
+
+    {type:"cta", buttons:[
+      {label:{ko:`이어 보기 · VOL.03 동시성 편 →`, en:`Related · VOL.03 Contemporaneous →`, vn:`Liên quan · VOL.03 Tính đồng thời →`}, href:"vol03.html", primary:true},
+      {label:{ko:`QC DI 퀴즈 풀어보기`, en:`Take the QC DI Quiz`, vn:`Làm Quiz DI của QC`}, href:"https://avenzia.github.io/qc-gmp-quiz"},
+      {label:{ko:`레터 목록`, en:`All letters`, vn:`Danh sách thư`}, href:"../index.html#di-letter"}
+    ]},
+
+    {type:"disclaimer", text:{
+      ko:`※ 본 이야기는 데이터 완전성 교육을 위한 가상의 시나리오이며, 등장인물(Ms. Han, Mr. Trail 등)과 사건은 실제와 무관합니다. 삽화는 생성형 이미지로 제작되었습니다.`,
+      en:`※ This is a fictional scenario for data integrity training. The characters (Ms. Han, Mr. Trail, etc.) and events are not real. Illustrations are AI-generated.`,
+      vn:`※ Đây là tình huống hư cấu phục vụ đào tạo về tính toàn vẹn dữ liệu. Các nhân vật (Ms. Han, Mr. Trail, v.v.) và sự kiện đều không có thật. Hình minh họa do AI tạo.`}}
+  ]
+};
+</script>
+<script src="letter.js"></script>
+</body>
+</html>
