@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>역대 DI Winner · 3D 3O · S1 Plant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="letters/letter.css">
+<style>
+  .grad{background:linear-gradient(120deg,var(--blue),var(--accent));
+        -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .aw-wrap{max-width:900px;margin:0 auto;padding:46px 24px 70px}
+  .crumb{font-family:var(--en);font-size:13px;font-weight:600;color:var(--gray);margin-bottom:22px}
+  .crumb a:hover{color:var(--blue)}
+  .aw-kicker{font-family:var(--en);font-size:13px;font-weight:700;letter-spacing:4px;color:var(--gray);text-transform:uppercase}
+  .aw-title{font-size:clamp(28px,4.4vw,40px);font-weight:800;color:var(--navy);line-height:1.3;letter-spacing:-.5px;margin:8px 0 12px}
+  .aw-sub{font-size:16px;color:var(--body);line-height:1.75;max-width:700px}
+
+  .mrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:30px 0 8px}
+  .mlab{font-family:var(--en);font-size:11.5px;font-weight:800;letter-spacing:.5px;color:var(--gray);text-transform:uppercase}
+  .mtabs{display:flex;gap:6px;flex-wrap:wrap}
+  .mtab{font-family:var(--en);font-size:13px;font-weight:700;color:var(--body);background:var(--off);
+        border:1px solid var(--border);border-radius:999px;padding:7px 14px;cursor:pointer;transition:.15s}
+  .mtab:hover{border-color:var(--blue);color:var(--blue)}
+  .mtab.on{background:linear-gradient(120deg,var(--blue),var(--accent));border-color:transparent;color:#fff}
+  .chip-demo{font-family:var(--ko);font-size:12px;font-weight:700;color:#9a7b1b;background:rgba(232,181,58,.16);padding:6px 11px;border-radius:999px}
+
+  .board{background:var(--card,#fff);border:1px solid var(--border);border-radius:22px;
+         box-shadow:0 18px 48px rgba(13,31,60,.07);padding:14px;overflow:hidden;margin-top:14px;min-height:120px}
+  .wrow{display:grid;grid-template-columns:54px 1fr auto;align-items:center;gap:14px;padding:14px 16px;border-radius:14px}
+  .wrow + .wrow{margin-top:4px}
+  .wrow.win{background:linear-gradient(100deg,rgba(0,194,203,.07),rgba(26,92,186,.05))}
+  .wrow .rank{display:flex;align-items:center;justify-content:center;font-family:var(--en);font-weight:800;font-size:17px;color:var(--gray)}
+  .wrow .medal{font-size:24px;line-height:1}
+  .wrow .who{min-width:0}
+  .wrow .wname{font-family:var(--ko);font-size:17px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .wrow .depts{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+  .wrow .dchip{font-family:var(--en);font-size:10.5px;font-weight:800;letter-spacing:.4px;color:#fff;padding:2px 7px;border-radius:5px}
+  .wrow .bar-wrap{height:7px;background:rgba(13,31,60,.06);border-radius:99px;margin-top:9px;overflow:hidden;max-width:380px}
+  .wrow .bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--accent))}
+  .wrow .score{text-align:right;font-family:var(--en)}
+  .wrow .score b{font-size:22px;font-weight:800;color:var(--navy)}
+  .wrow .score span{font-size:12px;color:var(--gray);font-weight:600;display:block;margin-top:1px}
+  .wdivider{height:1px;background:var(--border);margin:8px 16px}
+  .aw-state{font-family:var(--ko);font-size:14px;color:var(--gray);padding:34px 16px;text-align:center}
+  .aw-note{font-family:var(--ko);font-size:12.5px;color:var(--gray);margin-top:16px;line-height:1.7}
+  @media(max-width:560px){
+    .wrow{grid-template-columns:40px 1fr auto;gap:10px;padding:12px}
+    .wrow .wname{font-size:15px}.wrow .score b{font-size:18px}.wrow .bar-wrap{max-width:180px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html#top">
+      <span class="nav-badge"><span>3D</span><span>3O</span></span>
+      <span class="full">GMP&nbsp;Training&nbsp;·&nbsp;S1&nbsp;Plant</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="index.html#di-letter" data-k="navLetter">DI 레터</a>
+        <a href="index.html#di-quiz" data-k="navQuiz">DI 퀴즈</a>
+      </div>
+      <div class="langsel" role="group" aria-label="Language">
+        <button class="langbtn" data-l="ko">한</button>
+        <button class="langbtn" data-l="en">EN</button>
+        <button class="langbtn" data-l="vn">VN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="aw-wrap">
+  <div class="crumb"><a href="index.html#di-winner" data-k="back">← 홈으로</a></div>
+  <div class="aw-kicker">DI WINNER ARCHIVE</div>
+  <h1 class="aw-title" data-k="title">역대 <span class="grad">DI Winner</span></h1>
+  <p class="aw-sub" data-k="sub">월을 선택하면 그 달의 합산 순위를 볼 수 있습니다.</p>
+
+  <div class="mrow">
+    <span class="mlab" data-k="mlab">월 선택</span>
+    <div class="mtabs" id="mtabs"></div>
+    <span class="chip-demo" id="awDemo" style="display:none" data-k="demo">데모 데이터 (Firebase 연결 전)</span>
+  </div>
+
+  <div class="board" id="awBoard"><div class="aw-state" data-k="loading">불러오는 중…</div></div>
+  <div class="aw-note" data-k="note">※ 같은 이름은 합산되며, 각 부서 퀴즈는 본인 최고점만 반영됩니다. 매월 1일 기준으로 집계가 새로 시작됩니다.</div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div data-k="footer">본 포털은 사내 GMP · 데이터 완전성 교육 목적으로 제작되었습니다.</div>
+    <div><b>3D 3O</b> · S1 Plant Data Management Team</div>
+  </div>
+</footer>
+
+<script>
+  const T = {
+    ko:{navLetter:"DI 레터",navQuiz:"DI 퀴즈",back:"← 홈으로",title:'역대 <span class="grad">DI Winner</span>',
+        sub:"월을 선택하면 그 달의 합산 순위를 볼 수 있습니다.",mlab:"월 선택",demo:"데모 데이터 (Firebase 연결 전)",
+        loading:"불러오는 중…",empty:"해당 월에는 기록이 없습니다.",pts:"점",
+        note:"※ 같은 이름은 합산되며, 각 부서 퀴즈는 본인 최고점만 반영됩니다. 매월 1일 기준으로 집계가 새로 시작됩니다.",
+        footer:"본 포털은 사내 GMP · 데이터 완전성 교육 목적으로 제작되었습니다."},
+    en:{navLetter:"DI Letters",navQuiz:"DI Quiz",back:"← Back to home",title:'DI Winner <span class="grad">Archive</span>',
+        sub:"Pick a month to see that month's combined ranking.",mlab:"Select month",demo:"Demo data (before Firebase is connected)",
+        loading:"Loading…",empty:"No records for that month.",pts:"pts",
+        note:"※ Same names are combined; only each person's best score per quiz counts. Aggregation restarts on the 1st of each month.",
+        footer:"This portal is for internal GMP and data integrity training."},
+    vn:{navLetter:"Thư DI",navQuiz:"Quiz DI",back:"← Về trang chủ",title:'Lưu trữ <span class="grad">DI Winner</span>',
+        sub:"Chọn một tháng để xem bảng xếp hạng tổng của tháng đó.",mlab:"Chọn tháng",demo:"Dữ liệu demo (trước khi kết nối Firebase)",
+        loading:"Đang tải…",empty:"Không có dữ liệu cho tháng đó.",pts:"điểm",
+        note:"※ Tên trùng được cộng dồn; mỗi bài quiz chỉ tính điểm cao nhất của mỗi người. Việc tổng hợp bắt đầu lại vào ngày 1 mỗi tháng.",
+        footer:"Cổng thông tin này phục vụ đào tạo nội bộ về GMP và tính toàn vẹn dữ liệu."}
+  };
+  let LANG='ko';
+  try{ const s=localStorage.getItem('di_lang'); if(s&&T[s]) LANG=s; }catch(e){}
+
+  const FB = {
+    apiKey:"AIzaSyAJFodCtd0nZ9R3FIjKN0FSsBvFZkYVcqo",
+    authDomain:"cat-quiz-ece53.firebaseapp.com",
+    projectId:"cat-quiz-ece53",
+    appId:"1:306933977395:web:bd9d55fc46d0091d95ae46"
+  };
+  const COLLECTION_DEPT = { gmp_scores:'PR', qa_gmp_scores:'QA', qc_gmp_scores:'QC', pm_gmp_scores:'PM', en_gmp_scores:'EN', annex11_scores:'Annex11', annex22_scores:'Annex22' };
+  const SCORES_COLLECTIONS = Object.keys(COLLECTION_DEPT);
+  const DEPT_COLOR = { QA:"#00A9B5", PR:"#00B67A", QC:"#1A5CBA", PM:"#6D5BD0", EN:"#E0892B", ANNEX11:"#475569", ANNEX22:"#DB2777" };
+  const DEPT_LABEL = { ANNEX11:"A11", ANNEX22:"A22" };
+  const MEDALS = ['🥇','🥈','🥉'];
+  const MONTHS_BACK = 12;                 // 최근 12개월까지 조회
+
+  let ALL=[], SEL=null, DEMO=false;
+
+  function mKey(d){ return d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0'); }
+  function monthList(){
+    const out=[], n=new Date();
+    for(let i=0;i<MONTHS_BACK;i++){ out.push(new Date(n.getFullYear(), n.getMonth()-i, 1)); }
+    return out;
+  }
+  function aggregate(recs){
+    const byName={};
+    recs.forEach(r=>{ const name=(r.name||'').toString().trim().replace(/\s+/g,' '); if(!name||!r.dept) return;
+      const dept=r.dept.toString().toUpperCase(); const score=Number(r.score)||0;
+      byName[name]=byName[name]||{}; byName[name][dept]=Math.max(byName[name][dept]||0,score); });
+    const list=Object.keys(byName).map(name=>({name,total:Object.values(byName[name]).reduce((a,b)=>a+b,0),depts:byName[name]}));
+    list.sort((a,b)=> b.total-a.total || a.name.localeCompare(b.name));
+    return list.slice(0,10);
+  }
+  function recsForMonth(d){
+    const s=new Date(d.getFullYear(), d.getMonth(), 1, 0,0,0,0);
+    const e=new Date(d.getFullYear(), d.getMonth()+1, 1, 0,0,0,0);
+    return ALL.filter(r=> r._d && r._d>=s && r._d<e );
+  }
+  function renderTabs(){
+    const box=document.getElementById('mtabs');
+    box.innerHTML = monthList().map(d=>{
+      const k=mKey(d);
+      return '<button class="mtab'+(k===SEL?' on':'')+'" data-m="'+k+'">'+k+'</button>';
+    }).join('');
+    box.querySelectorAll('.mtab').forEach(b=>b.addEventListener('click',()=>{ SEL=b.dataset.m; renderTabs(); renderBoard(); }));
+  }
+  function renderBoard(){
+    const t=T[LANG], el=document.getElementById('awBoard');
+    const d=monthList().find(x=>mKey(x)===SEL) || new Date();
+    const list=aggregate(recsForMonth(d));
+    if(!list.length){ el.innerHTML='<div class="aw-state">'+t.empty+'</div>'; return; }
+    const max=list[0].total||1;
+    el.innerHTML=list.map((p,i)=>{
+      const win=i<3, rank= win? '<span class="medal">'+MEDALS[i]+'</span>' : (i+1);
+      const depts=Object.keys(p.depts).sort().map(x=>'<span class="dchip" style="background:'+(DEPT_COLOR[x]||'#8899AA')+'">'+(DEPT_LABEL[x]||x)+' '+p.depts[x]+'</span>').join('');
+      const sep=(i===2)?'<div class="wdivider"></div>':'';
+      return '<div class="wrow'+(win?' win':'')+'"><div class="rank">'+rank+'</div>'+
+        '<div class="who"><div class="wname">'+p.name+(win?' <span>🎁</span>':'')+'</div>'+
+        '<div class="depts">'+depts+'</div><div class="bar-wrap"><div class="bar" style="width:'+Math.max(6,Math.round(p.total/max*100))+'%"></div></div></div>'+
+        '<div class="score"><b>'+p.total+'</b><span>'+t.pts+'</span></div></div>'+sep;
+    }).join('');
+  }
+  function applyLang(){
+    const t=T[LANG];
+    document.querySelectorAll('[data-k]').forEach(el=>{ const v=t[el.dataset.k]; if(v!=null) el.innerHTML=v; });
+    document.documentElement.lang = (LANG==='vn'?'vi':LANG);
+    document.querySelectorAll('.langbtn').forEach(b=>b.classList.toggle('on', b.dataset.l===LANG));
+    renderBoard();
+  }
+  function setLang(l){ if(!T[l])return; LANG=l; try{localStorage.setItem('di_lang',l);}catch(e){} applyLang(); }
+  document.querySelectorAll('.langbtn').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.l)));
+
+  const DEMO_DATA=[
+    {name:"김경훈",dept:"QA",score:90,off:0},{name:"김경훈",dept:"QC",score:80,off:0},{name:"김경훈",dept:"Annex11",score:85,off:0},
+    {name:"Nguyễn Linh",dept:"PR",score:95,off:0},{name:"Nguyễn Linh",dept:"Annex22",score:88,off:0},
+    {name:"박상용",dept:"PM",score:88,off:0},{name:"박상용",dept:"QA",score:76,off:0},
+    {name:"이지민",dept:"QA",score:98,off:1},{name:"이지민",dept:"PR",score:90,off:1},{name:"이지민",dept:"QC",score:74,off:1},
+    {name:"Trần Huy",dept:"EN",score:94,off:1},{name:"Trần Huy",dept:"Annex11",score:80,off:1},
+    {name:"최윤",dept:"PM",score:86,off:1},
+    {name:"Phạm Trang",dept:"PR",score:82,off:2},{name:"Phạm Trang",dept:"QC",score:78,off:2},
+    {name:"Lê Minh",dept:"EN",score:76,off:2}
+  ];
+  function loadDemo(){
+    DEMO=true; document.getElementById('awDemo').style.display='';
+    const n=new Date();
+    ALL=DEMO_DATA.map(r=>{ const d=new Date(n.getFullYear(), n.getMonth()-r.off, 5); return Object.assign({},r,{_d:d}); });
+    renderTabs(); renderBoard();
+  }
+  function load(){
+    SEL = mKey(new Date());
+    renderTabs();
+    if(!(FB&&FB.apiKey)){ loadDemo(); return; }
+    const add=src=>new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});
+    add("https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js")
+     .then(()=>add("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"))
+     .then(()=>{
+        firebase.initializeApp(FB);
+        const db=firebase.firestore();
+        const n=new Date(); const from=new Date(n.getFullYear(), n.getMonth()-(MONTHS_BACK-1), 1, 0,0,0,0);
+        return Promise.all(SCORES_COLLECTIONS.map(c=>
+          db.collection(c).where('timestamp','>=',from).get()
+            .then(snap=>{ const a=[]; snap.forEach(doc=>{ const r=doc.data(); if(!r.dept) r.dept=COLLECTION_DEPT[c];
+                            const t=r.timestamp; r._d=(t&&t.toDate)?t.toDate():(t?new Date(t):null); a.push(r); }); return a; })
+            .catch(()=>[])
+        ));
+     })
+     .then(arrs=>{ ALL=[].concat.apply([],arrs); renderBoard(); })
+     .catch(e=>{ console.warn('archive: showing demo data —', e); loadDemo(); });
+  }
+  applyLang(); load();
+</script>
+</body>
+</html>
