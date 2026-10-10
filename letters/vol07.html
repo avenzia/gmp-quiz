@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DI Letter · VOL.07</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="letter.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="../index.html#top">
+      <span class="nav-badge"><span>3D</span><span>3O</span></span>
+      <span class="full">GMP&nbsp;Training&nbsp;·&nbsp;S1&nbsp;Plant</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="../index.html#di-letter" data-k="navLetter">DI 레터</a>
+        <a href="../index.html#di-quiz" data-k="navQuiz">DI 퀴즈</a>
+      </div>
+      <div class="langsel" role="group" aria-label="Language">
+        <button class="langbtn" data-l="ko">한</button>
+        <button class="langbtn" data-l="en">EN</button>
+        <button class="langbtn" data-l="vn">VN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="crumb"><a href="../index.html#di-letter" data-k="crumb">← 데이터 완전성 레터 목록</a></div>
+  <div id="art"></div>
+</article>
+
+<footer>
+  <div class="wrap">
+    <div data-k="footer">본 포털은 사내 GMP · 데이터 완전성 교육 목적으로 제작되었습니다.</div>
+    <div><b>3D 3O</b> · S1 Plant Data Management Team</div>
+  </div>
+</footer>
+
+<script>
+window.LETTER = {
+  vol:"VOL.07", date:"2026.10", readmin:5,
+  tags:["#DataIntegrity","#Logbook","#DelayedEntry","#GDP","#Contemporaneous"],
+  title:{ko:`빠뜨린 로그북 한 줄 — 지우는 대신, 늦게라도 남기는 법`, en:`The logbook line you missed — write it late, don't leave it out`, vn:`Dòng nhật ký bị bỏ quên — ghi muộn, đừng bỏ trống`},
+  series:{ko:`현장 이야기 · QC 편 — 실수를 다루는 올바른 방법`, en:`Stories from the floor · QC — the right way to handle a slip`, vn:`Chuyện hiện trường · QC — cách xử lý đúng khi lỡ sai`},
+  intro:{
+    ko:`이번 호 주제는 <b>Contemporaneous(동시성)</b>와 <b>Delayed entry(사후 기재)</b> — 깜빡한 기록 한 줄을, 덮는 대신 정직하게 되살리는 방법에 관한 이야기입니다.`,
+    en:`This issue is about <b>Contemporaneous</b> recording and <b>delayed entry</b> — how to honestly restore a line you forgot, instead of quietly letting it go.`,
+    vn:`Số này nói về <b>Contemporaneous (tính đồng thời)</b> và <b>Delayed entry (ghi muộn)</b> — cách khôi phục một cách trung thực dòng ghi chép bạn đã quên, thay vì lặng lẽ bỏ qua.`
+  },
+  blocks:[
+    {type:"figure", img:"img/v07_hero.webp", cap:{
+      ko:`급한 일정에 쫓겨 분석을 마치고 서둘러 나가는 순간, 로그북 한 줄이 그대로 비어 있습니다.`,
+      en:`Rushing out after finishing the analysis — and one line in the logbook stays empty.`,
+      vn:`Vội vã rời đi sau khi phân tích xong — và một dòng trong sổ nhật ký vẫn bỏ trống.`}},
+
+    {type:"lead", text:{
+      ko:`QC 분석자 <strong>Mr. Log</strong>은 늘 사용 직후에 장비 로그북을 작성해 왔습니다. 그런데 그날은 급한 시험 일정에 쫓겨, 분석을 마치고 시료를 들고 나가면서 <strong>로그북 작성을 깜빡했습니다.</strong> 사람이라면 있을 수 있는 실수입니다. <strong>진짜 시험은, 그 다음 날 아침에 시작됩니다.</strong>`,
+      en:`QC analyst <strong>Mr. Log</strong> had always filled in the equipment logbook right after use. But that day, chased by an urgent testing schedule, he walked out with his samples and <strong>forgot to write the entry.</strong> It's the kind of slip any person can make. <strong>The real test begins the next morning.</strong>`,
+      vn:`Phân tích viên QC <strong>Mr. Log</strong> luôn ghi sổ nhật ký thiết bị ngay sau khi sử dụng. Nhưng hôm đó, bị cuốn theo lịch thử nghiệm gấp, anh cầm mẫu đi ra và <strong>quên ghi vào sổ.</strong> Đó là sơ suất mà bất kỳ ai cũng có thể mắc. <strong>Phép thử thật sự bắt đầu vào sáng hôm sau.</strong>`}},
+
+    {type:"hr"},
+
+    {type:"h2", text:{ko:`"한 번쯤은 안 써도 아무도 모르겠지"`, en:`"Skip it just this once — nobody will know"`, vn:`"Bỏ qua một lần thôi — chẳng ai biết đâu"`}},
+
+    {type:"figure", img:"img/v07_scene1_blank.webp", cap:{
+      ko:`다음 날 아침, 어제 칸만 하얗게 비어 있습니다. 펜을 든 손이 망설입니다.`,
+      en:`The next morning, only yesterday's row sits blank. The hand holding the pen hesitates.`,
+      vn:`Sáng hôm sau, chỉ riêng dòng của hôm qua còn trống. Bàn tay cầm bút ngập ngừng.`}},
+
+    {type:"p", text:{
+      ko:`Mr. Log의 머릿속에 두 가지 생각이 스쳤습니다. 하나는 <strong>"그냥 어제 날짜로 적어 넣을까"</strong>, 다른 하나는 <strong>"한 줄쯤 비어 있어도 아무도 모르지 않을까"</strong>. 둘 다 유혹적이지만, <strong>둘 다 잘못된 길입니다.</strong>`,
+      en:`Two thoughts crossed Mr. Log's mind. One: <strong>"Should I just write it in under yesterday's date?"</strong> The other: <strong>"Would anyone really notice one blank line?"</strong> Both are tempting — and <strong>both are the wrong road.</strong>`,
+      vn:`Hai ý nghĩ lướt qua đầu Mr. Log. Một là: <strong>"Hay cứ ghi vào theo ngày hôm qua?"</strong> Hai là: <strong>"Thiếu một dòng thì ai mà để ý?"</strong> Cả hai đều hấp dẫn — và <strong>cả hai đều là con đường sai.</strong>`}},
+
+    {type:"p", text:{
+      ko:`어제 날짜로 적는 것은 <strong>기록 위조(backdating)</strong>입니다. 실제로는 오늘 쓴 글씨를 어제 쓴 것처럼 꾸미는 것이니까요. 그렇다고 빈칸으로 두면, 장비는 분명히 사용되었는데 <strong>사용 기록이 존재하지 않는 상태</strong>가 됩니다. 나중에 그 배치에 문제가 생겼을 때, 누가 어떤 장비로 언제 시험했는지 추적할 근거가 사라집니다.`,
+      en:`Writing it under yesterday's date is <strong>backdating</strong> — dressing today's handwriting up as yesterday's. But leaving it blank means the equipment was clearly used while <strong>no usage record exists</strong>. If a problem later surfaces with that batch, the basis for tracing who tested what, on which instrument and when, is simply gone.`,
+      vn:`Ghi theo ngày hôm qua chính là <strong>ghi lùi ngày (backdating)</strong> — ngụy trang nét chữ của hôm nay thành của hôm qua. Còn để trống thì thiết bị rõ ràng đã được dùng mà <strong>không hề có hồ sơ sử dụng</strong>. Nếu sau này lô đó có vấn đề, cơ sở để truy vết ai đã thử nghiệm gì, trên thiết bị nào, vào lúc nào sẽ biến mất.`}},
+
+    {type:"p", text:{
+      ko:`GDP(Good Documentation Practice)의 기본은 <strong>실시간 작성</strong>입니다. 행위가 일어난 그 시점에 기록하는 것이 원칙이죠. 하지만 원칙을 지키지 못했을 때 <strong>"이미 늦었으니 덮는다"가 정답이 되는 것은 아닙니다.</strong> GMP는 완벽한 사람을 요구하지 않습니다. <strong>정직하게 복구하는 절차</strong>를 요구할 뿐입니다.`,
+      en:`The foundation of GDP (Good Documentation Practice) is <strong>recording in real time</strong> — at the moment the activity happens. But when that principle has been missed, <strong>"it's too late, so bury it" is not the answer.</strong> GMP doesn't demand perfect people. It demands <strong>an honest way to put things right.</strong>`,
+      vn:`Nền tảng của GDP (Thực hành ghi chép tốt) là <strong>ghi theo thời gian thực</strong> — ngay tại thời điểm hoạt động diễn ra. Nhưng khi đã lỡ không làm được điều đó, <strong>"muộn rồi, thôi giấu đi" không phải là câu trả lời.</strong> GMP không đòi hỏi con người hoàn hảo. Nó chỉ đòi hỏi <strong>một cách khắc phục trung thực.</strong>`}},
+
+    {type:"h2", text:{ko:`올바른 길 — Delayed entry(사후 기재)`, en:`The right road — a delayed entry`, vn:`Con đường đúng — Delayed entry (ghi muộn)`}},
+
+    {type:"figure", img:"img/v07_scene2_evidence.webp", cap:{
+      ko:`점검 기록, 시험 리포트, 배치 리포트 — 그날 장비를 사용했다는 사실은 여러 곳에 남아 있습니다.`,
+      en:`Audit trail, test report, batch report — the fact that the instrument was used that day is recorded in several places.`,
+      vn:`Nhật ký kiểm tra, báo cáo thử nghiệm, báo cáo lô — việc thiết bị được dùng hôm đó đã được lưu ở nhiều nơi.`}},
+
+    {type:"p", text:{
+      ko:`Mr. Log은 선배 <strong>Ms. Han</strong>에게 솔직히 이야기했습니다. 돌아온 답은 뜻밖에 간단했습니다. <strong>"늦게라도 쓰면 됩니다. 대신 늦었다는 사실까지 같이 쓰세요."</strong> 이것이 <strong>Delayed entry(사후 기재)</strong>입니다.`,
+      en:`Mr. Log told his senior, <strong>Ms. Han</strong>, honestly what had happened. The answer was surprisingly simple: <strong>"You can still write it. Just write the fact that it's late, too."</strong> That is a <strong>delayed entry</strong>.`,
+      vn:`Mr. Log thành thật kể lại với đàn chị <strong>Ms. Han</strong>. Câu trả lời đơn giản đến bất ngờ: <strong>"Vẫn ghi được. Chỉ cần ghi kèm cả việc nó bị muộn."</strong> Đó chính là <strong>Delayed entry (ghi muộn)</strong>.`}},
+
+    {type:"p", text:{
+      ko:`핵심은 두 가지입니다. 첫째, <strong>기재 시점을 숨기지 않는 것</strong> — 오늘 쓴 것이므로 <strong>오늘 날짜와 서명</strong>으로 적고, <strong>왜 실시간으로 기록하지 못했는지 사유(Comment)</strong>를 함께 남깁니다. 둘째, <strong>그날 장비를 실제로 사용했다는 객관적 근거를 확보하는 것</strong> — 혼자만의 기억이 아니라 문서로 뒷받침해야 합니다.`,
+      en:`Two things matter. First, <strong>don't hide when you wrote it</strong> — enter it with <strong>today's date and signature</strong>, since that's when you wrote it, and add a <strong>comment explaining why it wasn't recorded in real time</strong>. Second, <strong>secure objective evidence that the instrument really was used that day</strong> — it must rest on documents, not on your memory alone.`,
+      vn:`Có hai điểm cốt yếu. Thứ nhất, <strong>đừng che giấu thời điểm ghi</strong> — hãy ghi bằng <strong>ngày hôm nay và chữ ký của hôm nay</strong>, vì đó là lúc bạn viết, kèm theo <strong>lý do (comment) vì sao đã không ghi theo thời gian thực</strong>. Thứ hai, <strong>thu thập bằng chứng khách quan rằng thiết bị thực sự đã được dùng hôm đó</strong> — phải dựa trên tài liệu, không phải chỉ trí nhớ của bạn.`}},
+
+    {type:"check", head:{ko:`사후 기재(Delayed entry), 이렇게 합니다`, en:`How to make a delayed entry`, vn:`Cách thực hiện ghi muộn (Delayed entry)`}, items:[
+      {ko:`<strong>빈칸으로 두지 않는다.</strong> 누락을 발견한 즉시 처리한다. 시간이 지날수록 근거 확보가 어려워진다.`,
+       en:`<strong>Don't leave it blank.</strong> Act as soon as you notice the gap — the longer you wait, the harder the evidence is to secure.`,
+       vn:`<strong>Đừng để trống.</strong> Xử lý ngay khi phát hiện thiếu sót — càng để lâu, bằng chứng càng khó thu thập.`},
+      {ko:`<strong>실제 사용일</strong>과 <strong>기재일(오늘)</strong>을 모두 적고, 오늘 날짜로 서명한다. 어제 날짜로 서명하지 않는다.`,
+       en:`Record both the <strong>actual date of use</strong> and the <strong>date of entry (today)</strong>, and sign with today's date — never backdate the signature.`,
+       vn:`Ghi cả <strong>ngày sử dụng thực tế</strong> và <strong>ngày ghi (hôm nay)</strong>, và ký theo ngày hôm nay — tuyệt đối không ký lùi ngày.`},
+      {ko:`비고란에 <strong>사유 Comment</strong>를 남긴다. (예: "시험 일정 지연으로 사용 직후 기재 누락, 익일 사후 기재함")`,
+       en:`Add a <strong>comment giving the reason</strong> in the remarks column (e.g. "entry missed at time of use due to schedule pressure; recorded the following day").`,
+       vn:`Ghi <strong>comment nêu lý do</strong> vào cột ghi chú (ví dụ: "bỏ sót ghi ngay lúc sử dụng do lịch gấp; ghi bổ sung vào ngày hôm sau").`},
+      {ko:`<strong>보조 근거</strong>를 함께 참조한다 — 점검 기록(Audit Trail), 시험 리포트, 배치 리포트, 분석 데이터의 타임스탬프 등.`,
+       en:`Reference <strong>supporting evidence</strong> — the audit trail, test report, batch report, timestamps in the analytical data.`,
+       vn:`Dẫn chiếu <strong>bằng chứng hỗ trợ</strong> — nhật ký kiểm tra, báo cáo thử nghiệm, báo cáo lô, dấu thời gian trong dữ liệu phân tích.`},
+      {ko:`<strong>팀장·QA에게 보고</strong>하고 검토를 받는다. 혼자 조용히 처리하지 않는다. 반복되면 개선이 필요한 신호다.`,
+       en:`<strong>Report it to your supervisor and QA</strong> and have it reviewed. Don't quietly handle it alone — if it recurs, that's a signal something needs fixing.`,
+       vn:`<strong>Báo cáo cho giám sát và QA</strong> và để họ rà soát. Đừng lặng lẽ tự xử lý — nếu lặp lại, đó là dấu hiệu cần cải tiến.`}
+    ]},
+
+    {type:"figure", img:"img/v07_scene3_entry.webp", cap:{
+      ko:`비어 있던 줄이 채워집니다. 사유와 오늘 날짜, 서명과 함께 — 감출 것이 없는 기록으로.`,
+      en:`The blank line gets filled — with the reason, today's date and a signature. A record with nothing to hide.`,
+      vn:`Dòng trống được điền vào — kèm lý do, ngày hôm nay và chữ ký. Một hồ sơ không có gì phải giấu.`}},
+
+    {type:"p", text:{
+      ko:`이렇게 남긴 기록은 <strong>흠이 아니라 신뢰의 증거</strong>가 됩니다. 점검자가 보기에도 명확합니다. 누락을 숨긴 기록은 의심을 부르지만, <strong>누락을 스스로 드러내고 근거와 함께 복구한 기록은 그 조직이 데이터를 정직하게 다룬다는 증거</strong>이기 때문입니다.`,
+      en:`A record made this way is <strong>not a blemish but evidence of trustworthiness</strong>. To an inspector it reads clearly: a record that hides a gap invites suspicion, while <strong>a record that discloses the gap and restores it with evidence proves the organization handles its data honestly.</strong>`,
+      vn:`Một hồ sơ được lập như vậy <strong>không phải vết nhơ mà là bằng chứng của sự đáng tin</strong>. Với thanh tra viên, điều đó rất rõ: hồ sơ che giấu thiếu sót sẽ gây nghi ngờ, còn <strong>hồ sơ tự phơi bày thiếu sót và khôi phục kèm bằng chứng lại chứng minh tổ chức đó xử lý dữ liệu một cách trung thực.</strong>`}},
+
+    {type:"hr"},
+
+    {type:"h2", text:{ko:`무엇이 핵심인가 — 실시간 작성과 정직한 복구`, en:`The key idea — real-time recording, honest recovery`, vn:`Điều cốt lõi — ghi theo thời gian thực và khắc phục trung thực`}},
+
+    {type:"reg", rows:[
+      {dt:{ko:`원칙`, en:`Principle`, vn:`Nguyên tắc`}, dd:{
+        ko:`장비 사용 기록은 <strong>사용 직후 실시간으로</strong> 작성한다(GDP의 기본). 부득이 누락되었다면 <strong>Delayed entry</strong>로 사유·기재일·서명·보조 근거와 함께 복구한다.`,
+        en:`Write equipment usage records <strong>in real time, right after use</strong> (the basis of GDP). If an entry was unavoidably missed, restore it as a <strong>delayed entry</strong> with the reason, entry date, signature and supporting evidence.`,
+        vn:`Ghi hồ sơ sử dụng thiết bị <strong>theo thời gian thực, ngay sau khi dùng</strong> (nền tảng của GDP). Nếu lỡ bỏ sót, hãy khôi phục bằng <strong>delayed entry</strong> kèm lý do, ngày ghi, chữ ký và bằng chứng hỗ trợ.`}},
+      {dt:{ko:`금지`, en:`Never`, vn:`Không được`}, dd:{
+        ko:`과거 날짜로 소급 서명(backdating), 누락을 빈칸으로 방치, 기억만으로 추정 기재, 조용히 혼자 메우기.`,
+        en:`Backdating a signature, leaving the gap blank, writing from memory alone, quietly filling it in by yourself.`,
+        vn:`Ký lùi ngày (backdating), để trống thiếu sót, ghi theo phỏng đoán từ trí nhớ, lặng lẽ tự điền một mình.`}},
+      {dt:{ko:`문화`, en:`Culture`, vn:`Văn hóa`}, dd:{
+        ko:`<strong>실수는 일어난다. 중요한 것은 그 다음 행동이다.</strong> 누락을 드러내고 바로잡는 사람을 탓하지 않는 문화가, 숨기는 기록을 없앤다.`,
+        en:`<strong>Slips happen. What matters is what you do next.</strong> A culture that doesn't punish those who surface and fix a gap is what eliminates hidden records.`,
+        vn:`<strong>Sơ suất vẫn xảy ra. Điều quan trọng là hành động tiếp theo.</strong> Một văn hóa không trách phạt người dám nêu ra và sửa chữa thiếu sót chính là điều xóa bỏ những hồ sơ che giấu.`}}
+    ], note:`관련 근거 · EU GMP Chapter 4 (문서화) · 21 CFR Part 211 · PIC/S PI 041 · ALCOA+ Principles · Good Documentation Practice (GDP)`},
+
+    {type:"h2", text:{ko:`기억할 한 문장`, en:`One line to remember`, vn:`Một câu để ghi nhớ`}},
+
+    {type:"quote", text:{
+      ko:`"늦은 기록은 고칠 수 있지만, 숨긴 기록은 고칠 수 없다. 실수보다 중요한 것은 그 다음 한 줄이다."`,
+      en:`"A late record can be put right; a hidden one cannot. What matters more than the slip is the line you write next."`,
+      vn:`"Một ghi chép muộn còn sửa được; một ghi chép bị giấu thì không. Quan trọng hơn sơ suất là dòng bạn viết tiếp theo."`}},
+
+    {type:"cta", buttons:[
+      {label:{ko:`이어 보기 · VOL.06 미리 적은 N/A →`, en:`Related · VOL.06 The N/A written in advance →`, vn:`Liên quan · VOL.06 Chữ N/A ghi trước →`}, href:"vol06.html", primary:true},
+      {label:{ko:`QC DI 퀴즈 풀어보기`, en:`Take the QC DI Quiz`, vn:`Làm Quiz DI của QC`}, href:"https://avenzia.github.io/qc-gmp-quiz"},
+      {label:{ko:`레터 목록`, en:`All letters`, vn:`Danh sách thư`}, href:"../index.html#di-letter"}
+    ]},
+
+    {type:"disclaimer", text:{
+      ko:`※ 본 이야기는 데이터 완전성 교육을 위한 가상의 시나리오이며, 등장인물(Mr. Log, Ms. Han 등)과 사건은 실제와 무관합니다. 삽화는 생성형 이미지로 제작되었습니다.`,
+      en:`※ This is a fictional scenario for data integrity training. The characters (Mr. Log, Ms. Han, etc.) and events are not real. Illustrations are AI-generated.`,
+      vn:`※ Đây là tình huống hư cấu phục vụ đào tạo về tính toàn vẹn dữ liệu. Các nhân vật (Mr. Log, Ms. Han, v.v.) và sự kiện đều không có thật. Hình minh họa do AI tạo.`}}
+  ]
+};
+</script>
+<script src="letter.js"></script>
+</body>
+</html>
