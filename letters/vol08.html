@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DI Letter · VOL.08</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="letter.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="../index.html#top">
+      <span class="nav-badge"><span>3D</span><span>3O</span></span>
+      <span class="full">GMP&nbsp;Training&nbsp;·&nbsp;S1&nbsp;Plant</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="../index.html#di-letter" data-k="navLetter">DI 레터</a>
+        <a href="../index.html#di-quiz" data-k="navQuiz">DI 퀴즈</a>
+      </div>
+      <div class="langsel" role="group" aria-label="Language">
+        <button class="langbtn" data-l="ko">한</button>
+        <button class="langbtn" data-l="en">EN</button>
+        <button class="langbtn" data-l="vn">VN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="crumb"><a href="../index.html#di-letter" data-k="crumb">← 데이터 완전성 레터 목록</a></div>
+  <div id="art"></div>
+</article>
+
+<footer>
+  <div class="wrap">
+    <div data-k="footer">본 포털은 사내 GMP · 데이터 완전성 교육 목적으로 제작되었습니다.</div>
+    <div><b>3D 3O</b> · S1 Plant Data Management Team</div>
+  </div>
+</footer>
+
+<script>
+window.LETTER = {
+  vol:"VOL.08", date:"2026.11", readmin:5,
+  tags:["#DataIntegrity","#AccessControl","#AuditTrail","#Attributable","#Annex11"],
+  title:{ko:`"잠깐만 빌려줘" — 양도할 수 없는 권한, Administrator 계정`, en:`"Just lend it to me for a minute" — the one account you can never share`, vn:`"Cho mượn một lát thôi" — tài khoản không bao giờ được chia sẻ`},
+  series:{ko:`현장 이야기 · 제조 편 — 계정은 사람이다`, en:`Stories from the floor · Manufacturing — an account is a person`, vn:`Chuyện hiện trường · Sản xuất — tài khoản chính là con người`},
+  intro:{
+    ko:`이번 호 주제는 <b>Attributable(귀속성)</b>과 <b>접근 권한 관리</b> — 급한 밤, 빌려준 계정 하나가 왜 두 사람 모두를 위태롭게 하는지에 관한 이야기입니다.`,
+    en:`This issue is about <b>Attributable</b> data and <b>access control</b> — why, on one urgent night, a single borrowed account puts both people at risk.`,
+    vn:`Số này nói về <b>Attributable (tính quy trách)</b> và <b>quản lý quyền truy cập</b> — vì sao trong một đêm gấp gáp, một tài khoản cho mượn lại khiến cả hai người gặp rủi ro.`
+  },
+  blocks:[
+    {type:"figure", img:"img/v08_hero.webp", cap:{
+      ko:`밤 11시. 설정 변경 화면 앞에서 생산팀 Mr. Shift의 손이 멈춥니다. 권한이 없습니다.`,
+      en:`11 p.m. In front of a settings screen, production's Mr. Shift stops. He doesn't have the privileges.`,
+      vn:`11 giờ đêm. Trước màn hình thay đổi thiết lập, Mr. Shift của sản xuất khựng lại. Anh không có quyền.`}},
+
+    {type:"lead", text:{
+      ko:`원칙은 분명합니다. 생산 장비의 <strong>Administrator 계정은 DI 팀 담당자만 보유</strong>하며, 실무 부서가 테스트나 환경 설정 변경이 필요하면 <strong>사전에 담당자와 일정을 협의</strong>해야 합니다. 그런데 그날 밤은 예정에 없던 상황이었습니다. 그리고 Mr. Shift의 머릿속에 이런 생각이 스쳤습니다. <strong>"한 번만 잠깐 빌려 쓰면 아무도 모르지 않을까?"</strong>`,
+      en:`The rule is clear. The <strong>administrator account for production equipment is held only by the DI team owner</strong>, and when an operating department needs a test or a settings change, the work must be <strong>scheduled with that owner in advance</strong>. But that night was unplanned. And a thought crossed Mr. Shift's mind: <strong>"If I just borrow it once, briefly, would anyone really know?"</strong>`,
+      vn:`Nguyên tắc rất rõ. <strong>Tài khoản Administrator của thiết bị sản xuất chỉ do người phụ trách của nhóm DI nắm giữ</strong>, và khi bộ phận vận hành cần thử nghiệm hay thay đổi thiết lập, công việc phải được <strong>hẹn lịch trước với người phụ trách đó</strong>. Nhưng đêm đó là tình huống ngoài kế hoạch. Và một ý nghĩ lướt qua đầu Mr. Shift: <strong>"Mượn một lần, một lát thôi, liệu có ai biết không?"</strong>`}},
+
+    {type:"hr"},
+
+    {type:"h2", text:{ko:`한밤의 전화 — "ID만 잠깐…"`, en:`A call at midnight — "just the ID, for a moment…"`, vn:`Cuộc gọi lúc nửa đêm — "chỉ cần ID, một lát thôi…"`}},
+
+    {type:"figure", img:"img/v08_scene1_request.webp", cap:{
+      ko:`전화를 받은 DI 담당 Mr. Key. 도와주고 싶은 마음과 지켜야 할 선 사이에서 망설입니다.`,
+      en:`DI owner Mr. Key takes the call, caught between wanting to help and a line he must not cross.`,
+      vn:`Mr. Key, người phụ trách DI, nhận cuộc gọi, giằng co giữa mong muốn giúp đỡ và ranh giới không được vượt qua.`}},
+
+    {type:"p", text:{
+      ko:`Mr. Shift는 개인적으로 Mr. Key에게 전화를 걸었습니다. <strong>"지금 당장 설정 하나만 바꾸면 되는데, ID랑 비밀번호만 알려주시면 안 될까요? 금방 끝납니다."</strong> 악의는 없습니다. 생산 일정을 지키려는 책임감에서 나온 부탁입니다. Mr. Key도 도와주고 싶었습니다.`,
+      en:`Mr. Shift called Mr. Key directly. <strong>"I only need to change one setting right now — could you just give me the ID and password? It'll take a minute."</strong> There's no bad intent here; the request comes from a sense of responsibility for the production schedule. Mr. Key wanted to help, too.`,
+      vn:`Mr. Shift gọi riêng cho Mr. Key. <strong>"Em chỉ cần đổi một thiết lập ngay bây giờ thôi — anh cho em ID với mật khẩu được không? Một phút là xong."</strong> Không hề có ý xấu; lời đề nghị xuất phát từ tinh thần trách nhiệm với tiến độ sản xuất. Mr. Key cũng muốn giúp.`}},
+
+    {type:"p", text:{
+      ko:`하지만 Mr. Key는 멈췄습니다. 계정을 빌려주는 순간 무슨 일이 벌어지는지 알고 있었기 때문입니다. 시스템에는 <strong>'Mr. Key가 로그인해서 설정을 변경했다'</strong>고 기록됩니다. 실제로 조작한 사람은 Mr. Shift인데 말이죠. <strong>기록과 사실이 어긋나는 순간, 그 데이터는 더 이상 누구의 행위인지 말해 주지 못합니다.</strong>`,
+      en:`But Mr. Key stopped. He knew what happens the moment an account is lent out. The system records that <strong>'Mr. Key logged in and changed the setting'</strong> — when the person who actually did it was Mr. Shift. <strong>The instant the record and the fact diverge, that data can no longer tell you whose action it was.</strong>`,
+      vn:`Nhưng Mr. Key dừng lại. Anh biết điều gì sẽ xảy ra ngay khi cho mượn tài khoản. Hệ thống sẽ ghi rằng <strong>'Mr. Key đã đăng nhập và thay đổi thiết lập'</strong> — trong khi người thực sự thao tác là Mr. Shift. <strong>Khoảnh khắc hồ sơ và sự thật lệch nhau, dữ liệu đó không còn cho biết đó là hành động của ai.</strong>`}},
+
+    {type:"p", text:{
+      ko:`ALCOA+의 첫 글자 <strong>A는 Attributable(귀속성)</strong>입니다. <strong>누가 했는지 분명해야 한다</strong>는 뜻이죠. 계정 공유는 이 원칙을 정면으로 무너뜨립니다. 게다가 피해는 빌린 사람에게만 가지 않습니다. 그 계정으로 벌어진 모든 일의 <strong>책임은 계정 소유자인 Mr. Key에게 남습니다.</strong>`,
+      en:`The first letter of ALCOA+, <strong>A, stands for Attributable</strong>: it must be clear who did it. Sharing an account breaks that principle head-on. And the damage doesn't fall only on the borrower — <strong>responsibility for everything done under that account stays with its owner, Mr. Key.</strong>`,
+      vn:`Chữ cái đầu của ALCOA+, <strong>A, là Attributable (tính quy trách)</strong>: phải rõ ai đã làm. Chia sẻ tài khoản phá vỡ trực diện nguyên tắc này. Và thiệt hại không chỉ rơi vào người mượn — <strong>trách nhiệm cho mọi việc làm dưới tài khoản đó vẫn thuộc về chủ tài khoản, Mr. Key.</strong>`}},
+
+    {type:"h2", text:{ko:`점검 기록은 반드시 검토된다`, en:`The audit trail will be reviewed`, vn:`Nhật ký kiểm tra chắc chắn sẽ được rà soát`}},
+
+    {type:"figure", img:"img/v08_scene2_audit.webp", cap:{
+      ko:`정기 점검 기록 검토. 한밤중의 Administrator 로그인 한 줄이 선명하게 남아 있습니다.`,
+      en:`Routine audit-trail review. One administrator login in the middle of the night stands out clearly.`,
+      vn:`Rà soát nhật ký kiểm tra định kỳ. Một lần đăng nhập Administrator giữa đêm hiện lên rõ mồn một.`}},
+
+    {type:"p", text:{
+      ko:`"아무도 모를 것"이라는 가정은 성립하지 않습니다. <strong>모든 시스템 접근과 조작 이력은 점검 기록(Audit Trail)에 남고</strong>, 그 기록은 <strong>주기적으로 검토</strong>됩니다. 누가, 언제, 어떤 권한으로, 무엇을 바꿨는지가 시간 순서대로 남습니다. 특히 <strong>Administrator 권한의 사용은 가장 먼저 들여다보는 항목</strong>입니다.`,
+      en:`The assumption that "no one will know" simply doesn't hold. <strong>Every system access and action is captured in the audit trail</strong>, and that trail is <strong>reviewed on a regular schedule</strong>. Who, when, with what privilege, and what was changed — all in time order. <strong>Administrator-level activity is the first thing reviewers look at.</strong>`,
+      vn:`Giả định "chẳng ai biết đâu" đơn giản là không đứng vững. <strong>Mọi truy cập và thao tác hệ thống đều được ghi vào nhật ký kiểm tra</strong>, và nhật ký đó được <strong>rà soát định kỳ</strong>. Ai, khi nào, với quyền gì, đã thay đổi điều gì — tất cả theo trình tự thời gian. <strong>Hoạt động ở cấp Administrator là thứ người rà soát xem đầu tiên.</strong>`}},
+
+    {type:"p", text:{
+      ko:`업무 시간 외의 Administrator 로그인, 담당자가 자리에 없던 시각의 설정 변경 — 이런 흔적은 숨길 수 없습니다. 그리고 뒤늦게 밝혀질 때, 문제는 '설정 변경' 하나로 끝나지 않습니다. <strong>계정 공유라는 더 큰 위반</strong>, 그리고 <strong>그것을 숨겼다는 사실</strong>까지 함께 다뤄집니다. 잠깐의 편의가 두 사람 모두를 더 어려운 자리에 세우는 셈입니다.`,
+      en:`An administrator login outside working hours, a settings change at a time when the owner wasn't even on site — such traces cannot be hidden. And when it surfaces later, the issue is no longer just the settings change. It becomes <strong>the larger violation of account sharing</strong>, plus <strong>the fact that it was concealed</strong>. A moment's convenience puts both people in a far harder position.`,
+      vn:`Một lần đăng nhập Administrator ngoài giờ làm việc, một thay đổi thiết lập vào lúc người phụ trách còn không có mặt — những dấu vết ấy không thể giấu. Và khi bị phát hiện muộn, vấn đề không còn là chuyện đổi thiết lập nữa. Nó trở thành <strong>vi phạm lớn hơn về chia sẻ tài khoản</strong>, cộng thêm <strong>việc đã che giấu điều đó</strong>. Chút tiện lợi nhất thời đẩy cả hai người vào thế khó hơn nhiều.`}},
+
+    {type:"h2", text:{ko:`그럼 긴급할 땐 어떻게 하나`, en:`So what do you do in a real emergency?`, vn:`Vậy khi thực sự khẩn cấp thì làm thế nào?`}},
+
+    {type:"figure", img:"img/v08_scene3_proper.webp", cap:{
+      ko:`Mr. Key가 직접 접속해 조치하고, 옆에서 경위를 문서로 남깁니다. 긴급해도 절차는 있습니다.`,
+      en:`Mr. Key logs in and performs the change himself while the circumstances are documented beside him. Even an emergency has a procedure.`,
+      vn:`Mr. Key tự đăng nhập và thực hiện thay đổi, trong khi diễn biến được ghi lại bên cạnh. Khẩn cấp vẫn có quy trình.`}},
+
+    {type:"p", text:{
+      ko:`"규정 때문에 안 됩니다"로 끝나면 현장은 멈춥니다. 그래서 GMP는 <strong>긴급 상황을 위한 길</strong>도 함께 마련해 둡니다. Mr. Key의 답은 이것이었습니다. <strong>"계정은 못 드립니다. 대신 제가 지금 접속해서 해 드리겠습니다. 그리고 왜 이 시간에 이 작업이 필요했는지, 같이 기록으로 남깁시다."</strong>`,
+      en:`If the answer is only "the rules don't allow it", the floor stops. So GMP also provides <strong>a path for emergencies</strong>. Mr. Key's answer was this: <strong>"I can't give you the account. But I'll log in now and do it for you — and let's document together why this work was needed at this hour."</strong>`,
+      vn:`Nếu câu trả lời chỉ là "quy định không cho phép", hiện trường sẽ dừng lại. Vì thế GMP cũng chuẩn bị sẵn <strong>một lối đi cho tình huống khẩn cấp</strong>. Câu trả lời của Mr. Key là: <strong>"Anh không thể đưa tài khoản. Nhưng anh sẽ đăng nhập ngay bây giờ và làm giúp em — và hãy cùng ghi lại vì sao công việc này cần làm vào giờ này."</strong>`}},
+
+    {type:"check", head:{ko:`Administrator 권한, 이렇게 다룹니다`, en:`How to handle administrator privileges`, vn:`Cách xử lý quyền Administrator`}, items:[
+      {ko:`<strong>계획된 작업은 사전 협의.</strong> 테스트·환경 설정 변경이 필요하면 미리 DI 담당자와 일정을 잡는다. 대부분의 '긴급'은 사전 협의로 예방된다.`,
+       en:`<strong>Plan scheduled work in advance.</strong> If a test or settings change is needed, book the slot with the DI owner beforehand — most "emergencies" are prevented this way.`,
+       vn:`<strong>Công việc có kế hoạch thì hẹn lịch trước.</strong> Nếu cần thử nghiệm hay đổi thiết lập, hãy đặt lịch trước với người phụ trách DI — phần lớn "tình huống khẩn" được ngăn ngừa nhờ việc này.`},
+      {ko:`<strong>ID·비밀번호는 어떤 이유로도 공유하지 않는다.</strong> 빌려주는 것도, 빌리는 것도, 대신 로그인해 주고 자리를 비우는 것도 모두 계정 공유다.`,
+       en:`<strong>Never share an ID or password, for any reason.</strong> Lending it, borrowing it, or logging in for someone and walking away all count as account sharing.`,
+       vn:`<strong>Không bao giờ chia sẻ ID hay mật khẩu, vì bất kỳ lý do gì.</strong> Cho mượn, đi mượn, hay đăng nhập hộ rồi bỏ đi — tất cả đều là chia sẻ tài khoản.`},
+      {ko:`<strong>작업은 권한 보유자가 직접.</strong> 담당자가 직접 접속해 조치하고, 요청자는 입회한다. 권한은 사람에게 부여된 것이지 상황에 부여된 것이 아니다.`,
+       en:`<strong>The privilege holder performs the work.</strong> The owner logs in and makes the change while the requester observes. Privileges are granted to a person, not to a situation.`,
+       vn:`<strong>Người có quyền phải tự thực hiện.</strong> Người phụ trách đăng nhập và thao tác, người yêu cầu chứng kiến. Quyền được cấp cho một con người, không phải cho một tình huống.`},
+      {ko:`<strong>심야·새벽 긴급 건은 문서를 연다.</strong> 일탈(Deviation)을 개시하고, 사유·시각·조치 내용·승인을 남긴 뒤 긴급 조치를 진행한다.`,
+       en:`<strong>For genuine late-night emergencies, open a record.</strong> Raise a deviation, capture the reason, time, actions and approval, then proceed with the emergency response.`,
+       vn:`<strong>Với tình huống khẩn thật sự vào đêm khuya, hãy mở hồ sơ.</strong> Khởi tạo sai lệch (deviation), ghi lại lý do, thời điểm, nội dung xử lý và phê duyệt, rồi mới tiến hành biện pháp khẩn cấp.`},
+      {ko:`<strong>부탁을 거절하는 것은 동료를 지키는 일이다.</strong> 계정을 빌려주지 않는 것이 요청한 사람을 보호하는 길이기도 하다.`,
+       en:`<strong>Declining the request protects your colleague.</strong> Not lending the account is also how you keep the person who asked out of trouble.`,
+       vn:`<strong>Từ chối lời đề nghị chính là bảo vệ đồng nghiệp.</strong> Không cho mượn tài khoản cũng là cách giữ cho người đã hỏi không gặp rắc rối.`}
+    ]},
+
+    {type:"p", text:{
+      ko:`그날 밤 작업은 정상적으로 끝났습니다. Mr. Key가 직접 접속해 설정을 변경했고, 경위는 일탈(Deviation)로 기록되어 다음 날 검토를 거쳤습니다. 점검 기록에 남은 로그인과 문서의 내용이 <strong>정확히 일치</strong>했습니다. 숨긴 것이 없으니 설명할 것도 없었습니다.`,
+      en:`That night's work finished normally. Mr. Key logged in and made the change himself, and the circumstances were recorded as a deviation and reviewed the next day. The login in the audit trail and the document <strong>matched exactly</strong>. With nothing hidden, there was nothing to explain away.`,
+      vn:`Công việc đêm đó kết thúc bình thường. Mr. Key tự đăng nhập và thực hiện thay đổi, diễn biến được ghi thành sai lệch (deviation) và rà soát vào ngày hôm sau. Lần đăng nhập trong nhật ký kiểm tra và nội dung tài liệu <strong>khớp nhau chính xác</strong>. Không giấu gì nên cũng chẳng có gì phải biện minh.`}},
+
+    {type:"hr"},
+
+    {type:"h2", text:{ko:`무엇이 핵심인가 — Attributable & 권한 관리`, en:`The key idea — Attributable & access control`, vn:`Điều cốt lõi — Attributable & quản lý quyền truy cập`}},
+
+    {type:"reg", rows:[
+      {dt:{ko:`원칙`, en:`Principle`, vn:`Nguyên tắc`}, dd:{
+        ko:`시스템 계정은 <strong>개인에게 고유하게 부여</strong>되며, Administrator 권한은 <strong>양도·공유할 수 없다</strong>. 모든 접근은 점검 기록에 남고 주기적으로 검토된다.`,
+        en:`System accounts are <strong>uniquely assigned to an individual</strong>, and administrator privileges <strong>cannot be transferred or shared</strong>. All access is captured in the audit trail and reviewed regularly.`,
+        vn:`Tài khoản hệ thống được <strong>cấp riêng cho từng cá nhân</strong>, và quyền Administrator <strong>không thể chuyển nhượng hay chia sẻ</strong>. Mọi truy cập đều được ghi vào nhật ký kiểm tra và rà soát định kỳ.`}},
+      {dt:{ko:`금지`, en:`Never`, vn:`Không được`}, dd:{
+        ko:`ID·비밀번호 공유 및 대여, 타인 계정으로 로그인, 대신 로그인해 준 뒤 자리 비우기, 권한 없는 설정 변경, 사후 미보고.`,
+        en:`Sharing or lending IDs and passwords, logging in under someone else's account, logging in for another person and leaving, changing settings without authority, failing to report afterwards.`,
+        vn:`Chia sẻ hoặc cho mượn ID/mật khẩu, đăng nhập bằng tài khoản người khác, đăng nhập hộ rồi bỏ đi, thay đổi thiết lập khi không có thẩm quyền, không báo cáo sau đó.`}},
+      {dt:{ko:`문화`, en:`Culture`, vn:`Văn hóa`}, dd:{
+        ko:`긴급 상황에 <strong>"안 됩니다"로 끝내지 않는다.</strong> 정식 경로(담당자 직접 수행 + 일탈(Deviation) 문서화)를 함께 안내한다. 거절이 아니라 <strong>다른 길을 제시</strong>하는 것이 협업이다.`,
+        en:`In an emergency, <strong>don't stop at "no".</strong> Offer the formal path — the owner performs the work, documented as a deviation. Collaboration means <strong>showing another road</strong>, not just refusing.`,
+        vn:`Trong tình huống khẩn, <strong>đừng dừng ở chữ "không".</strong> Hãy chỉ ra lối đi chính thức — người phụ trách tự thực hiện, có ghi nhận sai lệch (deviation). Hợp tác nghĩa là <strong>đưa ra một con đường khác</strong>, không chỉ là từ chối.`}}
+    ], note:`관련 근거 · EU GMP Annex 11 (접근 권한·점검 기록) · 21 CFR Part 11 · PIC/S PI 041 · ALCOA+ Principles · Deviation Management (일탈 관리)`},
+
+    {type:"h2", text:{ko:`기억할 한 문장`, en:`One line to remember`, vn:`Một câu để ghi nhớ`}},
+
+    {type:"quote", text:{
+      ko:`"계정은 열쇠가 아니라 이름이다. 빌려주는 순간, 기록에 남는 것은 당신의 이름이다."`,
+      en:`"An account is not a key — it's a name. The moment you lend it, the name left in the record is yours."`,
+      vn:`"Tài khoản không phải chiếc chìa khóa — đó là một cái tên. Khoảnh khắc bạn cho mượn, cái tên còn lại trong hồ sơ là của bạn."`}},
+
+    {type:"cta", buttons:[
+      {label:{ko:`이어 보기 · VOL.07 Delayed entry →`, en:`Related · VOL.07 Delayed entry →`, vn:`Liên quan · VOL.07 Delayed entry →`}, href:"vol07.html", primary:true},
+      {label:{ko:`Annex 11 퀴즈 풀어보기`, en:`Take the Annex 11 Quiz`, vn:`Làm Quiz Annex 11`}, href:"https://avenzia.github.io/annex11-quiz"},
+      {label:{ko:`레터 목록`, en:`All letters`, vn:`Danh sách thư`}, href:"../index.html#di-letter"}
+    ]},
+
+    {type:"disclaimer", text:{
+      ko:`※ 본 이야기는 데이터 완전성 교육을 위한 가상의 시나리오이며, 등장인물(Mr. Shift, Mr. Key 등)과 사건은 실제와 무관합니다. 삽화는 생성형 이미지로 제작되었습니다.`,
+      en:`※ This is a fictional scenario for data integrity training. The characters (Mr. Shift, Mr. Key, etc.) and events are not real. Illustrations are AI-generated.`,
+      vn:`※ Đây là tình huống hư cấu phục vụ đào tạo về tính toàn vẹn dữ liệu. Các nhân vật (Mr. Shift, Mr. Key, v.v.) và sự kiện đều không có thật. Hình minh họa do AI tạo.`}}
+  ]
+};
+</script>
+<script src="letter.js"></script>
+</body>
+</html>
